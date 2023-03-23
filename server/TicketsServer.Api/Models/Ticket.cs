@@ -8,13 +8,13 @@ public class Ticket
 {
     [Key]
     public int TicketId { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string CreatedAt { get; set; }
-    public Category Category { get; set; }
-    public bool Completed { get; set; }
-    public bool Archived { get; set; }
-    public int Urgency { get; set; }
-    public string TimeEstimate { get; set; }
-    public User AssignedUser { get; set; }
+    public required string Title { get; set; }
+    public string? Description { get; set; }
+    public required string CreatedAt { get; set; }
+    public required Category Category { get; set; }
+    public required bool Completed { get; set; }
+    public required bool Archived { get; set; }
+    public required int Urgency { get; set; }
+    public required string TimeEstimate { get; set; }
+    public  User? AssignedUser { get; set; }
 }
