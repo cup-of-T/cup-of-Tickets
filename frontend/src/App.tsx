@@ -6,22 +6,21 @@ import { IUser } from './interfaces/interface'
 import { FetchAllUsers } from './components/ticketApi'
 
 function App() {
-  const [users, setUsers] = useState<IUser>()
+  const [users, setUsers] = useState<IUser[]>()
 
-
-  // to be put in services
-
-  
-  
 
   useEffect(() => {
-     async () => { setUsers(await FetchAllUsers)}
+     async () => { 
+      const usersResponse = await FetchAllUsers()
+      setUsers(usersResponse)
+      console.log(users);
+    }
   }, [] )
 
 
   return (
     <div className="App">
-     
+    <p>hey You!</p>
     </div>
   )
 }
