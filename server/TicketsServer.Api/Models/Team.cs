@@ -6,6 +6,6 @@ public class Team
 {
     [Key]
     public int TeamId { get; set; }
-    public string Name { get; set; }
-    public List<User> Users { get; set; }
+    public required string Name { get; set; }
+    public List<User>? Users { get; set; }
 }
