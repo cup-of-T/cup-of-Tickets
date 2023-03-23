@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { IUser } from './interfaces/interface'
-import { FetchAllUsers } from './components/ticketApi'
+import { FetchAllUsers } from './services/ticketApi'
 
 function App() {
   const [users, setUsers] = useState<IUser[]>()
