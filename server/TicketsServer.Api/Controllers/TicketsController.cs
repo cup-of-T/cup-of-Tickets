@@ -20,7 +20,6 @@ namespace TicketsServer.Api.Controllers
             _context = context;
         }
 
-        // GET: api/Tickets
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
         {
@@ -31,7 +30,6 @@ namespace TicketsServer.Api.Controllers
             return await _context.Ticket.ToListAsync();
         }
 
-        // GET: api/Tickets/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
@@ -49,8 +47,18 @@ namespace TicketsServer.Api.Controllers
             return ticket;
         }
 
-        // PUT: api/Tickets/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
+        {
+          if (_context.Ticket == null)
+          {
+              return Problem("Entity set 'DbContext.Ticket'  is null.");
+          }
+            _context.Ticket.Add(ticket);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTicket", new { id = ticket.TicketId }, ticket);
+        }
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTicket(int id, Ticket ticket)
         {
@@ -80,22 +88,7 @@ namespace TicketsServer.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/Tickets
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
-        {
-          if (_context.Ticket == null)
-          {
-              return Problem("Entity set 'DbContext.Ticket'  is null.");
-          }
-            _context.Ticket.Add(ticket);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTicket", new { id = ticket.TicketId }, ticket);
-        }
-
-        // DELETE: api/Tickets/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(int id)
         {
