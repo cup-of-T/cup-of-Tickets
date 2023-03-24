@@ -12,7 +12,7 @@ using TicketsServer.Api.Models;
         {
         }
 
-        public DbSet<TicketsServer.Api.Models.User> User { get; set; } = default!;
+        public DbSet<TicketsServer.Api.Models.User> Users { get; set; } = default!;
 
-        public DbSet<TicketsServer.Api.Models.Ticket> Ticket { get; set; } = default!;
+        public DbSet<TicketsServer.Api.Models.Ticket> Tickets { get; set; } = default!;
     }
