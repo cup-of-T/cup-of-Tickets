@@ -11,15 +11,16 @@ namespace TicketsServer.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,19 +37,19 @@ namespace TicketsServer.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,45 +69,73 @@ namespace TicketsServer.Api.Migrations
                         principalColumn: "TeamId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeamUser_User_UsersUserId",
+                        name: "FK_TeamUser_Users_UsersUserId",
                         column: x => x.UsersUserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ticket",
+                name: "Tickets",
                 columns: table => new
                 {
                     TicketId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Completed = table.Column<bool>(type: "bit", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Archived = table.Column<bool>(type: "bit", nullable: false),
                     Urgency = table.Column<int>(type: "int", nullable: false),
                     TimeEstimate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AssignedUserUserId = table.Column<int>(type: "int", nullable: false)
+                    Completed = table.Column<bool>(type: "bit", nullable: false),
+                    CreatorUserId = table.Column<int>(type: "int", nullable: false),
+                    AssignedUserUserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ticket", x => x.TicketId);
+                    table.PrimaryKey("PK_Tickets", x => x.TicketId);
                     table.ForeignKey(
-                        name: "FK_Ticket_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ticket_User_AssignedUserUserId",
+                        name: "FK_Tickets_Users_AssignedUserUserId",
                         column: x => x.AssignedUserUserId,
-                        principalTable: "User",
+                        principalTable: "Users",
+                        principalColumn: "UserId");
+                    table.ForeignKey(
+                        name: "FK_Tickets_Users_CreatorUserId",
+                        column: x => x.CreatorUserId,
+                        principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryTicket",
+                columns: table => new
+                {
+                    CategoriesCategoryId = table.Column<int>(type: "int", nullable: false),
+                    TicketsTicketId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryTicket", x => new { x.CategoriesCategoryId, x.TicketsTicketId });
+                    table.ForeignKey(
+                        name: "FK_CategoryTicket_Categories_CategoriesCategoryId",
+                        column: x => x.CategoriesCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryTicket_Tickets_TicketsTicketId",
+                        column: x => x.TicketsTicketId,
+                        principalTable: "Tickets",
+                        principalColumn: "TicketId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryTicket_TicketsTicketId",
+                table: "CategoryTicket",
+                column: "TicketsTicketId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeamUser_UsersUserId",
@@ -114,33 +143,36 @@ namespace TicketsServer.Api.Migrations
                 column: "UsersUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ticket_AssignedUserUserId",
-                table: "Ticket",
+                name: "IX_Tickets_AssignedUserUserId",
+                table: "Tickets",
                 column: "AssignedUserUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ticket_CategoryId",
-                table: "Ticket",
-                column: "CategoryId");
+                name: "IX_Tickets_CreatorUserId",
+                table: "Tickets",
+                column: "CreatorUserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CategoryTicket");
+
+            migrationBuilder.DropTable(
                 name: "TeamUser");
 
             migrationBuilder.DropTable(
-                name: "Ticket");
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Team");
 
             migrationBuilder.DropTable(
-                name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }
