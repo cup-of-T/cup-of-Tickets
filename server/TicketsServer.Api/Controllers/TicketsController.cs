@@ -23,20 +23,20 @@ namespace TicketsServer.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
         {
-          if (_context.Tickets == null)
-          {
-              return NotFound();
-          }
+            if (_context.Tickets == null)
+            {
+                return NotFound();
+            }
             return await _context.Tickets.ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
-          if (_context.Tickets == null)
-          {
-              return NotFound();
-          }
+            if (_context.Tickets == null)
+            {
+                return NotFound();
+            }
             var ticket = await _context.Tickets.FindAsync(id);
 
             if (ticket == null)
@@ -50,12 +50,28 @@ namespace TicketsServer.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Ticket>> PostTicket(TicketRequest request)
         {
-          if (_context.Tickets == null)
-          {
-              return Problem("Entity set 'DbContext.Ticket'  is null.");
-          }
+            var categoryList = new List<Category>();
+            foreach (var categoryName in request.CategoryNames)
+            {
+                var categoryToAdd = await _context.Categories
+                    .FirstOrDefaultAsync(c => c.Name == categoryName);
+                if(categoryToAdd == null)
+                {
+                    return BadRequest();
+                }
+                categoryList.Add(categoryToAdd);
+            }
 
-            
+            var newTicket = new Ticket()
+            {
+                Title = request.Title,
+                Description = request.Description,
+                CreatedAt = DateTime.Now.ToLongDateString(),
+                Categories = categoryList,
+                Urgency = request.Urgency,
+                TimeEstimate = request.TimeEstimate,
+
+            };
 
             _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
