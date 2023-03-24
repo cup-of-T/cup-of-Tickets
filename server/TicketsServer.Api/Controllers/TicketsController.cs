@@ -50,7 +50,12 @@ namespace TicketsServer.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Ticket>> PostTicket(TicketRequest request)
         {
-            var categoryList = new List<Category>();
+            var creator = await _context.Users.FirstOrDefaultAsync(u => u.UserId == request.UserId);
+            if(creator == null)
+            {
+                return BadRequest();
+            }
+            var newTicketCategoryList = new List<Category>();
             foreach (var categoryName in request.CategoryNames)
             {
                 var categoryToAdd = await _context.Categories
@@ -59,7 +64,7 @@ namespace TicketsServer.Api.Controllers
                 {
                     return BadRequest();
                 }
-                categoryList.Add(categoryToAdd);
+                newTicketCategoryList.Add(categoryToAdd);
             }
 
             var newTicket = new Ticket()
@@ -69,7 +74,8 @@ namespace TicketsServer.Api.Controllers
                 Description = request.Description,
                 Urgency = request.Urgency,
                 TimeEstimate = request.TimeEstimate,
-                Categories = categoryList,
+                Categories = newTicketCategoryList,
+                Creator = creator
             };
 
             var result = _context.Tickets.Add(newTicket).Entity;
@@ -77,6 +83,7 @@ namespace TicketsServer.Api.Controllers
 
             return CreatedAtAction(nameof(GetTicket), new { id = result.TicketId }, result);
         }
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTicket(int id, Ticket ticket)
         {
