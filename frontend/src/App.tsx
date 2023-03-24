@@ -8,7 +8,6 @@ import NotFound from './pages/NotFound'
 import Home from './pages/Home'
 
 function App() {
-  const [count, setCount] = useState(0)
   const { isAuthenticated } = useAuth0();
   console.log(isAuthenticated);
 
