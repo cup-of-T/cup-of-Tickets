@@ -11,7 +11,7 @@ import Profile from './pages/Profile'
 import { getUsers } from './services/ticketApi'
 
 function App() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const [users, setUsers] = useState<IUser[]>();
 
   const getData = async () => {
@@ -29,7 +29,6 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        {users && <img src={users[0].imageUrl}/> }
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
