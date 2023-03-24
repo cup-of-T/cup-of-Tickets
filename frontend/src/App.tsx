@@ -29,7 +29,6 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        {users && <img src={users[0].imageUrl}/> }
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
