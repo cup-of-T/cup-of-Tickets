@@ -65,18 +65,17 @@ namespace TicketsServer.Api.Controllers
             var newTicket = new Ticket()
             {
                 Title = request.Title,
-                Description = request.Description,
                 CreatedAt = DateTime.Now.ToLongDateString(),
-                Categories = categoryList,
+                Description = request.Description,
                 Urgency = request.Urgency,
                 TimeEstimate = request.TimeEstimate,
-
+                Categories = categoryList,
             };
 
-            _context.Tickets.Add(ticket);
+            var result = _context.Tickets.Add(newTicket).Entity;
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTicket", new { id = ticket.TicketId }, ticket);
+            return CreatedAtAction(nameof(GetTicket), new { id = result.TicketId }, result);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTicket(int id, Ticket ticket)
