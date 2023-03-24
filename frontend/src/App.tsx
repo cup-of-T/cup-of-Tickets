@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { IUser } from './interfaces/interface'
-import { FetchAllUsers } from './services/ticketApi'
+import { getUsers } from './services/ticketApi'
 
 function App() {
   const [users, setUsers] = useState<IUser[]>()
 
+  const getData = async () => {
+    setUsers(await getUsers());
+    // setSports(await getSports());
+    // setDogs(await getDogs());
+  }
 
   useEffect(() => {
-    async () => {
-      const usersResponse = await FetchAllUsers()
-      setUsers(usersResponse)
-      console.log(users);
-    }
+    getData();
+    console.log(users);
   }, [])
 
 
