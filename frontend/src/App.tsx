@@ -11,7 +11,7 @@ import Profile from './pages/Profile'
 import { getUsers } from './services/ticketApi'
 
 function App() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const [users, setUsers] = useState<IUser[]>();
 
   const getData = async () => {
