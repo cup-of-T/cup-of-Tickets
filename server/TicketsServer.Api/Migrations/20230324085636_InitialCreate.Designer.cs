@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TicketsServer.Api.Migrations
 {
     [DbContext(typeof(DbContext))]
-    [Migration("20230323182143_nullableFix")]
-    partial class nullableFix
+    [Migration("20230324085636_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,21 @@ namespace TicketsServer.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CategoryTicket", b =>
+                {
+                    b.Property<int>("CategoriesCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketsTicketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoriesCategoryId", "TicketsTicketId");
+
+                    b.HasIndex("TicketsTicketId");
+
+                    b.ToTable("CategoryTicket");
+                });
 
             modelBuilder.Entity("TeamUser", b =>
                 {
@@ -47,9 +62,13 @@ namespace TicketsServer.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("TicketsServer.Api.Models.Team", b =>
@@ -83,15 +102,15 @@ namespace TicketsServer.Api.Migrations
                     b.Property<int?>("AssignedUserUserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
                     b.Property<string>("CreatedAt")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreatorUserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -111,9 +130,9 @@ namespace TicketsServer.Api.Migrations
 
                     b.HasIndex("AssignedUserUserId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CreatorUserId");
 
-                    b.ToTable("Ticket");
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("TicketsServer.Api.Models.User", b =>
@@ -132,16 +151,29 @@ namespace TicketsServer.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CategoryTicket", b =>
+                {
+                    b.HasOne("TicketsServer.Api.Models.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TicketsServer.Api.Models.Ticket", null)
+                        .WithMany()
+                        .HasForeignKey("TicketsTicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TeamUser", b =>
@@ -165,20 +197,15 @@ namespace TicketsServer.Api.Migrations
                         .WithMany()
                         .HasForeignKey("AssignedUserUserId");
 
-                    b.HasOne("TicketsServer.Api.Models.Category", "Category")
-                        .WithMany("Tickets")
-                        .HasForeignKey("CategoryId")
+                    b.HasOne("TicketsServer.Api.Models.User", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AssignedUser");
 
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("TicketsServer.Api.Models.Category", b =>
-                {
-                    b.Navigation("Tickets");
+                    b.Navigation("Creator");
                 });
 #pragma warning restore 612, 618
         }
