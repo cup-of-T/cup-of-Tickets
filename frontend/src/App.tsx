@@ -6,21 +6,21 @@ import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
 import { IUser } from './interfaces/interface'
-import { FetchAllUsers } from './services/ticketApi'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
+import { getUsers } from './services/ticketApi'
 
 function App() {
   const { isAuthenticated } = useAuth0();
   const [users, setUsers] = useState<IUser[]>();
 
+  const getData = async () => {
+    setUsers(await getUsers());
+  }
 
   useEffect(() => {
-    async () => {
-      const usersResponse = await FetchAllUsers();
-      setUsers(usersResponse);
-      console.log(users);
-    }
+    getData();
+    console.log(users);
   }, [])
 
   console.log(isAuthenticated);
