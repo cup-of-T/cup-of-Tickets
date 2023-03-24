@@ -20,20 +20,21 @@ function App() {
 
   useEffect(() => {
     getData();
-    console.log(users);
   }, [])
 
   console.log(isAuthenticated);
+  console.log(users);
 
   return (
     <div className="App">
       <Header />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        {users && <img src={users[0].imageUrl}/> }
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
       </main>
     </div>
   )
