@@ -13,8 +13,8 @@ public class Ticket
     public string? Description { get; set; }
     public bool Archived { get; set; }
     public int Urgency { get; set; }
-    public bool Completed { get; set; }
     public required string TimeEstimate { get; set; }
+    public bool Completed { get; set; }
     public User? AssignedUser { get; set; }
     public List<Category>? Category { get; set; }
 }

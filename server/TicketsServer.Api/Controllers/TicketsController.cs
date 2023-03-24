@@ -23,21 +23,21 @@ namespace TicketsServer.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
         {
-          if (_context.Ticket == null)
+          if (_context.Tickets == null)
           {
               return NotFound();
           }
-            return await _context.Ticket.ToListAsync();
+            return await _context.Tickets.ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
-          if (_context.Ticket == null)
+          if (_context.Tickets == null)
           {
               return NotFound();
           }
-            var ticket = await _context.Ticket.FindAsync(id);
+            var ticket = await _context.Tickets.FindAsync(id);
 
             if (ticket == null)
             {
@@ -50,11 +50,13 @@ namespace TicketsServer.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
         {
-          if (_context.Ticket == null)
+          if (_context.Tickets == null)
           {
               return Problem("Entity set 'DbContext.Ticket'  is null.");
           }
-            _context.Ticket.Add(ticket);
+
+
+            _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTicket", new { id = ticket.TicketId }, ticket);
@@ -92,17 +94,17 @@ namespace TicketsServer.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(int id)
         {
-            if (_context.Ticket == null)
+            if (_context.Tickets == null)
             {
                 return NotFound();
             }
-            var ticket = await _context.Ticket.FindAsync(id);
+            var ticket = await _context.Tickets.FindAsync(id);
             if (ticket == null)
             {
                 return NotFound();
             }
 
-            _context.Ticket.Remove(ticket);
+            _context.Tickets.Remove(ticket);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -110,7 +112,7 @@ namespace TicketsServer.Api.Controllers
 
         private bool TicketExists(int id)
         {
-            return (_context.Ticket?.Any(e => e.TicketId == id)).GetValueOrDefault();
+            return (_context.Tickets?.Any(e => e.TicketId == id)).GetValueOrDefault();
         }
     }
 }
