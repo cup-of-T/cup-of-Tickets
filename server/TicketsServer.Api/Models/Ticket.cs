@@ -15,6 +15,7 @@ public class Ticket
     public int Urgency { get; set; }
     public required string TimeEstimate { get; set; }
     public bool Completed { get; set; }
+    public User? Creator { get; set; }
     public User? AssignedUser { get; set; }
     public List<Category>? Category { get; set; }
 }

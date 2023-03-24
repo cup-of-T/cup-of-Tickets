@@ -48,13 +48,14 @@ namespace TicketsServer.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
+        public async Task<ActionResult<Ticket>> PostTicket(TicketRequest request)
         {
           if (_context.Tickets == null)
           {
               return Problem("Entity set 'DbContext.Ticket'  is null.");
           }
 
+            
 
             _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
