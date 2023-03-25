@@ -132,7 +132,7 @@ namespace TicketsServer.Api.Controllers;
             return NoContent();
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("{id}/status")]
         public async Task<IActionResult> PatchTicketStatus(int id, int status)
         {
             var ticketToUpdate = await _context.Tickets.FindAsync(id);
@@ -165,12 +165,20 @@ namespace TicketsServer.Api.Controllers;
             return NoContent();
         }
 
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchTicketAssignedTo(int id, User assignedUser)
+        [HttpPatch("{id}/assignedto")]
+        public async Task<IActionResult> PatchTicketAssignedTo(int id, int assignedUserId)
         {
             var ticketToUpdate = await _context.Tickets.FindAsync(id);
 
             if (ticketToUpdate == null)
+            {
+                return NotFound();
+            }
+
+
+            var assignedUser = await _context.Users.FindAsync(assignedUserId);
+
+            if (assignedUser == null)
             {
                 return NotFound();
             }

@@ -9,6 +9,7 @@ import { ITicket, IUser } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
 import { getTickets, getUsers } from './services/ticketApi'
+import { Sidebar } from './components/Sidebar'
 
 function App() {
   const { isAuthenticated, user } = useAuth0();
@@ -26,6 +27,7 @@ function App() {
 
   console.log(isAuthenticated);
   console.log(users);
+  console.log(tickets);
 
   return (
     <div className="App">

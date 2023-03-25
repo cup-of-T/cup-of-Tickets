@@ -1,4 +1,7 @@
+using Xunit;
+
 namespace TicketsServer.Tests;
+
 
 public class UnitTest1
 {
