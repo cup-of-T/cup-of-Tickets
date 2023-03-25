@@ -5,17 +5,19 @@ import Header from './components/Header'
 import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
-import { IUser } from './interfaces/interface'
+import { ITicket, IUser } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
-import { getUsers } from './services/ticketApi'
+import { getTickets, getUsers } from './services/ticketApi'
 
 function App() {
   const { isAuthenticated, user } = useAuth0();
   const [users, setUsers] = useState<IUser[]>();
+  const [tickets, setTickets] = useState<ITicket[]>();
 
   const getData = async () => {
     setUsers(await getUsers());
+    setTickets(await getTickets());
   }
 
   useEffect(() => {
