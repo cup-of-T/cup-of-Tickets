@@ -2,9 +2,8 @@ import { ITicket, IUser } from "../interfaces/interface";
 
 export const getUsers = async (accessToken: string) => {
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Users`,{
-    method: 'POST',
+    method: 'GET',
     headers: {
-      "content-type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
   })
