@@ -1,7 +1,13 @@
 import { ITicket, IUser } from "../interfaces/interface";
 
-export const getUsers = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Users`)
+export const getUsers = async (accessToken: string) => {
+  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Users`,{
+    method: 'POST',
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
   return await response.json() as IUser[];
 }
 
