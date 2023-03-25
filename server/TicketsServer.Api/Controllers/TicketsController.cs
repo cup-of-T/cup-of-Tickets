@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace TicketsServer.Api.Controllers;
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
             if (_context.Tickets == null)
