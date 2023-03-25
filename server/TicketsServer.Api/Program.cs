@@ -56,21 +56,18 @@ builder.Host.ConfigureServices(services =>
 });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-    {
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiPlayground", Version = "v1" });
-        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-        {
-            Type = SecuritySchemeType.ApiKey,
-            Scheme = "Bearer",
-            BearerFormat = "JWT",
-            In = ParameterLocation.Header,
-            Name = HeaderNames.Authorization,
-        });
-        // dont add global security requirement
-        // c.AddSecurityRequirement(/*...*/);
-        c.OperationFilter<SecureEndpointAuthRequirementFilter>();
-    });
+builder.Services.AddSwaggerGen(opt =>
+{
+	opt.SwaggerDoc("v1", new OpenApiInfo { Title = "My Api", Version = "v1" });
+	opt.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+	{
+		Type = SecuritySchemeType.Http,
+		BearerFormat = "JWT",
+		In = ParameterLocation.Header,
+		Scheme = "bearer"
+	});
+	opt.OperationFilter<SecureEndpointAuthRequirementFilter>();
+});
 
 builder.Services.AddDbContext<DbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")));
