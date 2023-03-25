@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace App.Requirement;
+namespace TicketsServer.Api.Requirement;
 
 class RbacRequirement : IAuthorizationRequirement
 {

@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using dotenv.net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using App.Requirement;
+using TicketsServer.Api.Requirement;
+using TicketsServer.Api.Authorization;
 using Microsoft.AspNetCore.Authorization;
-using App.Authorization;
 using Microsoft.OpenApi.Models;
 using Microsoft.Net.Http.Headers;
 

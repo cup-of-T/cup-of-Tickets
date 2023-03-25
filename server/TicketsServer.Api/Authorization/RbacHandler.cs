@@ -1,7 +1,7 @@
-using App.Requirement;
+using TicketsServer.Api.Requirement;
 using Microsoft.AspNetCore.Authorization;
 
-namespace App.Authorization;
+namespace TicketsServer.Api.Authorization;
 
 class RbacHandler : AuthorizationHandler<RbacRequirement>
 {

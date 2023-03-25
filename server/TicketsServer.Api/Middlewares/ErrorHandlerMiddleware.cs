@@ -1,4 +1,4 @@
-namespace App.Middlewares;
+namespace TicketsServer.Api.Middlewares;
 
 public class ErrorHandlerMiddleware
 {
