@@ -22,6 +22,7 @@ namespace TicketsServer.Api.Controllers;
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
         {
             if (_context.Tickets == null)
@@ -50,6 +51,7 @@ namespace TicketsServer.Api.Controllers;
         }
 
         [HttpPost]
+        [Authorize("create:ticket")]
         public async Task<ActionResult<Ticket>> PostTicket(TicketRequest request)
         {
             var creator = await _context.Users.FirstOrDefaultAsync(u => u.UserId == request.UserId);
@@ -87,6 +89,7 @@ namespace TicketsServer.Api.Controllers;
         }
 
         [HttpDelete("{id}")]
+        [Authorize("delete:ticket")]
         public async Task<IActionResult> DeleteTicket(int id)
         {
             if (_context.Tickets == null)
@@ -105,6 +108,7 @@ namespace TicketsServer.Api.Controllers;
             return NoContent();
         }
 
+        [Authorize("edit:ticket")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTicket(int id, Ticket ticket)
         {
@@ -134,6 +138,7 @@ namespace TicketsServer.Api.Controllers;
             return NoContent();
         }
 
+        [Authorize]
         [HttpPatch("{id}/status")]
         public async Task<IActionResult> PatchTicketStatus(int id, int status)
         {
@@ -167,6 +172,7 @@ namespace TicketsServer.Api.Controllers;
             return NoContent();
         }
 
+        [Authorize]
         [HttpPatch("{id}/assignedto")]
         public async Task<IActionResult> PatchTicketAssignedTo(int id, int assignedUserId)
         {
