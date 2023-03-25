@@ -6,24 +6,14 @@ internal class SecureEndpointAuthRequirementFilter : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        if (!context.ApiDescription
-            .ActionDescriptor
-            .EndpointMetadata
-            .OfType<AuthorizeAttribute>()
-            .Any())
-        {
-            return;
-        }
+        if (operation.Security == null)
+            operation.Security = new List<OpenApiSecurityRequirement>();
 
-        operation.Security = new List<OpenApiSecurityRequirement>
+
+        var scheme = new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearer" } };
+        operation.Security.Add(new OpenApiSecurityRequirement
         {
-            new OpenApiSecurityRequirement
-            {
-                [new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "token" }
-                }] = new List<string>()
-            }
-        };
+            [scheme] = new List<string>()
+        });
     }
 }
