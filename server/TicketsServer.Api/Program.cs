@@ -59,12 +59,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiPlayground", Version = "v1" });
-        c.AddSecurityDefinition("token", new OpenApiSecurityScheme
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             Type = SecuritySchemeType.ApiKey,
+            Scheme = "Bearer",
+            BearerFormat = "JWT",
             In = ParameterLocation.Header,
             Name = HeaderNames.Authorization,
-            Scheme = "Bearer"
         });
         // dont add global security requirement
         // c.AddSecurityRequirement(/*...*/);

@@ -25,10 +25,10 @@ namespace TicketsServer.Api.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
             return await _context.Users.ToListAsync();
         }
 
@@ -80,9 +80,11 @@ namespace TicketsServer.Api.Controllers
         // }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<User>> PostUser(UserRequest request)
         {
-            var user = new User() {
+            var user = new User()
+            {
                 Email = request.Email,
                 ImageUrl = request.ImageUrl,
                 Role = request.Role
