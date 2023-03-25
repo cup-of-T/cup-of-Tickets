@@ -40,19 +40,19 @@ export const deleteTicket = async (ticketId: number) => {
 
 export const updateTicketStatus = async (ticketId: number, status: number) => {
   const statusToJson = JSON.stringify(status);
-  const response = await fetch(`https://cup-of-tickets-backend.azurewebsites.net/api/Tickets/${ticketId}`, {
-    method: 'PUT',
+  const response = await fetch(`https://cup-of-tickets-backend.azurewebsites.net/api/Tickets/${ticketId}/status`, {
+    method: 'PATCH',
     body: statusToJson,
     headers: { 'Content-Type': 'application/json' },
   })
   return await response.json() as ITicket[];
 }
 
-export const updateTicketAssignedTo = async (ticketId: number, assignedTo: number) => {
-  const assignedToInJson = JSON.stringify(assignedTo);
-  const response = await fetch(`https://cup-of-tickets-backend.azurewebsites.net/api/Tickets/${ticketId}`, {
-    method: 'PUT',
-    body: assignedToInJson,
+export const updateTicketAssignedTo = async (ticketId: number, assigneeId: number) => {
+  const assigneeIdToJson = JSON.stringify(assigneeId);
+  const response = await fetch(`https://cup-of-tickets-backend.azurewebsites.net/api/Tickets/${ticketId}(assignedto)`, {
+    method: 'PATCH',
+    body: assigneeIdToJson,
     headers: { 'Content-Type': 'application/json' },
   })
   return await response.json() as ITicket[];
