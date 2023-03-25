@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketsServer.Api.Models;
 
-namespace TicketsServer.Api.Controllers
-{
+namespace TicketsServer.Api.Controllers;
+
     [Route("api/[controller]")]
     [ApiController]
     public class TicketsController : ControllerBase
@@ -83,7 +83,26 @@ namespace TicketsServer.Api.Controllers
 
             return CreatedAtAction(nameof(GetTicket), new { id = result.TicketId }, result);
         }
-        
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTicket(int id)
+        {
+            if (_context.Tickets == null)
+            {
+                return NotFound();
+            }
+            var ticket = await _context.Tickets.FindAsync(id);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            _context.Tickets.Remove(ticket);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTicket(int id, Ticket ticket)
         {
@@ -113,22 +132,68 @@ namespace TicketsServer.Api.Controllers
             return NoContent();
         }
 
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTicket(int id)
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchTicketStatus(int id, int status)
         {
-            if (_context.Tickets == null)
-            {
-                return NotFound();
-            }
-            var ticket = await _context.Tickets.FindAsync(id);
-            if (ticket == null)
+            var ticketToUpdate = await _context.Tickets.FindAsync(id);
+
+            if (ticketToUpdate == null)
             {
                 return NotFound();
             }
 
-            _context.Tickets.Remove(ticket);
-            await _context.SaveChangesAsync();
+            ticketToUpdate.Status = status;
+             _context.Entry(ticketToUpdate).State = EntityState.Modified;
+
+            // remove the try and catch?
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TicketExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchTicketAssignedTo(int id, User assignedUser)
+        {
+            var ticketToUpdate = await _context.Tickets.FindAsync(id);
+
+            if (ticketToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            ticketToUpdate.AssignedUser = assignedUser;
+             _context.Entry(ticketToUpdate).State = EntityState.Modified;
+
+            // remove the try and catch?
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TicketExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw ;
+                }
+            }
 
             return NoContent();
         }
@@ -138,4 +203,3 @@ namespace TicketsServer.Api.Controllers
             return (_context.Tickets?.Any(e => e.TicketId == id)).GetValueOrDefault();
         }
     }
-}
