@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.Controllers;
+namespace TicketsServer.Api.Controllers;
 
 [ApiController]
 public class ErrorController : ControllerBase
