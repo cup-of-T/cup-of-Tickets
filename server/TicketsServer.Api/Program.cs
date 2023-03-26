@@ -85,10 +85,9 @@ var requiredVars =
 foreach (var key in requiredVars)
 {
     var value = Environment.GetEnvironmentVariable(key);
-    Console.WriteLine(value);
     if (value == "" || value == null)
     {
-        throw new Exception($"");
+        throw new Exception($"Config variable missing: {key}.");
     }
 }
 
