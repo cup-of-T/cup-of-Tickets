@@ -31,7 +31,7 @@ const TicketProvider = ({ children }: TicketsProviderProps) => {
     }
 
     return (
-        <TicketsContext.Provider value={{ tickets, setTickets, fetchTickets }}>
+        <TicketsContext.Provider value={{ tickets, setTickets, fetchTickets, deletingTicket, postingTicket }}>
             {children}
         </TicketsContext.Provider>
     );
