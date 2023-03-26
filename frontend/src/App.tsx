@@ -9,7 +9,7 @@ import { ITicket, IUser } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
 import { getTickets, getUsers } from './services/ticketApi'
-import { Sidebar } from './components/Sidebar'
+import { Sidebar } from './components/sidebar/Sidebar'
 
 function App() {
   const { isAuthenticated, user } = useAuth0();
