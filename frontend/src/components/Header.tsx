@@ -1,6 +1,6 @@
 import './Header.css'
-import { Sidebar } from "./sidebar/Sidebar";
-import { Navbar } from "./navbar/Navbar";
+import Sidebar from "./sidebar/Sidebar";
+import Navbar from "./navbar/Navbar";
 
 interface IHeaderProps {
 }
