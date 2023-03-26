@@ -9,14 +9,12 @@ import { Navbar } from "./Navbar";
 interface IHeaderProps {
 }
 
-const Header = ({ }: IHeaderProps) => {
-    const { isAuthenticated, user } = useAuth0();
-    return (
-        <header>
-          <Navbar />
-          <Sidebar />
-        </header>
-    );
-}
+const Header = ({ }: IHeaderProps) => (
+    <header>
+        <Navbar />
+        <Sidebar />
+    </header>
+);
+
 
 export default Header;
