@@ -7,10 +7,7 @@ on:
     paths:
       - frontend/**
       - .github/workflows/azure-static-web-apps-orange-pond-040622003.yml
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build_and_deploy_job:
