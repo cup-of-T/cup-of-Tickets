@@ -27,7 +27,11 @@ namespace TicketsServer.Api.Controllers;
             {
                 return NotFound();
             }
-            return await _context.Tickets.ToListAsync();
+            return await _context.Tickets
+            .Include(ticket => ticket.AssignedUser)   
+            .Include(ticket => ticket.Creator)
+            .Include(ticket => ticket.Categories)   
+            .ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -37,7 +41,12 @@ namespace TicketsServer.Api.Controllers;
             {
                 return NotFound();
             }
-            var ticket = await _context.Tickets.FindAsync(id);
+
+            var ticket = await _context.Tickets
+            .Include(ticket => ticket.AssignedUser)
+            .Include(ticket => ticket.Creator)
+            .Include(ticket => ticket.Categories)
+            .FirstOrDefaultAsync(ticket => ticket.TicketId == id);
 
             if (ticket == null)
             {
