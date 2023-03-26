@@ -19,7 +19,7 @@ const LoginButton = ({ }: ILoginButtonProps) => {
     };
 
     return (
-        <button onClick={LoginHandler}>
+        <button className="btn btn--bordered" onClick={LoginHandler}>
             Log in
         </button>
     );
