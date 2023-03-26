@@ -2,7 +2,7 @@
     position: absolute;
     width: 100%;
     top: 0;
-    height: 60px;
+    height: 10vh;
     display: flex;
     align-items: center;
     border: 1px solid rgb(233, 230, 230);

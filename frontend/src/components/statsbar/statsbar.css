@@ -1,0 +1,34 @@
+.statsbar {
+    background-color: rgb(247, 247, 247);
+    display: flex;
+    justify-content: start;
+    gap: 24px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.stats-card__content {
+    margin-top: 8px;
+    display: flex;
+    border-radius: 8px;
+    background-color: white;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid rgb(233, 230, 230);
+}
+
+.stats-card__content-square{
+    flex-basis: 0;
+    flex-grow: 1;
+    padding: 8px 32px;
+    min-width: 50px;
+    min-height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.border-left{
+    border-left: 1px solid rgb(233, 230, 230);
+}

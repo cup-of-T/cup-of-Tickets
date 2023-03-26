@@ -1,0 +1,47 @@
+.ticket-board {
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgb(233, 230, 230);
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+.ticket-board__grid{
+    display: grid;
+    grid-template-columns: 1fr 2fr 10fr 3fr 4fr 3fr 3fr;
+    grid-template-areas: "checkbox id text requester requester-update group assignee";
+    grid-template-rows: auto;
+    gap: 8px;
+}
+
+
+.ticket-board_id {
+    grid-area: id;
+}
+
+.ticket-board__text {
+    grid-area: text;
+}
+
+.ticket-board__requester {
+    grid-area: requester;
+}
+
+.ticket-board__requester-update {
+    grid-area: requester-update;
+}
+
+.ticket-board__group {
+    grid-area: group;
+}
+
+.ticket-board__assignee {
+    grid-area: assignee;
+}
+
+
+.ticket-board__card-styling {
+    border-bottom: 1px solid rgb(233, 230, 230);
+    padding: 8px 0;
+    margin: 0;
+}

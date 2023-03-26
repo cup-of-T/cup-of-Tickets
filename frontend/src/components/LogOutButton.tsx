@@ -12,7 +12,7 @@ const LogoutButton = () => {
     };
 
     return (
-        <button onClick={LogoutHandler}>
+        <button className="btn btn--bordered" onClick={LogoutHandler}>
             Log Out
         </button>
     );
