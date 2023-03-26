@@ -8,8 +8,8 @@ import Home from './pages/Home'
 import { ITicket, IUser } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
-import { getTickets, getUsers } from './services/ticketApi'
-import { Sidebar } from './components/sidebar/Sidebar'
+import { getTickets } from './services/ticketApi'
+import { getUsers } from './services/userApi'
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
   const getData = async () => {
     const accessToken = await getAccessTokenSilently();
     setUsers(await getUsers(accessToken));
-    setTickets(await getTickets());
+    setTickets(await getTickets(accessToken));
   }
 
   useEffect(() => {
