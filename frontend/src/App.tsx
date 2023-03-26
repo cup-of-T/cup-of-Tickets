@@ -8,9 +8,9 @@ import Home from './pages/Home'
 import { IUser } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
-import { getTickets, getUsers } from './services/ticketApi'
 import { TicketsContext } from './context/TicketsProvider'
 import { TicketsContextType } from './types'
+import { getUsers } from './services/userApi'
 
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
   console.log(isAuthenticated);
   console.log(user);
   console.log(users);
+  console.log(tickets);
 
   return (
     <div className="App">
