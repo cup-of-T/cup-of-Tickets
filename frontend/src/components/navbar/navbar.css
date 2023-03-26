@@ -1,0 +1,22 @@
+.navbar{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(233, 230, 230);
+    box-sizing: border-box;
+}
+
+.navbar__container{
+    display: flex;
+    justify-content: end;
+    gap: 16px; 
+}   
+
+.navbar__avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
