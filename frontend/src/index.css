@@ -1,21 +1,39 @@
+
+
 body{
   width: 100%;
-  min-width: 100vw;
   margin: 0;
+  font-family: 'Barlow', sans-serif;
+  margin-top: 10vh;
 }
 
 html{
   margin: 0;
+  padding: 0;
   max-width: 100vw;
+
   /* padding: 50px 0 0; */
 }
 
 .container {
-  width: 85vw;
+  width: 92vw;
 }
 
 .center {
   margin: 0 auto;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #57a5b8;
+}
+a:hover {
+  color: #407a88;
+  font-weight: 500;
 }
 
 

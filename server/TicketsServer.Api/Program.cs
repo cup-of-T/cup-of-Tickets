@@ -13,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureAppConfiguration((configBuilder) =>
 {
-    // DotEnv.Load();
     configBuilder.AddEnvironmentVariables();
 });
 
@@ -90,9 +89,6 @@ foreach (var key in requiredVars)
         throw new Exception($"Config variable missing: {key}.");
     }
 }
-
-// app.Urls.Add(
-//     $"http://+:{app.Configuration.GetValue<string>("PORT")}");
 
 app.UseSwagger();
 app.UseSwaggerUI();
