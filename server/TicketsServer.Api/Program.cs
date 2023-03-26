@@ -82,15 +82,18 @@ var requiredVars =
           "AUTH0_AUDIENCE",
     };
 
+
 foreach (var key in requiredVars)
 {
-    var value = app.Configuration.GetValue<string>(key);
-
+    var value = Environment.GetEnvironmentVariable(key);
+    Console.WriteLine(value);
     if (value == "" || value == null)
     {
-        throw new Exception($"Config variable missing: {key}.");
+        throw new Exception($"");
     }
 }
+
+
 
 app.Urls.Add(
     $"http://+:{app.Configuration.GetValue<string>("PORT")}");

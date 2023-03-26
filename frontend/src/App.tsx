@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { useAuth0 } from '@auth0/auth0-react'
-import Header from './components/Header'
+import Header from './components/header/Header'
 import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
