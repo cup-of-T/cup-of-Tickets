@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <main className="main container center">
+      <main className="main center">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />

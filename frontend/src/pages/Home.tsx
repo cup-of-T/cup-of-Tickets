@@ -1,3 +1,5 @@
+import { StatsBar } from "../components/statsbar/StatsBar";
+import { TicketBoard } from "../components/ticketboard/TicketBoard";
 
 interface IHomeProps {
 }
@@ -5,7 +7,8 @@ interface IHomeProps {
 const Home = ({ }: IHomeProps) => {
     return (
         <>
-            home page
+            <StatsBar />
+            <TicketBoard />
         </>
     );
 };
