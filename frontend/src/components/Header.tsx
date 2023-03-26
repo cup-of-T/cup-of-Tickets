@@ -12,9 +12,9 @@ interface IHeaderProps {
 const Header = ({ }: IHeaderProps) => {
     const { isAuthenticated, user } = useAuth0();
     return (
-        <header>
-          <Navbar />
-          <Sidebar />
+        <header className="header">
+            <Sidebar />
+            <Navbar />
         </header>
     );
 }
