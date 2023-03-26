@@ -5,7 +5,7 @@ import LoginButton from "../LoginButton";
 import LogoutButton from "../LogOutButton";
 import './navbar.css';
 
-export const Navbar = () => {
+const Navbar = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
   return (
     <nav className="navbar">
@@ -23,3 +23,5 @@ export const Navbar = () => {
     </nav>
   );
 };
+
+export default Navbar;
