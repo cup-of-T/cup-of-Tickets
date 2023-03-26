@@ -9,6 +9,8 @@ import { ITicket, IUser } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
 import { getTickets, getUsers } from './services/ticketApi'
+import { Sidebar } from './components/sidebar/Sidebar'
+
 
 function App() {
   const { isAuthenticated, user, getAccessTokenSilently} = useAuth0();
@@ -33,7 +35,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <main>
+      <main className="main container center">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
