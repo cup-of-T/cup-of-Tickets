@@ -1,4 +1,3 @@
-import { StringMappingType } from "typescript"
 
 export interface IUser {
     userId: number,

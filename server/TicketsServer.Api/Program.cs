@@ -13,8 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureAppConfiguration((configBuilder) =>
 {
-    configBuilder.Sources.Clear();
-    DotEnv.Load();
+    // DotEnv.Load();
     configBuilder.AddEnvironmentVariables();
 });
 
@@ -92,11 +91,6 @@ foreach (var key in requiredVars)
         throw new Exception($"");
     }
 }
-
-
-
-app.Urls.Add(
-    $"http://+:{app.Configuration.GetValue<string>("PORT")}");
 
 app.UseSwagger();
 app.UseSwaggerUI();
