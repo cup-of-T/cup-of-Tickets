@@ -42,9 +42,13 @@
     height: 100%;
     padding: 8px;
     animation: rotation 25s linear infinite;
+    border-radius: 50%;
+    opacity: .8;
 }
-.logo:hover {
-}
+/* .logo:hover {
+    opacity: 1;
+} */
+
 
 @keyframes rotation {
     0% {
