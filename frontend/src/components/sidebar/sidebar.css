@@ -34,12 +34,13 @@
     /* background-color: #95cddb ; */
     color: #4d7298;
     text-align: center;
-    height: 8vh;
+    height: 64px;
 }
 
 .logo {
     box-sizing: border-box;
     height: 100%;
+    padding: 4px;
 }
 /* .logo:hover {
     padding: 5px;
