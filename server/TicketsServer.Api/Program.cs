@@ -13,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureAppConfiguration((configBuilder) =>
 {
-    // DotEnv.Load();
     configBuilder.AddEnvironmentVariables();
 });
 
@@ -81,10 +80,10 @@ var requiredVars =
           "AUTH0_AUDIENCE",
     };
 
-
 foreach (var key in requiredVars)
 {
-    var value = Environment.GetEnvironmentVariable(key);
+    var value = app.Configuration.GetValue<string>(key);
+
     if (value == "" || value == null)
     {
         throw new Exception($"Config variable missing: {key}.");
