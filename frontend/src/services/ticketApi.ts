@@ -18,25 +18,27 @@ export const postUser = async (user: IUser) => {
 }
 
 
-export const getTickets = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets`)
+export const getTickets = async (accessToken: string) => {
+  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets`, {
+    headers: { Authorization: `Bearer ${accessToken}` }
+  })
   return await response.json() as ITicket[];
 }
 
-export const postTicket = async (ticket: ITicket) => {
+export const postTicket = async (ticket: ITicket, accessToken: string) => {
   const ticketToJson = JSON.stringify(ticket);
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets`, {
     method: 'POST',
     body: ticketToJson,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
   })
   return await response.json() as ITicket;
 }
 
-export const deleteTicket = async (ticketId: number) => {
+export const deleteTicket = async (ticketId: number, accessToken: string) => {
   await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}`, {
     method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json',  Authorization: `Bearer ${accessToken}` },
   })
 }
 
