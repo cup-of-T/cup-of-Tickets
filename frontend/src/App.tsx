@@ -1,46 +1,46 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import { useAuth0 } from '@auth0/auth0-react'
 import Header from './components/Header'
 import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
-import { ITicket, IUser } from './interfaces/interface'
+import { IUser } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
 import { getTickets, getUsers } from './services/ticketApi'
-import { Sidebar } from './components/sidebar/Sidebar'
+import { TicketsContext } from './context/TicketsProvider'
+import { TicketsContextType } from './types'
 
 
 function App() {
-  const { isAuthenticated, user, getAccessTokenSilently} = useAuth0();
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
   const [users, setUsers] = useState<IUser[]>();
-  const [tickets, setTickets] = useState<ITicket[]>();
 
   const getData = async () => {
     const accessToken = await getAccessTokenSilently();
     setUsers(await getUsers(accessToken));
-    setTickets(await getTickets());
   }
 
   useEffect(() => {
     getData();
+    fetchTickets();
   }, [])
 
   console.log(isAuthenticated);
   console.log(user);
   console.log(users);
-  console.log(tickets);
 
   return (
     <div className="App">
       <Header />
       <main className="main container center">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
     </div>
   )
