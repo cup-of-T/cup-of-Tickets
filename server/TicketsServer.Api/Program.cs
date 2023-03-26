@@ -13,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.ConfigureAppConfiguration((configBuilder) =>
 {
-    configBuilder.Sources.Clear();
     DotEnv.Load();
     configBuilder.AddEnvironmentVariables();
 });
