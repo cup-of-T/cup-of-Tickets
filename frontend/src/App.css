@@ -1,4 +1,29 @@
+
 .main {
-    padding: 16px 0 0 24px;
+    padding: 8px 0px 0px 64px;
     box-sizing: border-box;
+    min-height: 93vh;
+    display: flex;
+    flex-direction: column;
 }
+
+.btn {
+    border-radius: 25px;
+    padding: 4px 16px;
+    background-color: transparent;
+}
+
+.btn--bordered {
+    border: 1px solid rgb(233, 230, 230);
+}
+
+.btn:hover {
+    color: #407a88;
+    font-weight: 500;
+}
+
+.btn--bordered:hover{
+    border: 1px solid rgb(171, 171, 171);
+}
+
+

@@ -10,7 +10,7 @@ export const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container navbar__container center">
-        <Link to="/">Home</Link>
+        <Link className="btn" to="/">Home</Link>
         {!isAuthenticated && <LoginButton />}
         {isAuthenticated && (
           <>
