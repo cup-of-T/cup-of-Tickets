@@ -1,18 +1,15 @@
 import { ITicket, IUser } from "../interfaces/interface";
 
 export const getUsers = async (accessToken: string) => {
-  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Users`,{
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Users`, {
+    headers: { Authorization: `Bearer ${accessToken}` }
   })
   return await response.json() as IUser[];
 }
 
 export const postUser = async (user: IUser) => {
   const userToJson = JSON.stringify(user);
-  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/User`, {
+  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Users`, {
     method: 'POST',
     body: userToJson,
     headers: { 'Content-Type': 'application/json' },
@@ -55,7 +52,7 @@ export const updateTicketStatus = async (ticketId: number, status: number) => {
 
 export const updateTicketAssignedTo = async (ticketId: number, assigneeId: number) => {
   const assigneeIdToJson = JSON.stringify(assigneeId);
-  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}(assignedto)`, {
+  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/assignedto`, {
     method: 'PATCH',
     body: assigneeIdToJson,
     headers: { 'Content-Type': 'application/json' },

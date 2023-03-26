@@ -9,8 +9,6 @@ import { ITicket, IUser } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
 import { getTickets, getUsers } from './services/ticketApi'
-import { Sidebar } from './components/Sidebar'
-import { isAccessor } from 'typescript'
 
 function App() {
   const { isAuthenticated, user, getAccessTokenSilently} = useAuth0();
@@ -18,8 +16,8 @@ function App() {
   const [tickets, setTickets] = useState<ITicket[]>();
 
   const getData = async () => {
-    const accesToken = await getAccessTokenSilently();
-    setUsers(await getUsers(accesToken));
+    const accessToken = await getAccessTokenSilently();
+    setUsers(await getUsers(accessToken));
     setTickets(await getTickets());
   }
 
