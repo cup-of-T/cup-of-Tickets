@@ -10,11 +10,16 @@
     flex-direction: column;
     align-items: center;
     padding: 0;
+    margin: 48px 0;
 }
 
 .sidebar__links-item {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    /* styling */
+    padding: 16px;
     color: #e9e9e9;
-    padding: 24px;
     font-size: 1.5rem;
 }
 
