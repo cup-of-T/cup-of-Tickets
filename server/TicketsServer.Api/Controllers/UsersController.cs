@@ -32,7 +32,7 @@ namespace TicketsServer.Api.Controllers
             return await _context.Users.ToListAsync();
         }
 
-        [HttpGet("/email")]
+        [HttpGet("/email/{email}")]
         [Authorize]
         public async Task<ActionResult<User>> GetUser(string email)
         {
