@@ -52,11 +52,22 @@ namespace TicketsServer.Api.Controllers
 
         [HttpPost]
         [Authorize("User")]
-        public async Task<ActionResult<User>> PostUser(UserRequest request)
+        public async Task<ActionResult<User>> PostUser()
         {
             string token = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
             var handler = new JwtSecurityTokenHandler();
             var decodedToken = handler.ReadJwtToken(token);
+
+            var email = decodedToken.Claims.FirstOrDefault(c => c.Type == "/email")!.Value;
+            if (email == null)
+            {
+                return Forbid();
+            }
+            if (_context.Users.FirstOrDefault(u => u.Email == email) != null)
+            {
+                return BadRequest();
+            }
+            var picture = decodedToken.Claims.FirstOrDefault(c => c.Type == "/picture")!.Value;
             var roles = decodedToken.Claims.Where(c => c.Type == "/roles")
                                             .Select(role => role.Value)
                                             .ToList();
@@ -66,9 +77,9 @@ namespace TicketsServer.Api.Controllers
 
             var user = new User()
             {
-                Email = request.Email,
-                Name = request.Name == null ? request.Email.Split('@')[0] : request.Name,
-                ImageUrl = request.ImageUrl,
+                Email = email,
+                Name = email.Split('@')[0],
+                ImageUrl = picture,
                 Role = role
             };
             _context.Users.Add(user);
