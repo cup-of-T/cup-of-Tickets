@@ -31,7 +31,7 @@ function App() {
   console.log(tickets);
 
   return (
-    <div className="App">
+    <div className="app">
       <Header />
       <main className="main center">
         <Routes>
