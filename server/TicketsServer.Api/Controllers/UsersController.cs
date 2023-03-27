@@ -63,7 +63,7 @@ namespace TicketsServer.Api.Controllers
             {
                 return Forbid();
             }
-            if (_context.Users.FirstOrDefault(u => u.Email == email) != null)
+            if (_context.Users.Any(u => u.Email == email))
             {
                 return BadRequest();
             }
@@ -87,6 +87,7 @@ namespace TicketsServer.Api.Controllers
 
             return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, user);
         }
+        
 
         // [HttpGet("{id}")]
         // public async Task<ActionResult<User>> GetUser(int id)
