@@ -53,11 +53,20 @@
 }
 
 .color-yellow{
-    color: rgb(222, 222, 0);
-    text-shadow: 0 0 1px black;
+    color: rgb(211, 211, 15);
+    text-shadow:  0 0 2px #000;
 }
 
 .color-red{
     color: red;
-    text-shadow: 0 0 1px black;
+    text-shadow:  0 0 2px #000;
+}
+
+.bg--red{
+    background-color: #a30000;
+    color: white;
+}
+
+.bg--grey{
+    background-color: lightgray;
 }
