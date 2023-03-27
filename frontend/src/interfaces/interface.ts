@@ -9,7 +9,6 @@ export interface IUser {
 }
 
 
-export interface ITicket {
   ticketId: number
   title: string,
   createdAt: string,
