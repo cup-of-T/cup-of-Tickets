@@ -5,15 +5,15 @@ interface UserProviderProps {
     children: React.ReactNode
 }
 
-export const UsersContext = createContext({});
+export const UserContext = createContext({});
 
 const UserProvider = ({ children }: UserProviderProps) => {
     const [dbUser, setDbUser] = useState<IUser>();
 
     return (
-        <UsersContext.Provider value={{ dbUser, setDbUser }}>
+        <UserContext.Provider value={{ dbUser, setDbUser }}>
             {children}
-        </UsersContext.Provider>
+        </UserContext.Provider>
     );
 }
 
