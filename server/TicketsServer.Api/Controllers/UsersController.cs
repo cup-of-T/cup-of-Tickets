@@ -54,15 +54,26 @@ namespace TicketsServer.Api.Controllers
         [Authorize("User")]
         public async Task<ActionResult<User>> PostUser(UserRequest request)
         {
+            string token = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            var handler = new JwtSecurityTokenHandler();
+            var decodedToken = handler.ReadJwtToken(token);
+            var roles = decodedToken.Claims.Where(c => c.Type == "/roles")
+                                            .Select(role => role.Value)
+                                            .ToList();
+
+            roles.Sort();
+            var role = roles[0];
+
             var user = new User()
             {
                 Email = request.Email,
                 ImageUrl = request.ImageUrl,
+                Role = role
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.UserId }, user);
+            return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, user);
         }
 
         // [HttpGet("{id}")]
