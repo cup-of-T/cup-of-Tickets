@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -49,19 +51,18 @@ namespace TicketsServer.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize("User")]
         public async Task<ActionResult<User>> PostUser(UserRequest request)
         {
             var user = new User()
             {
                 Email = request.Email,
                 ImageUrl = request.ImageUrl,
-                Role = request.Role
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction(nameof(GetUser), new { id = user.UserId }, user);
         }
 
         // [HttpGet("{id}")]

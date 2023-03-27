@@ -52,6 +52,10 @@ builder.Host.ConfigureServices(services =>
         {
             policy.Requirements.Add(new RbacRequirement("Manager"));
         });
+        options.AddPolicy("User", policy =>
+        {
+            policy.Requirements.Add(new RbacRequirement("User"));
+        });
     });
 
     services.AddSingleton<IAuthorizationHandler, RbacHandler>();
