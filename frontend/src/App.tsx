@@ -28,9 +28,6 @@ function App() {
     fetchTickets();
   }, [])
 
-  console.log(isAuthenticated);
-  console.log(user);
-  console.log(users);
   console.log(tickets);
 
   return (
