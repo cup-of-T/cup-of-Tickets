@@ -24,6 +24,20 @@ export const TicketCard :FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
     }
   }
 
+  const handleStatus = () => {
+    switch(ticket.status) { 
+      case 1: { 
+        return <span className='status-icon bg--grey'>CLOSED</span>;
+      } 
+      default: {
+        return <span className='status-icon bg--red'>OPEN</span>;
+      }
+    }
+  }
+
+
+
+
 
 
   return (
@@ -34,12 +48,17 @@ export const TicketCard :FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
       <li className='ticket-board__text'>{ticket.title}</li>
       <li className='ticket-board__requester'>{ticket.creator.name ? ticket.creator.name : ticket.creator.email}</li>
       <li className='ticket-board__requester-update'>{ticket.createdAt}</li>
-      <li className='ticket-board__group'>{ticket.status}</li>
-      <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : "-"}</li>
+      <li className='ticket-board__group'>{ticket.timeEstimate}</li>
+      <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name  : "-"}</li>
     </ul> 
-    { showPopUp && (<div className='popup-card'>
-      
-      Additional info: {ticket.description}
+    { showPopUp && (
+    <div className='popup-card'>
+      <div className="popup-card__header">
+        <p>{handleStatus()} Issue # {ticket.ticketId} </p>
+        <p className='popup-card__title '>{ticket.title}</p>
+      </div>
+      <p className='popup-card__description'>{ticket.description}</p>
+  
     </div>)}
     </>
   )
