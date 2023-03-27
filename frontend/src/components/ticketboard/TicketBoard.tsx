@@ -1,4 +1,3 @@
-
 import React, { FC, useContext } from 'react'
 import { TicketCard } from './ticketcard/TicketCard'
 import { TicketHeader } from './ticketheader/TicketHeader'
