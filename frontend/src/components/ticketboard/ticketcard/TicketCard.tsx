@@ -32,7 +32,7 @@ export const TicketCard :FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
       <li className='ticket-board__requester'>{ticket.creator.name ? ticket.creator.name : ticket.creator.email}</li>
       <li className='ticket-board__requester-update'>{ticket.createdAt}</li>
       <li className='ticket-board__group'>{ticket.status}</li>
-      <li className='ticket-board__assignee'>{ticket.assignedUser.name ? ticket.assignedUser.name : "-"}</li>
+      <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : "-"}</li>
     </ul> 
   )
 }
