@@ -4,7 +4,9 @@ body{
   width: 100%;
   margin: 0;
   font-family: 'Barlow', sans-serif;
-  margin-top: 64px;
+  padding-top: 14px;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
 html{

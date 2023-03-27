@@ -1,4 +1,4 @@
-import { ITicket } from "./interfaces/interface";
+import { ITicket, IUser } from "./interfaces/interface";
 
 export type TicketsContextType = {
     tickets: ITicket[];
@@ -6,4 +6,11 @@ export type TicketsContextType = {
     fetchTickets: () => void;
     postingTicket: () => void;
     deletingTicket: () => void;
+};
+
+export type UsersContextType = {
+    users: IUser[];
+    setusers: React.Dispatch<React.SetStateAction<IUser[]>>;
+    fetchUsers: () => void;
+    postingUser: () => void;
 };
