@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-import Loader from "../Loader";
-import LoginButton from "../LoginButton";
-import LogoutButton from "../LogOutButton";
+import Loader from "../loader/Loader";
+import LoginButton from "../buttons/LoginButton";
+import LogoutButton from "../buttons/LogOutButton";
 import './navbar.css';
 
 export const Navbar = () => {
