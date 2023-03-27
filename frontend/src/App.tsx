@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import './App.css'
 import Header from './components/header/Header'
 import { Route, Routes } from 'react-router-dom'
@@ -7,7 +7,7 @@ import Home from './pages/Home'
 import ProtectedRoute from './pages/ProtectedRoute'
 import Profile from './pages/Profile'
 import { TicketsContext } from './context/TicketsProvider'
-import { TicketsContextType } from './types'
+import { TicketsContextType, UserContextType } from './types'
 
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+          <Route path="/callback" element={<ProtectedRoute component={Profile} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
