@@ -35,11 +35,6 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
     }
   }
 
-
-
-
-
-
   return (
     <>
       <ul
