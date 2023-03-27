@@ -8,17 +8,17 @@ interface IHomeProps {
 
 const Home = ({ }: IHomeProps) => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
-    const [currentTicket, setCurrentTicket] = useState<ITicket>()
+    const [currentTicketId, setCurrentTicketId] = useState<number>(0)
 
-    const toggleAddBtn = (ticket: ITicket) => {
-        setCurrentTicket(ticket);
+    const toggleAddBtn = (ticketId : number) => {
+        setCurrentTicket(ticketId);
         // toggleAddBtn needs to take and id 
         setAddToggleBtn(!addBtnToggle);
     }
 
     return (
         <>
-            <StatsBar addBtnToggle={addBtnToggle} ticket={currentTicket}/>
+            <StatsBar addBtnToggle={addBtnToggle} ticketId={currentTicketId}/>
             <TicketBoard toggleAddBtn={toggleAddBtn}/>
         </>
     );

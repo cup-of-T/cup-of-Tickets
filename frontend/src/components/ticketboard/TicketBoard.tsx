@@ -7,7 +7,7 @@ import { TicketsContextType } from '../../types'
 import { ITicket } from '../../interfaces/interface'
 
 type TicketBoardProps = {
-  toggleAddBtn : (ticket : ITicket) => void
+  toggleAddBtn : (ticketId : number) => void
 }
 
 export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {

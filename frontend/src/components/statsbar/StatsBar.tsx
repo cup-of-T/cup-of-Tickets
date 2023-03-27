@@ -12,10 +12,10 @@ import { ITicket } from '../../interfaces/interface'
 
 type StatsBarProps = {
   addBtnToggle : boolean,
-  ticket: ITicket | undefined
+  ticketId: number
 }
 
-export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle, ticket }) => {
+export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle, ticketId }) => {
   const { user } = useAuth0();
   const { users } = useContext(UsersContext) as UsersContextType;
   const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
@@ -33,7 +33,7 @@ export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle, ticket }) => {
           {currentUser?.role == "admin" ? <button className='btn btn--blue'>Create ticket</button> : null}
           {addBtnToggle && ( 
           <button 
-            onClick={() => updateTicketAssignee(ticket!.ticketId, currentUser!.userId)}
+            onClick={() => updateTicketAssignee(ticketId, currentUser!.userId)}
             className='btn btn--blue'>Add ticket +
           </button>)}
         </div>
