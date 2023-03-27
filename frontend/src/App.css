@@ -9,12 +9,25 @@
 
 .btn {
     border-radius: 25px;
-    padding: 4px 16px;
+    padding: 6px 16px;
     background-color: transparent;
 }
 
+.btn--blue {
+    color: white;
+    border: none;
+    background-color: #57a5b8 ;
+}
+
+.btn--blue:hover {
+    background-color: transparent;
+    color: #407a88;
+    font-weight: 500;
+    border: 1px solid rgb(150, 149, 149);
+}
+
 .btn--bordered {
-    border: 1px solid rgb(233, 230, 230);
+    border: 1px solid rgb(213, 210, 210);
 }
 
 .btn:hover {
@@ -23,7 +36,7 @@
 }
 
 .btn--bordered:hover{
-    border: 1px solid rgb(171, 171, 171);
+    border: 1px solid rgb(150, 149, 149);
 }
 
 .fw-300 {
