@@ -40,22 +40,6 @@
 .logo {
     box-sizing: border-box;
     height: 100%;
-    padding: 4px;
-    /* animation: rotation 25s linear infinite; */
+    padding: 8px;
     border-radius: 50%;
-    opacity: 1;
-}
-/* .logo:hover {
-    opacity: 1;
-} */
-
-
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
 }
