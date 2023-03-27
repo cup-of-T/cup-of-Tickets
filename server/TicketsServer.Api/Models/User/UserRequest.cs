@@ -9,5 +9,5 @@ public class UserRequest
 {
     public required string Email { get; set; }
     public required string ImageUrl { get; set; }
-    public required string Role { get; set; }
+    public string? Name { get; set; }
 }
