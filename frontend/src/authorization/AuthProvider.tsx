@@ -25,6 +25,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
                 navigate('/403');
             }
             const { setDbUser } = useContext(UserContext) as UserContextType;
+            setDbUser(dbUser);
         }
         getOrPostUser();
         navigate(appState?.returnTo || window.location.pathname);
