@@ -61,3 +61,12 @@
     color: red;
     text-shadow:  0 0 2px #000;
 }
+
+.bg--red{
+    background-color: #a30000;
+    color: white;
+}
+
+.bg--grey{
+    background-color: lightgray;
+}
