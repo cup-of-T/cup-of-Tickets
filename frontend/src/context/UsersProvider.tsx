@@ -7,27 +7,27 @@ interface UserProviderProps {
     children: React.ReactNode
 }
 
-export const UserContext = createContext({});
+export const UsersContext = createContext({});
 
 const UserProvider = ({ children }: UserProviderProps) => {
     const { getAccessTokenSilently } = useAuth0();
-    const [user, setUser] = useState<IUser[]>([]);
+    const [users, setUsers] = useState<IUser[]>([]);
 
     const fetchUser = async () => {
         const accessToken = await getAccessTokenSilently();
-        setUser(await getUsers(accessToken));
+        setUsers(await getUsers(accessToken));
     }
 
     const postingUser = async (ticket: IUser) => {
         const accessToken = await getAccessTokenSilently();
         const response = await postUser(ticket, accessToken);
-        setUser(prevState => [ticket, ...prevState]);
+        setUsers(prevState => [ticket, ...prevState]);
     }
 
     return (
-        <UserContext.Provider value={{ user, setUser, fetchUser, postingUser }}>
+        <UsersContext.Provider value={{ users, setUsers, fetchUser, postingUser }}>
             {children}
-        </UserContext.Provider>
+        </UsersContext.Provider>
     );
 }
 
