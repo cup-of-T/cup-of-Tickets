@@ -7,6 +7,7 @@ import './navbar.css';
 
 const Navbar = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
+  
   return (
     <nav className="navbar">
       <div className="container navbar__container center">
