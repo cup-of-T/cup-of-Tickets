@@ -1,7 +1,7 @@
 import { Auth0Provider, AppState, useAuth0 } from "@auth0/auth0-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UsersContext } from "../context/UserProvider";
+import { UserContext } from "../context/UserProvider";
 import { getUserByEmail, postUser } from "../services/userApi";
 import { TicketsContextType, UserContextType } from "../types";
 
@@ -24,7 +24,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             if (dbUser == null) {
                 navigate('/403');
             }
-            const { setDbUser } = useContext(UsersContext) as UsersContextType;
+            const { setDbUser } = useContext(UserContext) as UserContextType;
         }
         getOrPostUser();
         navigate(appState?.returnTo || window.location.pathname);
