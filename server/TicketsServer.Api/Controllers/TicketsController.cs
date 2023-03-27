@@ -60,7 +60,7 @@ namespace TicketsServer.Api.Controllers;
         }
 
         [HttpPost]
-        [Authorize("create:ticket")]
+        [Authorize("Admin")]
         public async Task<ActionResult<Ticket>> PostTicket(TicketRequest request)
         {
             var creator = await _context.Users.FirstOrDefaultAsync(u => u.UserId == request.UserId);
