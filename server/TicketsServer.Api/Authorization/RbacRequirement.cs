@@ -4,10 +4,10 @@ namespace TicketsServer.Api.Requirement;
 
 class RbacRequirement : IAuthorizationRequirement
 {
-    public string Permission { get; }
+    public string Role { get; }
 
-    public RbacRequirement(string permission)
+    public RbacRequirement(string role)
     {
-        Permission = permission ?? throw new ArgumentNullException(nameof(permission));
+        Role = role ?? throw new ArgumentNullException(nameof(role));
     }
 }
