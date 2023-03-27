@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './sidebar.css'
 
-export const Sidebar = () => {
+const Sidebar = () => {
   return (
     <aside className="sidebar">
       <menu className="sidebar__links">
@@ -13,3 +13,5 @@ export const Sidebar = () => {
     </aside>
   )
 }
+
+export default Sidebar;
