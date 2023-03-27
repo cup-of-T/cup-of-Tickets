@@ -1,7 +1,6 @@
-import { useAuth0, User } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
-import { Navbar } from "../navbar/Navbar";
-import { Sidebar } from "../sidebar/Sidebar";
+import { useAuth0 } from "@auth0/auth0-react";
+import Navbar from "../navbar/Navbar";
+import Sidebar from "../sidebar/Sidebar";
 import './Header.css'
 
 interface IHeaderProps {

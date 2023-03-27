@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { TicketCard } from './ticketcard/TicketCard'
 import { TicketHeader } from './ticketheader/TicketHeader'
 import './ticketboard.css'
@@ -8,6 +8,8 @@ type TicketBoardProps = {
 }
 
 export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
+  // const Tickets = useContext()
+
   return (
     <section className="ticket-board">
         <TicketHeader />
