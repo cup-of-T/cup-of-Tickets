@@ -1,0 +1,5 @@
+.ticket-container {
+    min-height: 300px;
+    min-width: 200px;
+    background-color: red;
+}
