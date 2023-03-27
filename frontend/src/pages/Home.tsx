@@ -11,7 +11,7 @@ const Home = ({ }: IHomeProps) => {
     const [currentTicketId, setCurrentTicketId] = useState<number>(0)
 
     const toggleAddBtn = (ticketId : number) => {
-        setCurrentTicket(ticketId);
+        setCurrentTicketId(ticketId);
         // toggleAddBtn needs to take and id 
         setAddToggleBtn(!addBtnToggle);
     }
