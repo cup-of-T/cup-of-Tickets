@@ -1,4 +1,17 @@
-.large-ticket-card__content{
+.popup-card{
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 30vw;
+    min-height: 100px; /* Need a specific value to work */
+    padding: 16px;
+    background-color: white;
+    border: 1px solid rgb(233, 230, 230);
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
 }
