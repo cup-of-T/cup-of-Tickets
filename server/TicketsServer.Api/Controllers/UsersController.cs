@@ -67,6 +67,7 @@ namespace TicketsServer.Api.Controllers
             var user = new User()
             {
                 Email = request.Email,
+                Name = request.Name == null ? request.Email.Split('@')[0] : request.Name,
                 ImageUrl = request.ImageUrl,
                 Role = role
             };
