@@ -15,8 +15,7 @@ export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle }) => {
   const { user } = useAuth0();
   const { users, fetchUsers } = useContext(UsersContext) as UsersContextType;
 
-  const currentUserRole = users.find(u => u.email == user?.email )
-  console.log(users);
+  const currentUserRole = users.find(u => u.email == user?.email )?.role;
 
   return (
     <section className="statsbar">
@@ -26,7 +25,7 @@ export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle }) => {
           <StatsCard />
         </div>
         <div className="statsbar__buttons">
-          <button className='btn btn--blue'>Create ticket</button>
+          {currentUserRole == "admin" ? <button className='btn btn--blue'>Create ticket</button> : null}
           {addBtnToggle && ( <button className='btn btn--blue'>Add ticket +</button>)}
         </div>
       </div>
