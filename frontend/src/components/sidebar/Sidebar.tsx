@@ -9,6 +9,7 @@ const Sidebar = () => {
         <Link className="sidebar__links-item"to=""><i className="fa-solid fa-house-chimney"></i></Link>
         <Link className="sidebar__links-item"to=""><i className="fa-solid fa-people-group"></i></Link>
         <Link className="sidebar__links-item"to=""><i className="fa-solid fa-gear"></i></Link>
+        <Link className="sidebar__links-item"to=""><i className="fa-solid fa-ticket"></i></Link>
       </menu>
     </aside>
   )

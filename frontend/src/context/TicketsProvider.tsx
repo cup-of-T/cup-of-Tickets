@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { createContext, useEffect, useState } from "react";
 import { ITicket } from "../interfaces/interface";
-import { getTickets, postTicket, deleteTicket, updateTicketStatus } from "../services/ticketApi";
+import { getTickets, postTicket, deleteTicket, updateTicketStatus, updateTicketAssignedTo } from "../services/ticketApi";
 
 interface TicketsProviderProps {
     children: React.ReactNode
@@ -18,6 +18,11 @@ const TicketProvider = ({ children }: TicketsProviderProps) => {
         setTickets(await getTickets(accessToken));
     }
 
+    const updateTicketAssignee = async (ticketId : number, userId: number) => {
+        const accessToken = await getAccessTokenSilently();
+        setTickets(await updateTicketAssignedTo(ticketId, userId, accessToken)); 
+    }
+
     const postingTicket = async (ticket: ITicket) => {
         const accessToken = await getAccessTokenSilently();
         const response = await postTicket(ticket, accessToken);
@@ -31,7 +36,7 @@ const TicketProvider = ({ children }: TicketsProviderProps) => {
     }
 
     return (
-        <TicketsContext.Provider value={{ tickets, setTickets, fetchTickets, deletingTicket, postingTicket }}>
+        <TicketsContext.Provider value={{ tickets, setTickets, fetchTickets, deletingTicket, updateTicketAssignee, postingTicket }}>
             {children}
         </TicketsContext.Provider>
     );
