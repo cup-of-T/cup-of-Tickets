@@ -5,23 +5,22 @@ import './statsbar.css'
 import { OpenTicketCard } from './statscard/OpenTicketCard'
 import { useAuth0 } from '@auth0/auth0-react'
 import { UsersContext } from '../../context/UsersProvider'
-import { UsersContextType } from '../../types'
+import { TicketsContextType, UsersContextType } from '../../types'
+import { TicketsContext } from '../../context/TicketsProvider'
+import { updateTicketAssignedTo } from '../../services/ticketApi'
+import { ITicket } from '../../interfaces/interface'
 
 type StatsBarProps = {
   addBtnToggle : boolean,
-
+  ticketId: number
 }
 
-export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle }) => {
+export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle, ticketId }) => {
   const { user } = useAuth0();
-  const { users, fetchUsers } = useContext(UsersContext) as UsersContextType;
+  const { users } = useContext(UsersContext) as UsersContextType;
+  const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
 
-  const currentUserRole = users.find(u => u.email == user?.email )?.role;
-
-
-type StatsBarProps = {
-  addBtnToggle : boolean
-}
+  const currentUser = users.find(u => u.email == user?.email );
 
   return (
     <section className="statsbar">
@@ -31,8 +30,12 @@ type StatsBarProps = {
           <StatsCard />
         </div>
         <div className="statsbar__buttons">
-          {currentUserRole == "admin" ? <button className='btn btn--blue'>Create ticket</button> : null}
-          {addBtnToggle && ( <button className='btn btn--blue'>Add ticket +</button>)}
+          {currentUser?.role == "admin" ? <button className='btn btn--blue'>Create ticket</button> : null}
+          {addBtnToggle && ( 
+          <button 
+            onClick={() => updateTicketAssignee(ticketId, currentUser!.userId)}
+            className='btn btn--blue'>Add ticket +
+          </button>)}
         </div>
       </div>
     </section>

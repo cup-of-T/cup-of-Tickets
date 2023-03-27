@@ -4,9 +4,10 @@ import { TicketHeader } from './ticketheader/TicketHeader'
 import './ticketboard.css'
 import TicketProvider, { TicketsContext } from '../../context/TicketsProvider'
 import { TicketsContextType } from '../../types'
+import { ITicket } from '../../interfaces/interface'
 
 type TicketBoardProps = {
-  toggleAddBtn : () => void
+  toggleAddBtn : (ticketId : number) => void
 }
 
 export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
