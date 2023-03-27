@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +24,7 @@ namespace TicketsServer.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize("User")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             if (_context.Users == null)
@@ -32,6 +34,48 @@ namespace TicketsServer.Api.Controllers
             return await _context.Users.ToListAsync();
         }
 
+        [HttpGet("/email/{email}")]
+        [Authorize("User")]
+        public async Task<ActionResult<User>> GetUser(string email)
+        {
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+            {
+                return NoContent();
+            }
+            return user;
+        }
+
+        [HttpPost]
+        [Authorize("User")]
+        public async Task<ActionResult<User>> PostUser(UserRequest request)
+        {
+            string token = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            var handler = new JwtSecurityTokenHandler();
+            var decodedToken = handler.ReadJwtToken(token);
+            var roles = decodedToken.Claims.Where(c => c.Type == "/roles")
+                                            .Select(role => role.Value)
+                                            .ToList();
+
+            roles.Sort();
+            var role = roles[0];
+
+            var user = new User()
+            {
+                Email = request.Email,
+                Name = request.Name == null ? request.Email.Split('@')[0] : request.Name,
+                ImageUrl = request.ImageUrl,
+                Role = role
+            };
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, user);
+        }
 
         // [HttpGet("{id}")]
         // public async Task<ActionResult<User>> GetUser(int id)
@@ -79,21 +123,6 @@ namespace TicketsServer.Api.Controllers
         //     return NoContent();
         // }
 
-        [HttpPost]
-        [Authorize]
-        public async Task<ActionResult<User>> PostUser(UserRequest request)
-        {
-            var user = new User()
-            {
-                Email = request.Email,
-                ImageUrl = request.ImageUrl,
-                Role = request.Role
-            };
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
-        }
 
         // [HttpDelete("{id}")]
         // public async Task<IActionResult> DeleteUser(int id)
