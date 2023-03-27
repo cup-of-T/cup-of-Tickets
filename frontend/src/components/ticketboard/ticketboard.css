@@ -8,15 +8,17 @@
 
 .ticket-board__grid{
     display: grid;
-    grid-template-columns: 1fr 2fr 10fr 3fr 4fr 3fr 3fr;
-    grid-template-areas: "checkbox id text requester requester-update group assignee";
+    grid-template-columns: 1fr 2fr 7fr 4fr 5fr 3fr 3fr;
+    grid-template-areas: "checkbox urgency text requester requester-update group assignee";
     grid-template-rows: auto;
     gap: 8px;
+    
 }
 
 
-.ticket-board_id {
-    grid-area: id;
+.ticket-board__urgency {
+    grid-area: urgency;
+    text-align: center;
 }
 
 .ticket-board__text {
