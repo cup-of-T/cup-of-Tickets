@@ -8,9 +8,10 @@ const Sidebar = () => {
         <Link className="sidebar__logo" to=""><img src="logo.png" className="logo" alt="logo" /></Link>
         <Link className="sidebar__links-item" to=""><i className="fa-solid fa-house-chimney"></i></Link>
         <Link className="sidebar__links-item" to=""><i className="fa-solid fa-people-group"></i></Link>
-        <Link className="sidebar__links-item" to=""><i className="fa-solid fa-gear"></i></Link>
+        <Link className="sidebar__links-item" to="/kanban"><i className="fa-solid fa-list-ul"></i></Link>
+        <Link className="sidebar__links-item" to="/profile"><i className="fa-solid fa-gear"></i></Link>
       </menu>
-    </aside>
+    </aside >
   )
 }
 

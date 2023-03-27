@@ -11,6 +11,7 @@ import Profile from './pages/Profile'
 import { TicketsContext } from './context/TicketsProvider'
 import { TicketsContextType } from './types'
 import { getUsers } from './services/userApi'
+import Kanban from './pages/Kanban'
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+          <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
