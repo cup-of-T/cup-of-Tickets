@@ -5,41 +5,32 @@ import Header from './components/header/Header'
 import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
-import { IUser } from './interfaces/interface'
+import { IUserRequest } from './interfaces/interface'
 import ProtectedRoute from './components/ProtectedRoute'
 import Profile from './pages/Profile'
-import { TicketsContext } from './context/TicketsProvider'
-import { TicketsContextType } from './types'
-import { getUsers } from './services/userApi'
+import { getUserByEmail, getUsers, postUser } from './services/userApi'
 
 
 function App() {
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
-  const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
-  const [users, setUsers] = useState<IUser[]>();
-
-  const getData = async () => {
-    const accessToken = await getAccessTokenSilently();
-    setUsers(await getUsers(accessToken));
-  }
 
   useEffect(() => {
-    getData();
-    fetchTickets();
-  }, [])
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      console.log('how did I get here');
-      return;
+    const tryFetchUser = async () => {
+      const accessToken = await getAccessTokenSilently();
+      let dbUser = await getUserByEmail(user?.email!, accessToken);
+      if (dbUser === null) {
+        const newUser: IUserRequest = {
+          email: user!.email!,
+          imageUrl: user!.picture!
+         }
+        dbUser = await postUser(newUser, accessToken);
+      }
+      
     }
-    
-  }, [isAuthenticated]);
-
-  console.log(isAuthenticated);
-  console.log(user);
-  console.log(users);
-  console.log(tickets);
+    if (isAuthenticated) {
+      tryFetchUser();
+    }
+  },);
 
   return (
     <div className="App">
