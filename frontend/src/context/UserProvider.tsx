@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { IUser } from "../interfaces/interface";
 
 interface UserProviderProps {

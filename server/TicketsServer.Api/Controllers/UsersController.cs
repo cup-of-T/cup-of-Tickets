@@ -34,21 +34,6 @@ namespace TicketsServer.Api.Controllers
             return await _context.Users.ToListAsync();
         }
 
-        [HttpGet("/email/{email}")]
-        [Authorize("User")]
-        public async Task<ActionResult<User>> GetUser(string email)
-        {
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-            if (user == null)
-            {
-                return NoContent();
-            }
-            return user;
-        }
 
         [HttpPost]
         [Authorize("User")]
@@ -63,9 +48,10 @@ namespace TicketsServer.Api.Controllers
             {
                 return Forbid();
             }
-            if (_context.Users.Any(u => u.Email == email))
+            var existingUser = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser != null)
             {
-                return BadRequest();
+                return Ok(existingUser);
             }
             var picture = decodedToken.Claims.FirstOrDefault(c => c.Type == "/picture")!.Value;
             var roles = decodedToken.Claims.Where(c => c.Type == "/roles")
@@ -87,7 +73,24 @@ namespace TicketsServer.Api.Controllers
 
             return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, user);
         }
-        
+
+        //__________I DONT THINK WE NEED THIS SPAGHETTI ANYMORE________
+
+        // [HttpGet("/email/{email}")]
+        // [Authorize("User")]
+        // public async Task<ActionResult<User>> GetUser(string email)
+        // {
+        //     if (_context.Users == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        //     if (user == null)
+        //     {
+        //         return NoContent();
+        //     }
+        //     return user;
+        // }
 
         // [HttpGet("{id}")]
         // public async Task<ActionResult<User>> GetUser(int id)

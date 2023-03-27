@@ -1,34 +1,14 @@
 import { Auth0Provider, AppState, useAuth0 } from "@auth0/auth0-react";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserProvider";
-import { getUserByEmail, postUser } from "../services/userApi";
-import { TicketsContextType, UserContextType } from "../types";
 
 interface AuthProviderProps {
     children: React.ReactNode
 }
 
-
 const AuthProvider = ({ children }: AuthProviderProps) => {
     const navigate = useNavigate();
-    const { user, getAccessTokenSilently } = useAuth0();
 
     const onRedirectCallback = (appState?: AppState) => {
-        const getOrPostUser = async () => {
-            const accessToken = await getAccessTokenSilently();
-            let dbUser = await getUserByEmail(user?.email, accessToken);
-            if (dbUser == null) {
-                dbUser = await postUser(accessToken);
-            }
-            if (dbUser == null) {
-                // navigate('/403');
-            }
-            console.log(dbUser);
-            const { setDbUser } = useContext(UserContext) as UserContextType;
-            setDbUser(dbUser);
-        }
-        getOrPostUser();
         navigate(appState?.returnTo || window.location.pathname);
     };
 
