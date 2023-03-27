@@ -24,7 +24,7 @@ namespace TicketsServer.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize("User")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             if (_context.Users == null)
@@ -35,7 +35,7 @@ namespace TicketsServer.Api.Controllers
         }
 
         [HttpGet("/email/{email}")]
-        [Authorize]
+        [Authorize("User")]
         public async Task<ActionResult<User>> GetUser(string email)
         {
             if (_context.Users == null)
