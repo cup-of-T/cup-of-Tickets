@@ -1,3 +1,4 @@
+
 import React, { FC, useContext } from 'react'
 import { StatsCard } from './statscard/StatsCard'
 import './statsbar.css'
@@ -17,6 +18,11 @@ export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle }) => {
 
   const currentUserRole = users.find(u => u.email == user?.email )?.role;
 
+
+type StatsBarProps = {
+  addBtnToggle : boolean
+}
+
   return (
     <section className="statsbar">
       <div className="statsbar__container container center">
@@ -32,3 +38,4 @@ export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle }) => {
     </section>
   )
 }
+
