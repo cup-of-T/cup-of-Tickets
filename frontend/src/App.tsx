@@ -27,7 +27,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
-          <Route path="/callback" element={<ProtectedRoute component={Profile} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

@@ -9,7 +9,6 @@ interface IProfileProps {
 
 const Profile = ({ }: IProfileProps) => {
 
-    const [posted, setPosted] = useState(false);
     const { getAccessTokenSilently } = useAuth0();
     const { setDbUser } = useContext(UserContext) as UserContextType;
 
@@ -18,11 +17,9 @@ const Profile = ({ }: IProfileProps) => {
             const accessToken = await getAccessTokenSilently();
             setDbUser(await postUser(accessToken));
         }
-        if (!posted) {
-            getOrPostUser();
-            setPosted(true);
-            console.log('how many times am I here');
-        }
+        getOrPostUser();
+        console.log('donna help');
+
     }, []);
 
     return (
