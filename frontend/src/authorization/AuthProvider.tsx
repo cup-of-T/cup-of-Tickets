@@ -22,8 +22,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
                 dbUser = await postUser(accessToken);
             }
             if (dbUser == null) {
-                navigate('/403');
+                // navigate('/403');
             }
+            console.log(dbUser);
             const { setDbUser } = useContext(UserContext) as UserContextType;
             setDbUser(dbUser);
         }
