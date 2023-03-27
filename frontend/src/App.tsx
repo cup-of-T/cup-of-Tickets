@@ -28,6 +28,14 @@ function App() {
     fetchTickets();
   }, [])
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      console.log('how did I get here');
+      return;
+    }
+    
+  }, [isAuthenticated]);
+
   console.log(isAuthenticated);
   console.log(user);
   console.log(users);
