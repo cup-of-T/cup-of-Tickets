@@ -5,7 +5,7 @@ import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogOutButton";
 import './navbar.css';
 import { useContext } from "react";
-import { UsersContext } from "../../context/UsersProvider";
+import { UsersContext } from "../../context/UserProvider";
 import { UsersContextType } from "../../types";
 
 const Navbar = () => {
