@@ -23,7 +23,6 @@ type StatsBarProps = {
   addBtnToggle : boolean
 }
 
-export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle }) => {
   return (
     <section className="statsbar">
       <div className="statsbar__container container center">
@@ -39,3 +38,4 @@ export const StatsBar :FC<StatsBarProps> = ({ addBtnToggle }) => {
     </section>
   )
 }
+
