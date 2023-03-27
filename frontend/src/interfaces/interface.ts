@@ -8,10 +8,6 @@ export interface IUser {
     teams: ITeam[]
 }
 
-export interface IUserRequest {
-  email:string,
-  imageUrl: string
-}
 
 export interface ITicket {
   ticketId: number
