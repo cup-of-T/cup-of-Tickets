@@ -15,10 +15,6 @@ export const StatsBar: FC<StatsBarProps> = ({ addBtnToggle, ticketId }) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
 
-  useEffect(() => {
-    console.log(dbUser);
-  }, [dbUser]);
-
   return (
     <section className="statsbar">
       <div className="statsbar__container container center">
