@@ -1,4 +1,4 @@
-import { ITicket } from "../interfaces/interface";
+import { IAssigneeRequest, IStatusRequest, ITicket } from "../interfaces/interface";
 
 export const getTickets = async (accessToken: string) => {
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets`, {
@@ -31,7 +31,8 @@ export const deleteTicket = async (ticketId: number, accessToken: string) => {
 }
 
 export const updateTicketStatus = async (ticketId: number, status: number, accessToken: string) => {
-  const statusToJson = JSON.stringify(status);
+  const statusRequest : IStatusRequest = {status: status};
+  const statusToJson = JSON.stringify(statusRequest);
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/status`, {
     method: 'PATCH',
     body: statusToJson,
@@ -44,8 +45,9 @@ export const updateTicketStatus = async (ticketId: number, status: number, acces
 }
 
 export const updateTicketAssignedTo = async (ticketId: number, assigneeId: number, accessToken: string) => {
-  const assigneeIdToJson = JSON.stringify(assigneeId);
-  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/assignedto`, {
+  const assigneeRequest : IAssigneeRequest = {assigneeId : assigneeId};
+  const assigneeIdToJson = JSON.stringify(assigneeRequest);
+  return await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/assignedto`, {
     method: 'PATCH',
     body: assigneeIdToJson,
     headers: {
@@ -53,5 +55,4 @@ export const updateTicketAssignedTo = async (ticketId: number, assigneeId: numbe
       Authorization: `Bearer ${accessToken}`
     },
   })
-  return await response.json() as ITicket[];
 }
