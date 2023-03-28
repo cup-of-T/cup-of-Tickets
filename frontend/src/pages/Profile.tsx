@@ -8,20 +8,6 @@ interface IProfileProps {
 }
 
 const Profile = ({ }: IProfileProps) => {
-
-    const { getAccessTokenSilently } = useAuth0();
-    const { setDbUser } = useContext(UserContext) as UserContextType;
-
-    useEffect(() => {
-        const getOrPostUser = async () => {
-            const accessToken = await getAccessTokenSilently();
-            setDbUser(await postUser(accessToken));
-        }
-        getOrPostUser();
-        console.log('donna help');
-
-    }, []);
-
     return (
         <>
             profile

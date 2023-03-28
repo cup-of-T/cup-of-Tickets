@@ -8,6 +8,8 @@ interface AuthProviderProps {
 const AuthProvider = ({ children }: AuthProviderProps) => {
     const navigate = useNavigate();
 
+    const { getAccessTokenSilently } = useAuth0();
+
     const onRedirectCallback = (appState?: AppState) => {
         navigate(appState?.returnTo || window.location.pathname);
     };
