@@ -13,7 +13,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     const { getAccessTokenSilently } = useAuth0();
     const [users, setUsers] = useState<IUser[]>([]);
 
-    const fetchUser = async () => {
+    const fetchUsers = async () => {
         const accessToken = await getAccessTokenSilently();
         setUsers(await getUsers(accessToken));
     }
@@ -25,7 +25,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     }
 
     return (
-        <UsersContext.Provider value={{ users, setUsers, fetchUser, postingUser }}>
+        <UsersContext.Provider value={{ users, setUsers, fetchUsers, postingUser }}>
             {children}
         </UsersContext.Provider>
     );

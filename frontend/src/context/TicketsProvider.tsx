@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { createContext, useEffect, useState } from "react";
-import { ITicket } from "../interfaces/interface";
+import { IAssigneeRequest, ITicket } from "../interfaces/interface";
 import { getTickets, postTicket, deleteTicket, updateTicketStatus, updateTicketAssignedTo } from "../services/ticketApi";
 
 interface TicketsProviderProps {

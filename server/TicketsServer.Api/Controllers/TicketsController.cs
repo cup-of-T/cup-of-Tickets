@@ -149,7 +149,7 @@ namespace TicketsServer.Api.Controllers;
 
         [HttpPatch("{id}/status")]
         [Authorize("User")]
-        public async Task<IActionResult> PatchTicketStatus(int id, int status)
+        public async Task<IActionResult> PatchTicketStatus(int id, TicketStatusRequest request)
         {
             var ticketToUpdate = await _context.Tickets.FindAsync(id);
 
@@ -158,10 +158,9 @@ namespace TicketsServer.Api.Controllers;
                 return NotFound();
             }
 
-            ticketToUpdate.Status = status;
+            ticketToUpdate.Status = request.Status;
              _context.Entry(ticketToUpdate).State = EntityState.Modified;
 
-            // remove the try and catch?
             try
             {
                 await _context.SaveChangesAsync();
@@ -183,7 +182,7 @@ namespace TicketsServer.Api.Controllers;
 
         [HttpPatch("{id}/assignedto")]
         [Authorize("User")]
-        public async Task<IActionResult> PatchTicketAssignedTo(int id, int assignedUserId)
+        public async Task<IActionResult> PatchTicketAssignedTo(int id, TicketAssigneeRequest request)
         {
             var ticketToUpdate = await _context.Tickets.FindAsync(id);
 
@@ -193,7 +192,7 @@ namespace TicketsServer.Api.Controllers;
             }
 
 
-            var assignedUser = await _context.Users.FindAsync(assignedUserId);
+            var assignedUser = await _context.Users.FindAsync(request.AssigneeId);
 
             if (assignedUser == null)
             {
@@ -203,7 +202,6 @@ namespace TicketsServer.Api.Controllers;
             ticketToUpdate.AssignedUser = assignedUser;
              _context.Entry(ticketToUpdate).State = EntityState.Modified;
 
-            // remove the try and catch?
             try
             {
                 await _context.SaveChangesAsync();
