@@ -9,7 +9,7 @@ import '../components/logincard/LoginCard.css'
 export const Login: React.FC = () => {
   const { isLoading } = useAuth0();
   return (
-    <div className="login-card">
+    <div>
       {isLoading
         ? <Loader />
         : <LoginCard />
