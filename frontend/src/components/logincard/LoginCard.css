@@ -1,0 +1,16 @@
+.login-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.login-card__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    gap: 20px;
+    border: 1px solid black;
+    padding: 40px;
+}

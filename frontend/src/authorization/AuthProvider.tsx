@@ -1,10 +1,9 @@
-import { Auth0Provider, AppState } from "@auth0/auth0-react";
+import { Auth0Provider, AppState, useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
 interface AuthProviderProps {
     children: React.ReactNode
 }
-
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
     const navigate = useNavigate();
@@ -16,7 +15,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     if (!(import.meta.env.VITE_AUTH0_DOMAIN && import.meta.env.VITE_AUTH0_CLIENT_ID && import.meta.env.VITE_AUTH0_CALLBACK_URL && import.meta.env.VITE_AUTH0_AUDIENCE)) {
         return null;
     }
-    
+
     return (
         <Auth0Provider
             domain={import.meta.env.VITE_AUTH0_DOMAIN}
