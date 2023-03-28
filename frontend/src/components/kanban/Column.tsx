@@ -25,7 +25,7 @@ const Column = ({ title, tickets }: IColumnProps) => {
                 items={tickets}
                 strategy={verticalListSortingStrategy}
             >
-                <h5>{title}</h5>
+                <h3 className="column-title">{title}</h3>
                 <div className="ticket-container" ref={setNodeRef}>
                     {tickets.map((ticket) => {
                         return (<Card parent={title} key={ticket.ticketId} ticket={ticket} />)

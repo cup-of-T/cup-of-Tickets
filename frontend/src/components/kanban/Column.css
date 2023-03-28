@@ -12,3 +12,9 @@
     flex-grow: 1;
     flex-basis: 0;
 }
+
+.column-title {
+    margin-left: 8px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
