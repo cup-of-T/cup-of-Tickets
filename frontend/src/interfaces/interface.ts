@@ -8,6 +8,7 @@ export interface IUser {
   teams: ITeam[]
 }
 
+
 export interface ITicket {
   ticketId: number
   title: string,

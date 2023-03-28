@@ -44,9 +44,17 @@ builder.Host.ConfigureServices(services =>
 
     services.AddAuthorization(options =>
     {
-        options.AddPolicy("delete:ticket", policy =>
+        options.AddPolicy("Admin", policy =>
         {
-            policy.Requirements.Add(new RbacRequirement("delete:ticket"));
+            policy.Requirements.Add(new RbacRequirement("Admin"));
+        });
+        options.AddPolicy("Manager", policy =>
+        {
+            policy.Requirements.Add(new RbacRequirement("Manager"));
+        });
+        options.AddPolicy("User", policy =>
+        {
+            policy.Requirements.Add(new RbacRequirement("User"));
         });
     });
 

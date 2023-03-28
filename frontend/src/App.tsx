@@ -1,41 +1,41 @@
 import { useContext, useEffect, useState } from 'react'
 import './App.css'
-import { useAuth0 } from '@auth0/auth0-react'
 import Header from './components/header/Header'
 import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
-import { IUser } from './interfaces/interface'
-import ProtectedRoute from './components/ProtectedRoute'
+import ProtectedRoute from './pages/ProtectedRoute'
 import Profile from './pages/Profile'
 import { TicketsContext } from './context/TicketsProvider'
-import { TicketsContextType } from './types'
-import { getUsers } from './services/userApi'
+import { TicketsContextType, UserContextType } from './types'
+import { useAuth0 } from '@auth0/auth0-react'
+import { UserContext } from './context/UserProvider'
+import { postUser } from './services/userApi'
 import Kanban from './pages/Kanban'
 
 
 function App() {
-  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
-  const [users, setUsers] = useState<IUser[]>();
+  const { dbUser, setDbUser } = useContext(UserContext) as UserContextType;
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [postedUser, setPostedUser] = useState(false);
 
-  const getData = async () => {
+  const getOrPostUser = async () => {
     const accessToken = await getAccessTokenSilently();
-    setUsers(await getUsers(accessToken));
+    setDbUser(await postUser(accessToken));
+    setPostedUser(true);
   }
 
   useEffect(() => {
-    getData();
+    if (isAuthenticated && !postedUser) {
+      getOrPostUser();
+    }
     fetchTickets();
-  }, [])
+  }, [isAuthenticated])
 
-  console.log(isAuthenticated);
-  console.log(user);
-  console.log(users);
-  console.log(tickets);
 
   return (
-    <div className="App">
+    <div className="app">
       <Header />
       <main className="main center">
         <Routes>
