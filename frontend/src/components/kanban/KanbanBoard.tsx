@@ -15,17 +15,14 @@ interface IKanbanBoardProps {
 }
 
 
-export const findBoardSectionContainer = (
-    boardSections: IColumn,
-    id: number
-) => {
-    if (id in boardSections) {
+const findTicketContainer = (columns: IColumn, id: number) => {
+    if (id in columns) {
         return id;
     }
 
-    const container = Object.keys(boardSections).find((key) =>
-        boardSections[key].find((item) => item.ticketId === id)
-    );
+    const container = Object.keys(columns).find(key =>
+        columns[key].find(ticket => ticket.ticketId === id));
+
     return container;
 };
 
@@ -35,19 +32,19 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const [active, setActive] = useState<null | number>(null);
     const [columns, setColumns] = useState<IColumn>({
-        "to do": tickets.filter(ticket => ticket.status == 0),
+        "To Do": tickets.filter(ticket => ticket.status == 0),
         "Doing": tickets.filter(ticket => ticket.status == 1),
         "Done": tickets.filter(ticket => ticket.status == 2)
     });
-
+    const activeTicket = find(tickets, (task) => task.ticketId === active);
 
     const handleDragStart = ({ active }: DragStartEvent) => {
         setActive(active.id as number);
     };
 
     const handleDragOver = ({ active, over }: DragOverEvent) => {
-        const activeContainer = findBoardSectionContainer(columns, active.id as number);
-        const overContainer = findBoardSectionContainer(columns, over?.id as number);
+        const activeContainer = findTicketContainer(columns, active.id as number);
+        const overContainer = findTicketContainer(columns, over?.id as number);
 
         if (!activeContainer || !overContainer || activeContainer === overContainer) {
             return;
@@ -79,18 +76,18 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
     };
 
     const handleDragEnd = ({ active, over }: DragEndEvent) => {
-        const activeContainer = findBoardSectionContainer(columns, active.id as number);
-        const overContainer = findBoardSectionContainer(columns, over?.id as number);
+        const activeContainer = findTicketContainer(columns, active.id as number);
+        const overContainer = findTicketContainer(columns, over?.id as number);
 
         if (!activeContainer || !overContainer || activeContainer !== overContainer) {
             return;
         }
 
         const activeIndex = columns[activeContainer].findIndex(
-            (task) => task.ticketId === active.id
+            (ticket) => ticket.ticketId === active.id
         );
         const overIndex = columns[overContainer].findIndex(
-            (task) => task.ticketId === over?.id
+            (ticket) => ticket.ticketId === over?.id
         );
 
         if (activeIndex !== overIndex) {
@@ -107,10 +104,8 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
         setActive(null);
     };
 
-    var Tik = find(tickets, (task) => task.ticketId === active);
-
     return (
-        <>
+        <section className="kanban-container">
             <DndContext
                 collisionDetection={rectIntersection}
                 onDragEnd={handleDragEnd}
@@ -121,10 +116,10 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
                     {Object.keys(columns).map(column => <Column title={column} key={column} tickets={columns[column]} />)}
                 </div>
                 <DragOverlay dropAnimation={defaultDropAnimation}>
-                    {Tik ? <Card ticket={Tik} /> : null}
+                    {activeTicket ? <Card ticket={activeTicket} /> : null}
                 </DragOverlay>
             </DndContext>
-        </>
+        </section>
     );
 };
 

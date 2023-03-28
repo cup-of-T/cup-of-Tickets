@@ -5,10 +5,7 @@ interface IKanbanProps {
 
 const Kanban = ({ }: IKanbanProps) => {
     return (
-        <>
-            Kanban
-            <KanbanBoard />
-        </>
+        <KanbanBoard />
     );
 };
 
