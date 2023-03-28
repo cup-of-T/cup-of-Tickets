@@ -11,6 +11,6 @@ public class User
     public string? Role { get; set; }
     public string? ImageUrl { get; set; }
     public List<Team>? Teams { get; set; }
-
+    
 
 }

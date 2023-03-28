@@ -8,13 +8,10 @@ export const getUsers = async (accessToken: string) => {
     return await response.json() as IUser[];
 }
 
-export const postUser = async (user: IUser, accessToken: string) => {
-    const userToJson = JSON.stringify(user);
+export const postUser = async (accessToken: string) => {
     const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Users`, {
         method: 'POST',
-        body: userToJson,
         headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${accessToken}`
         },
     })

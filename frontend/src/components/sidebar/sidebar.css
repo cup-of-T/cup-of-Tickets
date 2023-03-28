@@ -40,10 +40,6 @@
 .logo {
     box-sizing: border-box;
     height: 100%;
-    padding: 4px;
+    padding: 8px;
+    border-radius: 50%;
 }
-/* .logo:hover {
-    padding: 5px;
-    height: 44px;
-    width: 44px;
-} */
