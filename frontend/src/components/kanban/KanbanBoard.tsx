@@ -2,7 +2,7 @@ import { defaultDropAnimation, DndContext, DragEndEvent, DragOverEvent, DragOver
 import { useContext, useState } from "react";
 import { find } from "lodash";
 import { TicketsContext } from "../../context/TicketsProvider";
-import { IColumn, ITicket } from "../../interfaces/interface";
+import { IColumn, Istatuses } from "../../interfaces/interface";
 import { TicketsContextType } from "../../types";
 import Column from "./Column";
 import './KanbanBoard.css'
@@ -10,6 +10,8 @@ import Card from "./Card";
 import {
     arrayMove
 } from '@dnd-kit/sortable';
+import { updateTicketStatus } from "../../services/ticketApi";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface IKanbanBoardProps {
 }
@@ -30,6 +32,7 @@ const findTicketContainer = (columns: IColumn, id: number) => {
 
 const KanbanBoard = ({ }: IKanbanBoardProps) => {
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
+    const { getAccessTokenSilently } = useAuth0();
     const [active, setActive] = useState<null | number>(null);
     const [columns, setColumns] = useState<IColumn>({
         "To Do": tickets.filter(ticket => ticket.status == 0),
@@ -37,7 +40,11 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
         "Done": tickets.filter(ticket => ticket.status == 2)
     });
     const activeTicket = find(tickets, (task) => task.ticketId === active);
-
+    const ticketStatuses = {
+        "To Do": 0,
+        "Doing": 1,
+        "Done": 2
+    } as Istatuses;
     const handleDragStart = ({ active }: DragStartEvent) => {
         setActive(active.id as number);
     };
@@ -75,7 +82,7 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
         });
     };
 
-    const handleDragEnd = ({ active, over }: DragEndEvent) => {
+    const handleDragEnd = async ({ active, over }: DragEndEvent) => {
         const activeContainer = findTicketContainer(columns, active.id as number);
         const overContainer = findTicketContainer(columns, over?.id as number);
 
@@ -101,6 +108,9 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
             }));
         }
 
+        console.log(active.id);
+
+        updateTicketStatus(active.id as number, ticketStatuses[activeContainer], await getAccessTokenSilently());
         setActive(null);
     };
 

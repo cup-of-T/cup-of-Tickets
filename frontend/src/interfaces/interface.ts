@@ -36,3 +36,7 @@ interface ITeam {
 export interface IColumn {
   [name: string]: ITicket[]
 }
+
+export interface Istatuses {
+  [name: string]: number
+}
