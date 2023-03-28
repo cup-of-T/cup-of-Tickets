@@ -19,7 +19,7 @@ const Column = ({ title, tickets }: IColumnProps) => {
 
 
     return (
-        <div>
+        <div className="column-container">
             <SortableContext
                 id={title}
                 items={tickets}

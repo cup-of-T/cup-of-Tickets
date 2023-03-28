@@ -1,7 +1,9 @@
-.column-container {
+.columns-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    gap: 20px;
+    margin: 0 16px;
 }
 
 .kanban-container {
