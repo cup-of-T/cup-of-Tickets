@@ -48,6 +48,7 @@
 
 .card__time-description{
     margin-bottom: 24px;
+    font-size: 12px;
 }
 
 .card__status {
