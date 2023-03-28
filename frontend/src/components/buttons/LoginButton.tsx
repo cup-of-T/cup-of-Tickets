@@ -19,8 +19,8 @@ const LoginButton = ({ }: ILoginButtonProps) => {
     };
 
     return (
-        <button className="btn btn--bordered" onClick={LoginHandler}>
-            Log in
+        <button className="btn btn--blue btn--large" onClick={LoginHandler}>
+            Proceed to login
         </button>
     );
 }
