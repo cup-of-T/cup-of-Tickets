@@ -12,6 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { UserContext } from './context/UserProvider'
 import { postUser } from './services/userApi'
 import Kanban from './pages/Kanban'
+import { Login } from './pages/Login'
 
 
 function App() {
@@ -36,15 +37,25 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
-      <main className="main center">
+      {isAuthenticated && <>
+        <Header />
+        <main className="main center">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </>
+      }
+      {!isAuthenticated &&
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
           <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<Login />} />
         </Routes>
-      </main>
+      }
     </div>
   )
 }
