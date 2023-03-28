@@ -18,11 +18,13 @@ const Column = ({ title, tickets }: IColumnProps) => {
     });
 
 
+    const items = tickets.map(item => ({ ...item, id: item.ticketId }));
+
     return (
         <div className="column-container">
             <SortableContext
                 id={title}
-                items={tickets}
+                items={items}
                 strategy={verticalListSortingStrategy}
             >
                 <h3 className="column-title">{title}</h3>
