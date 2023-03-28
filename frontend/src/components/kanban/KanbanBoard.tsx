@@ -1,4 +1,4 @@
-import { defaultDropAnimation, DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, rectIntersection } from "@dnd-kit/core";
+import { defaultDropAnimation, DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, PointerSensor, rectIntersection, useSensor, useSensors } from "@dnd-kit/core";
 import { useContext, useState } from "react";
 import { find } from "lodash";
 import { TicketsContext } from "../../context/TicketsProvider";
@@ -104,9 +104,18 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
         setActive(null);
     };
 
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 8,
+            },
+        })
+    )
+
     return (
         <section className="kanban-container">
             <DndContext
+                sensors={sensors}
                 collisionDetection={rectIntersection}
                 onDragEnd={handleDragEnd}
                 onDragOver={handleDragOver}
