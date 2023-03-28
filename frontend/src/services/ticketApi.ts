@@ -31,8 +31,9 @@ export const deleteTicket = async (ticketId: number, accessToken: string) => {
 }
 
 export const updateTicketStatus = async (ticketId: number, status: number, accessToken: string) => {
-  const statusToJson = JSON.stringify(status);
-  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/status?status=${status}`, {
+  const statusRequest: IStatusRequest = { status: status };
+  const statusToJson = JSON.stringify(statusRequest);
+  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/status`, {
     method: 'PATCH',
     body: statusToJson,
     headers: {
@@ -44,7 +45,7 @@ export const updateTicketStatus = async (ticketId: number, status: number, acces
 }
 
 export const updateTicketAssignedTo = async (ticketId: number, assigneeId: number, accessToken: string) => {
-  const assigneeRequest : IAssigneeRequest = {assigneeId : assigneeId};
+  const assigneeRequest: IAssigneeRequest = { assigneeId: assigneeId };
   const assigneeIdToJson = JSON.stringify(assigneeRequest);
   return await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/assignedto`, {
     method: 'PATCH',
