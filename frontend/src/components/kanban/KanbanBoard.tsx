@@ -108,8 +108,6 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
             }));
         }
 
-        console.log(active.id);
-
         updateTicketStatus(active.id as number, ticketStatuses[activeContainer], await getAccessTokenSilently());
         setActive(null);
     };
