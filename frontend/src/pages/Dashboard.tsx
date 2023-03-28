@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { StatsBar } from "../components/statsbar/StatsBar";
 import { TicketBoard } from "../components/ticketboard/TicketBoard";
-import { ITicket } from "../interfaces/interface";
-
 interface IDashboardProps {
 }
 
@@ -10,7 +8,7 @@ const Dashboard = ({ }: IDashboardProps) => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
     const [currentTicketId, setCurrentTicketId] = useState<number>(0)
 
-    const toggleAddBtn = (ticketId : number) => {
+    const toggleAddBtn = (ticketId: number) => {
         setCurrentTicketId(ticketId);
         // toggleAddBtn needs to take and id 
         setAddToggleBtn(!addBtnToggle);
@@ -18,8 +16,8 @@ const Dashboard = ({ }: IDashboardProps) => {
 
     return (
         <>
-            <StatsBar addBtnToggle={addBtnToggle} ticketId={currentTicketId}/>
-            <TicketBoard toggleAddBtn={toggleAddBtn}/>
+            <StatsBar addBtnToggle={addBtnToggle} ticketId={currentTicketId} />
+            <TicketBoard toggleAddBtn={toggleAddBtn} />
         </>
     );
 };
