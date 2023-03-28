@@ -1,0 +1,92 @@
+.card {
+    background-color: white;
+    border: 1px solid rgb(233, 230, 230);
+    margin-bottom: 12px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+
+.card__section {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.card__label {
+    display: flex
+}
+
+.card__title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.user-image {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.card__description {
+    padding: 10px;
+    font-size: 12px;
+}
+
+.card__time-estimate {
+    font-size: 12px;
+    opacity: 0.6;
+    margin: 10px 0;
+    display: flex;
+    gap: 5px;
+    align-items: baseline;
+}
+
+.card__time-description{
+    margin-bottom: 24px;
+    font-size: 12px;
+}
+
+.card__status {
+    border-radius: 20px;
+    width: 30px;
+    padding: 5px;
+    margin: 8px 0;
+}
+
+.card__assigned-user {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.card__user-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__title-container {
+    display: flex;
+    margin: 4px 5px 10px 0;
+    justify-content: space-between;
+}
+
+.user-container__button {
+    border: none;
+    background-color: white;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.user-container__button:hover {
+    background-color: transparent;
+    background-color: rgb(233, 230, 230);
+    transition: 0.3 s ease-in;
+}
