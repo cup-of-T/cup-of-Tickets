@@ -43,16 +43,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+            <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </>
       }
       {!isAuthenticated &&
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
-          <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
+        <Routes>         
           <Route path="*" element={<Login />} />
         </Routes>
       }
