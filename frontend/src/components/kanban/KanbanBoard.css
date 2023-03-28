@@ -1,14 +1,15 @@
 .columns-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    gap: 20px;
-    margin: 0 16px;
+    justify-content: center;
+    gap: 64px;
+    margin: 0 auto;
 }
 
 .kanban-container {
     background-color: rgb(247, 247, 247);
     padding: 16px;
-    overflow: scroll;
-    height: 100vh
+    height: 100vh;
+    box-sizing: border-box;
+    width: 100%;
 }
