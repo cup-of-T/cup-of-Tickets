@@ -2,6 +2,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { ITicket } from "../../interfaces/interface";
 import { CSS } from "@dnd-kit/utilities";
 import './Card.css'
+import { useState } from 'react';
 
 interface ICardProps {
     ticket: ITicket,
@@ -9,6 +10,7 @@ interface ICardProps {
 }
 
 const Card = ({ ticket, parent = null }: ICardProps) => {
+    const [show, setShow] = useState(false);
     const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
         id: ticket.ticketId,
         data: { title: ticket.title, index: ticket.ticketId, parent },
@@ -19,24 +21,39 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
         transition,
         opacity: isDragging ? 0 : 1,
     };
-    const urgencyColors = ["#CF513D", "#F5DD29", "#7BC86C"];
+    const urgencyColors = ["#51b53f", "#FF9E19", "#FF9E19"];
 
     return (
         <div {...listeners} style={style} {...attributes} ref={setNodeRef}>
             <div className="card">
-                <div>
-                </div>
                 <section className="card__description">
-                    <span className='card__status' style={{ backgroundColor: urgencyColors[ticket.status] }}></span>
+                    <div className="card__label">
+                        <span className='card__status' style={{ backgroundColor: urgencyColors[ticket.urgency] }}></span>
+                    </div>
+                    <div className='card__title-container'>
+                        <h5 className="card__title">{ticket.title} #{ticket.ticketId}</h5>
 
-                    <h5 className="card__title">{ticket.title} #{ticket.ticketId}</h5>
-                    <p>{ticket.description}</p>
-                    <p className="card__time-estimate">time estimate: {ticket.timeEstimate}</p>
-                    <p className="card__time-estimate">created: {ticket.createdAt}</p>
-                    <p className="card__time-estimate">requested by: {ticket.creator.email}</p>
+                    </div>
+                    {show &&
+                        <div>
+                            <p>{ticket.description}</p>
+                            <p className="card__time-estimate"><i className="fa-regular fa-clock"></i>{ticket.timeEstimate}</p>
+                            <p className="card__time-estimate"><i className="fa-regular fa-calendar"></i> {ticket.createdAt}</p>
+                            <p className="card__time-estimate">requested by: {ticket.creator.email}</p>
+                        </div>
+                    }
+
+
+                    <div className="card__user-container">
+                        <button className="user-container__button" onClick={() => setShow(!show)}>{show ? <i className="fa-solid fa-chevron-down"></i> :
+                            <i className="fa-solid fa-chevron-up"></i>}</button>
+                        {ticket.assignedUser && (
+                            <img className="card__assigned-user" src={ticket.assignedUser.imageUrl} alt={ticket.assignedUser.email} />
+                        )}
+                    </div>
                 </section>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 
