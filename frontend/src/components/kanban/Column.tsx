@@ -20,19 +20,19 @@ const Column = ({ title, tickets }: IColumnProps) => {
 
     return (
         <div>
-            <h5>{title}</h5>
-            <div className="ticket-container" ref={setNodeRef}>
-                <SortableContext
-                    id={title}
-                    items={tickets}
-                    strategy={verticalListSortingStrategy}
-                >
+            <SortableContext
+                id={title}
+                items={tickets}
+                strategy={verticalListSortingStrategy}
+            >
+                <h5>{title}</h5>
+                <div className="ticket-container" ref={setNodeRef}>
                     {tickets.map((ticket) => {
                         return (<Card parent={title} key={ticket.ticketId} ticket={ticket} />)
                     })}
-                </SortableContext>
-            </div>
-        </div>
+                </div>
+            </SortableContext >
+        </div >
     );
 };
 
