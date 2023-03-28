@@ -39,6 +39,7 @@
 
 .ticket-board__assignee {
     grid-area: assignee;
+    text-align: center;
 }
 
 
