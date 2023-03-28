@@ -34,29 +34,26 @@ namespace TicketsServer.Api.Controllers
             return await _context.Users.ToListAsync();
         }
 
-        [HttpGet("/email/{email}")]
-        [Authorize("User")]
-        public async Task<ActionResult<User>> GetUser(string email)
-        {
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-            if (user == null)
-            {
-                return NoContent();
-            }
-            return user;
-        }
 
         [HttpPost]
         [Authorize("User")]
-        public async Task<ActionResult<User>> PostUser(UserRequest request)
+        public async Task<ActionResult<User>> PostUser()
         {
             string token = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
             var handler = new JwtSecurityTokenHandler();
             var decodedToken = handler.ReadJwtToken(token);
+
+            var email = decodedToken.Claims.FirstOrDefault(c => c.Type == "/email")!.Value;
+            if (email == null)
+            {
+                return Forbid();
+            }
+            var existingUser = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser != null)
+            {
+                return Ok(existingUser);
+            }
+            var picture = decodedToken.Claims.FirstOrDefault(c => c.Type == "/picture")!.Value;
             var roles = decodedToken.Claims.Where(c => c.Type == "/roles")
                                             .Select(role => role.Value)
                                             .ToList();
@@ -66,9 +63,9 @@ namespace TicketsServer.Api.Controllers
 
             var user = new User()
             {
-                Email = request.Email,
-                Name = request.Name == null ? request.Email.Split('@')[0] : request.Name,
-                ImageUrl = request.ImageUrl,
+                Email = email,
+                Name = email.Split('@')[0],
+                ImageUrl = picture,
                 Role = role
             };
             _context.Users.Add(user);
@@ -76,6 +73,24 @@ namespace TicketsServer.Api.Controllers
 
             return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, user);
         }
+
+        //__________I DONT THINK WE NEED THIS SPAGHETTI ANYMORE________
+
+        // [HttpGet("/email/{email}")]
+        // [Authorize("User")]
+        // public async Task<ActionResult<User>> GetUser(string email)
+        // {
+        //     if (_context.Users == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        //     if (user == null)
+        //     {
+        //         return NoContent();
+        //     }
+        //     return user;
+        // }
 
         // [HttpGet("{id}")]
         // public async Task<ActionResult<User>> GetUser(int id)
