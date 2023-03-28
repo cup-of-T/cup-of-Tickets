@@ -1,9 +1,8 @@
 .ticket-container {
     min-height: 300px;
     min-width: 200px;
-    background-color: red;
-    padding: 20px;
-    background-color: white;
+    padding: 8px;
+    background-color: #ecedee;
     border: 1px solid #E3E4E6;
     border-radius: 6px;
 }
