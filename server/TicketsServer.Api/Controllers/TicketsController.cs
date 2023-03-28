@@ -182,7 +182,7 @@ namespace TicketsServer.Api.Controllers;
 
         [HttpPatch("{id}/assignedto")]
         [Authorize("User")]
-        public async Task<IActionResult> PatchTicketAssignedTo(int id, TicketAssigneeRequest request)
+        public async Task<IActionResult> PatchTicketAssignedTo(int id, [FromBody]TicketAssigneeRequest request)
         {
             var ticketToUpdate = await _context.Tickets.FindAsync(id);
 

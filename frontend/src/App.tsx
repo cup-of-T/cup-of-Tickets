@@ -21,6 +21,7 @@ function App() {
 
   const getData = async () => {
     const accessToken = await getAccessTokenSilently();
+    console.log(accessToken);
   }
 
   useEffect(() => {
@@ -28,8 +29,6 @@ function App() {
     fetchUsers();
     fetchTickets();
   }, [])
-
-  console.log(tickets);
 
   return (
     <div className="app">

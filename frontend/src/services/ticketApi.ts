@@ -45,7 +45,7 @@ export const updateTicketStatus = async (ticketId: number, status: number, acces
 }
 
 export const updateTicketAssignedTo = async (ticketId: number, assigneeId: number, accessToken: string) => {
-  const assigneeRequest : IAssigneeRequest = {assignedUserId : assigneeId};
+  const assigneeRequest : IAssigneeRequest = {assigneeId : assigneeId};
   const assigneeIdToJson = JSON.stringify(assigneeRequest);
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/assignedto`, {
     method: 'PATCH',

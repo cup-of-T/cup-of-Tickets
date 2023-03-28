@@ -12,9 +12,7 @@ const Navbar = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
   const { users, fetchUsers } = useContext(UsersContext) as UsersContextType;
   const currentUser = users.find(u => u.email === user?.email);
-
-
-  console.log(users);
+  
   return (
     <nav className="navbar">
       <div className="container navbar__container center">
