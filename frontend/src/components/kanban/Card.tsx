@@ -25,7 +25,7 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
 
     return (
         <div {...listeners} style={style} {...attributes} ref={setNodeRef}>
-            <div className="card">
+            <div className="card" onClick={() => setShow(!show)}>
                 <section className="card__description">
                     <div className="card__label">
                         <span className='card__status' style={{ backgroundColor: urgencyColors[ticket.urgency] }}></span>
@@ -45,7 +45,7 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
 
 
                     <div className="card__user-container">
-                        <button className="user-container__button" onClick={() => setShow(!show)}>{show ? <i className="fa-solid fa-chevron-up"></i> :
+                        <button className="user-container__button">{show ? <i className="fa-solid fa-chevron-up"></i> :
                             <i className="fa-solid fa-chevron-down"></i>}</button>
                         {ticket.assignedUser && (
                             <img className="card__assigned-user" src={ticket.assignedUser.imageUrl} alt={ticket.assignedUser.email} />
