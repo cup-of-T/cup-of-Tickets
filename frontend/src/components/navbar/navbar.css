@@ -1,6 +1,6 @@
 .navbar{
     padding: 0 0 0 64px;
-    position: absolute;
+    position: fixed;
     width: 100%;
     top: 0;
     height: 64px;
@@ -8,6 +8,7 @@
     align-items: center;
     border: 1px solid rgb(233, 230, 230);
     box-sizing: border-box;
+    background-color: white;
 }
 
 .navbar__container{

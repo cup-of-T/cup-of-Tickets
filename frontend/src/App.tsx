@@ -11,6 +11,7 @@ import { TicketsContextType, UserContextType } from './types'
 import { useAuth0 } from '@auth0/auth0-react'
 import { UserContext } from './context/UserProvider'
 import { postUser } from './services/userApi'
+import Kanban from './pages/Kanban'
 import { Login } from './pages/Login'
 
 
@@ -41,14 +42,15 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+            <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </>
       }
       {!isAuthenticated &&
-        <Routes>
-          <Route path="*" element={<Login />} />F
+        <Routes>         
+          <Route path="*" element={<Login />} />
         </Routes>
       }
     </div>
