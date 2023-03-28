@@ -8,7 +8,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     /* background-image: url(https://img.freepik.com/free-vector/natural-simple-memphis-design-presentation-vector_53876-136104.jpg?w=1480&t=st=1680005756~exp=1680006356~hmac=0ccf7d078b2839ae4f43375fdf5263c3a4ae38460f01344076097d7a04a97f36); */
-    background-image: url(bloblarge.png);
+    background-image: url(../../../public/bloblarge.png);
     width: 100vw;
 }
 
