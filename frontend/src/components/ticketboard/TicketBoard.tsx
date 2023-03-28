@@ -13,10 +13,20 @@ type TicketBoardProps = {
 export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
 
+  const sortedByUrgency = (tickets : ITicket[]) => tickets.sort((a, b) => b.urgency - a.urgency);
+
+  const sortedTicketsByAssignee = () => {
+    var unassignedTickets = tickets.filter(ticket => ticket.assignedUser == null);
+    var assignedTickets = tickets.filter(ticket => ticket.assignedUser !== null);
+
+    return new Array().concat(sortedByUrgency(unassignedTickets), sortedByUrgency(assignedTickets));
+  }
+
   return (
     <section className="ticket-board">
         <TicketHeader />
-        {tickets.map( ticket => <TicketCard toggleAddBtn = {toggleAddBtn} ticket={ticket} key={ticket.ticketId}/> )}
+        {sortedTicketsByAssignee().map( ticket => <TicketCard toggleAddBtn = {toggleAddBtn} ticket={ticket} key={ticket.ticketId}/>)}
     </section>
   )
 }
+ 

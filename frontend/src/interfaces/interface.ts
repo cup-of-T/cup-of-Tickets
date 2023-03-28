@@ -9,6 +9,14 @@ export interface IUser {
 }
 
 
+export interface IAssigneeRequest {
+  assigneeId: number
+}
+
+export interface IStatusRequest {
+  status: number
+}
+
 export interface ITicket {
   ticketId: number
   title: string,
