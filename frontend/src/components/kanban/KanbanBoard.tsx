@@ -98,10 +98,10 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
         );
 
         if (activeIndex !== overIndex) {
-            setColumns((boardSection) => ({
-                ...boardSection,
+            setColumns((prevState) => ({
+                ...prevState,
                 [overContainer]: arrayMove(
-                    boardSection[overContainer],
+                    prevState[overContainer],
                     activeIndex,
                     overIndex
                 ),
