@@ -36,7 +36,7 @@ export const StatsBar: FC<StatsBarProps> = ({ addBtnToggle, ticketId }) => {
               className='btn btn--blue'>
               Claim ticket
             </button>)}
-          {dbUser?.role == "Admin" || dbUser?.role == "Manager" &&
+          {(dbUser?.role == "Admin" || dbUser?.role == "Manager") &&
             <button
               className='btn btn--green'
               onClick={onCreateButtonClick}>
