@@ -1,45 +1,56 @@
 import { useContext, useEffect, useState } from 'react'
 import './App.css'
-import { useAuth0 } from '@auth0/auth0-react'
 import Header from './components/header/Header'
 import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
-import { ITicket, IUser } from './interfaces/interface'
 import ProtectedRoute from './pages/ProtectedRoute'
 import Profile from './pages/Profile'
 import { TicketsContext } from './context/TicketsProvider'
-import { TicketsContextType, UsersContextType } from './types'
-import { getUsers } from './services/userApi'
-import { UsersContext } from './context/UsersProvider'
+import { TicketsContextType, UserContextType } from './types'
+import { useAuth0 } from '@auth0/auth0-react'
+import { UserContext } from './context/UserProvider'
+import { postUser } from './services/userApi'
+import { Login } from './pages/Login'
 
 
 function App() {
-  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
-  const { users, fetchUsers } = useContext(UsersContext) as UsersContextType;
+  const { dbUser, setDbUser } = useContext(UserContext) as UserContextType;
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [postedUser, setPostedUser] = useState(false);
 
-  const getData = async () => {
+  const getOrPostUser = async () => {
     const accessToken = await getAccessTokenSilently();
-    console.log(accessToken);
+    setDbUser(await postUser(accessToken));
+    setPostedUser(true);
   }
 
   useEffect(() => {
-    getData();
-    fetchUsers();
+    if (isAuthenticated && !postedUser) {
+      getOrPostUser();
+    }
     fetchTickets();
-  }, [])
+  }, [isAuthenticated])
 
   return (
     <div className="app">
-      <Header />
-      <main className="main center">
+      {isAuthenticated && <>
+        <Header />
+        <main className="main center">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </>
+      }
+      {!isAuthenticated &&
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<Login />} />F
         </Routes>
-      </main>
+      }
     </div>
   )
 }

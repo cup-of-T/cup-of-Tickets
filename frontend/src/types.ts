@@ -9,9 +9,7 @@ export type TicketsContextType = {
     deletingTicket: () => void;
 };
 
-export type UsersContextType = {
-    users: IUser[];
-    setusers: React.Dispatch<React.SetStateAction<IUser[]>>;
-    fetchUsers: () => void;
-    postingUser: () => void;
+export type UserContextType = {
+    dbUser: IUser;
+    setDbUser: React.Dispatch<React.SetStateAction<IUser>>;
 };

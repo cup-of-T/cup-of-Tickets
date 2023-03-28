@@ -4,15 +4,13 @@ import Loader from "../loader/Loader";
 import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogOutButton";
 import './navbar.css';
-import { useContext, useEffect } from "react";
-import { UsersContext } from "../../context/UsersProvider";
-import { UsersContextType } from "../../types";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserProvider";
+import { UserContextType } from "../../types";
 
 const Navbar = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
-  const { users, fetchUsers } = useContext(UsersContext) as UsersContextType;
-  const currentUser = users.find(u => u.email === user?.email);
-  
+  const { dbUser } = useContext(UserContext) as UserContextType;
   return (
     <nav className="navbar">
       <div className="container navbar__container center">
@@ -22,7 +20,7 @@ const Navbar = () => {
         {isAuthenticated && (
           <>
             <LogoutButton />
-            <img className="navbar__avatar" src={currentUser?.imageUrl} />
+            <img className="navbar__avatar" src={dbUser?.imageUrl} />
           </>
         )}
       </div>
