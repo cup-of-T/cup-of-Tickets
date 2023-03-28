@@ -14,7 +14,6 @@ type StatsBarProps = {
 export const StatsBar: FC<StatsBarProps> = ({ addBtnToggle, ticketId }) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
-
   return (
     <section className="statsbar">
       <div className="statsbar__container container center">
@@ -23,12 +22,14 @@ export const StatsBar: FC<StatsBarProps> = ({ addBtnToggle, ticketId }) => {
           <StatsCard />
         </div>
         <div className="statsbar__buttons">
-          {dbUser?.role == "admin" ? <button className='btn btn--blue'>Create ticket</button> : null}
           {addBtnToggle && (
             <button
               onClick={() => updateTicketAssignee(ticketId, dbUser.userId)}
-              className='btn btn--blue'>Add ticket +
+              className='btn btn--blue'>Claim ticket
             </button>)}
+          {dbUser?.role == "Admin" || dbUser?.role == "Manager" &&
+            <button className='btn btn--green'>Create ticket</button>
+          }
         </div>
       </div>
     </section>
