@@ -34,7 +34,6 @@ function App() {
     fetchTickets();
   }, [isAuthenticated])
 
-
   return (
     <div className="app">
       {isAuthenticated && <>
