@@ -131,7 +131,7 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
                 onDragOver={handleDragOver}
                 onDragStart={handleDragStart}
             >
-                <div className="column-container">
+                <div className="columns-container">
                     {Object.keys(columns).map(column => <Column title={column} key={column} tickets={columns[column]} />)}
                 </div>
                 <DragOverlay dropAnimation={defaultDropAnimation}>

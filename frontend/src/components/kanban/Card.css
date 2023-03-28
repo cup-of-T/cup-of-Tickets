@@ -1,10 +1,11 @@
 .card {
     background-color: white;
     border: 1px solid rgb(233, 230, 230);
-    margin: 2px;
+    margin-bottom: 12px;
     border-radius: 6px;
     display: flex;
     flex-direction: column;
+    padding: 4px;
 }
 
 
@@ -21,6 +22,8 @@
 
 .card__title {
     margin: 0;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .user-image {
@@ -31,7 +34,7 @@
 
 .card__description {
     padding: 10px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .card__time-estimate {
@@ -41,6 +44,10 @@
     display: flex;
     gap: 5px;
     align-items: baseline;
+}
+
+.card__time-description{
+    margin-bottom: 24px;
 }
 
 .card__status {

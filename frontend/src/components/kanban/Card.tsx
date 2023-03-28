@@ -36,17 +36,17 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
                     </div>
                     {show &&
                         <div>
-                            <p>{ticket.description}</p>
+                            <p className='card__time-description'>{ticket.description}</p>
                             <p className="card__time-estimate"><i className="fa-regular fa-clock"></i>{ticket.timeEstimate}</p>
                             <p className="card__time-estimate"><i className="fa-regular fa-calendar"></i> {ticket.createdAt}</p>
-                            <p className="card__time-estimate">requested by: {ticket.creator.email}</p>
+                            <p className="card__time-estimate"><i className="fa-solid fa-user"></i> {ticket.creator.email}</p>
                         </div>
                     }
 
 
                     <div className="card__user-container">
-                        <button className="user-container__button" onClick={() => setShow(!show)}>{show ? <i className="fa-solid fa-chevron-down"></i> :
-                            <i className="fa-solid fa-chevron-up"></i>}</button>
+                        <button className="user-container__button" onClick={() => setShow(!show)}>{show ? <i className="fa-solid fa-chevron-up"></i> :
+                            <i className="fa-solid fa-chevron-down"></i>}</button>
                         {ticket.assignedUser && (
                             <img className="card__assigned-user" src={ticket.assignedUser.imageUrl} alt={ticket.assignedUser.email} />
                         )}
