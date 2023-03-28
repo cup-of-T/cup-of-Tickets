@@ -4,14 +4,17 @@ import Loader from "../loader/Loader";
 import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogOutButton";
 import './navbar.css';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UsersContext } from "../../context/UsersProvider";
 import { UsersContextType } from "../../types";
 
 const Navbar = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
   const { users, fetchUsers } = useContext(UsersContext) as UsersContextType;
-  const currentUser = users.find(u => u.email == user?.email)
+  const currentUser = users.find(u => u.email === user?.email);
+
+
+  console.log(users);
   return (
     <nav className="navbar">
       <div className="container navbar__container center">

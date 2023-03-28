@@ -13,6 +13,14 @@ export interface IUserRequest {
   imageUrl: string
 }
 
+export interface IAssigneeRequest {
+  assignedUserId: number
+}
+
+export interface IStatusRequest {
+  status: number
+}
+
 export interface ITicket {
   ticketId: number
   title: string,

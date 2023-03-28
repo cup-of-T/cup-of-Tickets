@@ -9,22 +9,23 @@ import { ITicket, IUser } from './interfaces/interface'
 import ProtectedRoute from './pages/ProtectedRoute'
 import Profile from './pages/Profile'
 import { TicketsContext } from './context/TicketsProvider'
-import { TicketsContextType } from './types'
+import { TicketsContextType, UsersContextType } from './types'
 import { getUsers } from './services/userApi'
+import { UsersContext } from './context/UsersProvider'
 
 
 function App() {
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
-  const [users, setUsers] = useState<IUser[]>();
+  const { users, fetchUsers } = useContext(UsersContext) as UsersContextType;
 
   const getData = async () => {
     const accessToken = await getAccessTokenSilently();
-    setUsers(await getUsers(accessToken));
   }
 
   useEffect(() => {
     getData();
+    fetchUsers();
     fetchTickets();
   }, [])
 
