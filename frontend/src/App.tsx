@@ -13,6 +13,7 @@ import { UserContext } from './context/UserProvider'
 import { postUser } from './services/userApi'
 import Kanban from './pages/Kanban'
 import { Login } from './pages/Login'
+import { AddTicket } from './pages/AddTicket'
 
 
 function App() {
@@ -43,13 +44,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
+            <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </>
       }
       {!isAuthenticated &&
-        <Routes>         
+        <Routes>
           <Route path="*" element={<Login />} />
         </Routes>
       }
