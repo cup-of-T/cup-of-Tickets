@@ -14,7 +14,7 @@ export interface IUserRequest {
 }
 
 export interface IAssigneeRequest {
-  assignedUserId: number
+  assigneeId: number
 }
 
 export interface IStatusRequest {

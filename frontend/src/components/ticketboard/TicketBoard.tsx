@@ -16,7 +16,7 @@ export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
   return (
     <section className="ticket-board">
         <TicketHeader />
-        {tickets.map( ticket => <TicketCard toggleAddBtn = {toggleAddBtn} ticket={ticket} key={ticket.ticketId}/> )}
+        {tickets.sort((a, b) => (a.assignedUser !== null ? a.assignedUser.userId : -Infinity) - (b.assignedUser !== null ? b.assignedUser.userId : -Infinity)).map( ticket => <TicketCard toggleAddBtn = {toggleAddBtn} ticket={ticket} key={ticket.ticketId}/> )}
     </section>
   )
 }
