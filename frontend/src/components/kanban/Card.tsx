@@ -19,15 +19,19 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
         transition,
         opacity: isDragging ? 0 : 1,
     };
-
+    const urgencyColors = ["#CF513D", "#F5DD29", "#7BC86C"];
 
     return (
         <div {...listeners} style={style} {...attributes} ref={setNodeRef}>
             <div className="card">
-                <h5 className="card__title">{ticket.title} #{ticket.ticketId}</h5>
+                <div>
+                </div>
                 <section className="card__description">
+                    <span className='card__status' style={{ backgroundColor: urgencyColors[ticket.status] }}></span>
+
+                    <h5 className="card__title">{ticket.title} #{ticket.ticketId}</h5>
                     <p>{ticket.description}</p>
-                    <p className="card__time-estimate">time estimate: {ticket.timeEstimate}</p> 
+                    <p className="card__time-estimate">time estimate: {ticket.timeEstimate}</p>
                     <p className="card__time-estimate">created: {ticket.createdAt}</p>
                     <p className="card__time-estimate">requested by: {ticket.creator.email}</p>
                 </section>
