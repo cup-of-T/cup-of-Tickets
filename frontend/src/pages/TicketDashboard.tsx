@@ -4,7 +4,7 @@ import { TicketBoard } from "../components/ticketboard/TicketBoard";
 interface IDashboardProps {
 }
 
-const Dashboard = ({ }: IDashboardProps) => {
+const TicketDashboard = ({ }: IDashboardProps) => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
     const [currentTicketId, setCurrentTicketId] = useState<number>(0)
 
@@ -22,4 +22,4 @@ const Dashboard = ({ }: IDashboardProps) => {
     );
 };
 
-export default Dashboard;
+export default TicketDashboard;
