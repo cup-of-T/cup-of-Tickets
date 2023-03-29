@@ -6,13 +6,13 @@
     box-sizing: border-box;
 }
 
-.ticket-board__grid{
+.ticket-board__grid {
     display: grid;
     grid-template-columns: 1fr 1fr 7fr 4fr 5fr 3fr 3fr;
     grid-template-areas: "checkbox urgency text requester requester-update group assignee";
     grid-template-rows: auto;
     gap: 8px;
-    
+
 }
 
 
@@ -50,4 +50,8 @@
 
 .border-bottom {
     border-bottom: 1px solid rgb(233, 230, 230);
+}
+
+.ticket-card {
+    border-bottom: 1px solid rgba(100, 100, 100, 0.2);
 }
