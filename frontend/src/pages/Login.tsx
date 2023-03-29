@@ -9,7 +9,8 @@ export const Login: React.FC = () => {
   return (
     <div>
       {isLoading
-        ? <Loader />
+
+        ? <div className="loader-container"><Loader /></div>
         : <LoginCard />
       }
 
