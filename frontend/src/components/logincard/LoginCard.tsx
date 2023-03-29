@@ -1,4 +1,3 @@
-import React from 'react'
 import LoginButton from '../buttons/LoginButton'
 
 export const LoginCard = () => {
