@@ -37,8 +37,6 @@ jobs:
           VITE_AUTH0_CALLBACK_URL: ${{ secrets.VITE_AUTH0_CALLBACK_URL }}
           VITE_AUTH0_AUDIENCE: ${{ secrets.VITE_AUTH0_AUDIENCE }}
           VITE_API_SERVER_URL: ${{ secrets.VITE_API_SERVER_URL }}
-      - name: Using the previously defined environment variable
-        run: echo "The API key is:${{secrets.VITE_AUTH0_DOMAIN}}"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
