@@ -24,10 +24,10 @@ const TicketProvider = ({ children }: TicketsProviderProps) => {
         setTickets(await getTickets(accessToken)); 
     }
 
-    const postingTicket = async (ticket: ITicket) => {
+    const postingTicket = async (ticket: Partial<ITicket>) => {
         const accessToken = await getAccessTokenSilently();
         const response = await postTicket(ticket, accessToken);
-        setTickets(prevState => [ticket, ...prevState]);
+        setTickets(prevState => [response, ...prevState]);
     }
 
     const deletingTicket = async (ticket: ITicket) => {
