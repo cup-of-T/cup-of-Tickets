@@ -2,7 +2,7 @@ import { defaultDropAnimation, DndContext, DragEndEvent, DragOverEvent, DragOver
 import { useContext, useState } from "react";
 import { find } from "lodash";
 import { TicketsContext } from "../../context/TicketsProvider";
-import { IColumn, Istatuses } from "../../interfaces/interface";
+import { IColumn, Istatuses, ITicket } from "../../interfaces/interface";
 import { TicketsContextType } from "../../types";
 import Column from "./Column";
 import './KanbanBoard.css'
@@ -11,6 +11,9 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { updateTicketStatus } from "../../services/ticketApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
+type KanbanBoardProps = {
+    tickets: ITicket[]
+}
 
 const findTicketContainer = (columns: IColumn, id: number) => {
     if (id in columns) {
@@ -25,8 +28,7 @@ const findTicketContainer = (columns: IColumn, id: number) => {
 
 
 
-const KanbanBoard = () => {
-    const { tickets } = useContext(TicketsContext) as TicketsContextType;
+const KanbanBoard: React.FC<KanbanBoardProps> = ({ tickets }) => {
     const { getAccessTokenSilently } = useAuth0();
     const [active, setActive] = useState<null | number>(null);
     const [columns, setColumns] = useState<IColumn>({
