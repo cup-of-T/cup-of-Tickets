@@ -15,7 +15,7 @@ export const StatsCard = () => {
           Urgent {}
         </div>
         <div className="stats-card__content-square border-left">
-          <strong>{tickets?.filter(ticket => ticket.timeEstimate == 'xl').filter(ticket => new Date(ticket.createdAt).toDateString() == new Date().toDateString()).length}</strong>
+          <strong>{tickets?.filter(ticket => ticket.timeEstimate == 'XL').filter(ticket => new Date(ticket.createdAt).toDateString() == new Date().toDateString()).length}</strong>
           Complex
         </div>
       </div>
