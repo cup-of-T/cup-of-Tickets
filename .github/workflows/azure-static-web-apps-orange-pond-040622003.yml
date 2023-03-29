@@ -32,7 +32,7 @@ jobs:
           output_location: "dist" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
-          HUB_AUTH_TOKEN: ${{ secrets.HUB_AUTH_TOKEN }}
+          VITE_AUTH0_DOMAIN: ${{ secrets.VITE_AUTH0_DOMAIN }}
       - name: Using the previously defined environment variable
         run: |
           echo ${{ secrets.VITE_AUTH0_DOMAIN }}
