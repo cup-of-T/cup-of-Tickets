@@ -5,6 +5,9 @@ import { OpenTicketCard } from './statscard/OpenTicketCard'
 import { UserContext } from '../../context/UserProvider'
 import { TicketsContextType, UserContextType } from '../../types'
 import { TicketsContext } from '../../context/TicketsProvider'
+import { UNSAFE_getPathContributingMatches } from '@remix-run/router'
+import { useNavigate } from 'react-router-dom'
+
 
 type StatsBarProps = {
   addBtnToggle: boolean,
@@ -14,7 +17,11 @@ type StatsBarProps = {
 export const StatsBar: FC<StatsBarProps> = ({ addBtnToggle, ticketId }) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
-
+  const navigate = useNavigate();
+  
+  const onCreateButtonClick = () => {
+    navigate('/addticket');
+  }
   return (
     <section className="statsbar">
       <div className="statsbar__container container center">
@@ -23,12 +30,19 @@ export const StatsBar: FC<StatsBarProps> = ({ addBtnToggle, ticketId }) => {
           <StatsCard />
         </div>
         <div className="statsbar__buttons">
-          {dbUser?.role == "admin" ? <button className='btn btn--blue'>Create ticket</button> : null}
           {addBtnToggle && (
             <button
               onClick={() => updateTicketAssignee(ticketId, dbUser.userId)}
-              className='btn btn--blue'>Add ticket +
+              className='btn btn--blue'>
+              Claim ticket
             </button>)}
+          {(dbUser?.role == "Admin" || dbUser?.role == "Manager") &&
+            <button
+              className='btn btn--green'
+              onClick={onCreateButtonClick}>
+              Create ticket
+            </button>
+          }
         </div>
       </div>
     </section>
