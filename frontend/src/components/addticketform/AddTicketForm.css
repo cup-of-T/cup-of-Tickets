@@ -1,5 +1,34 @@
-.form-container {
+.form-background {
+    background-color: rgb(247, 247, 247) ;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticket-form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-width: 30%;
+    background-color: white;
+    padding: 40px 24px;
+    border-radius: 10px;
+    flex-wrap:wrap;
+    border: 1px solid rgb(233, 230, 230);
+}
+
+.ticket-form__title{
+    margin-top: 8px;
+    font-weight: 400;
+    font-size: 28px;
+}
+
+.ticket-form__input {
+    width: 100%;
+}
+
+.ticket-form__submit-btn {
+    margin-top: 24px;
 }

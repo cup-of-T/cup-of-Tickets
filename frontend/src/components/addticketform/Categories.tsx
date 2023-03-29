@@ -1,35 +1,46 @@
-import { useField, useFormikContext } from 'formik';
-import './Categories.css';
+import { useField, useFormikContext } from "formik";
+import "./Categories.css";
 
 const categories = ["backend", "frontend", "bug", "tests"];
 
-export const Categories = () => {
-    const { setFieldValue, } = useFormikContext();
-    const [field, meta] = useField("categoryNames");
+type CategoriesProps = {
+  label: string;
+};
 
-    const changeCategoryHandler = (value: string) => {
-        const indexOfCategory = field.value.indexOf(value);
-        if (indexOfCategory > -1) {
-            setFieldValue("categoryNames", field.value.filter((category: string) => category != field.value[indexOfCategory]));
-        } else {
+export const Categories = ({ label }: CategoriesProps) => {
+  const { setFieldValue } = useFormikContext();
+  const [field, meta] = useField("categoryNames");
 
-            setFieldValue("categoryNames", [...field.value, value]);
-        }
+  const changeCategoryHandler = (value: string) => {
+    const indexOfCategory = field.value.indexOf(value);
+    if (indexOfCategory > -1) {
+      setFieldValue(
+        "categoryNames",
+        field.value.filter(
+          (category: string) => category != field.value[indexOfCategory]
+        )
+      );
+    } else {
+      setFieldValue("categoryNames", [...field.value, value]);
     }
+  };
 
-    return (
-        <div className='categories'>
-            {categories.map(category => (<button
-                className='btn btn--bordered'
-                key={category}
-                onClick={() => changeCategoryHandler(category)}
-                type="button"
-            >
-                {category}
-            </button>))}
-            {meta.touched && meta.error ? (
-                <div>{meta.error}</div>) : null
-            }
-        </div>
-    )
-}
+  return (
+    <>
+      <label htmlFor={label}>{label}</label>
+      <div className="categories">
+        {categories.map((category) => (
+          <button
+            className="btn btn--bordered"
+            key={category}
+            onClick={() => changeCategoryHandler(category)}
+            type="button"
+          >
+            {category}
+          </button>
+        ))}
+        {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+      </div>
+    </>
+  );
+};
