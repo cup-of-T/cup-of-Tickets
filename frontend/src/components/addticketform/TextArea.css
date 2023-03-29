@@ -1,6 +1,8 @@
 .text-area {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .text-area__error {

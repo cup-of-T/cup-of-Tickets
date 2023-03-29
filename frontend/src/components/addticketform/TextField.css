@@ -1,6 +1,8 @@
 .text-field {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .text-field__error {
