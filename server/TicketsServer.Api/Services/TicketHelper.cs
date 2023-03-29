@@ -6,11 +6,14 @@ internal static class TicketHelper
 {
     public static TicketResponse TicketToResponse(Ticket ticket)
     {
-        var responseList = new List<string>();
-        if (ticket.Categories != null)
-        {
-            responseList = ticket.Categories.Select(cat => cat.Name).ToList();
-        }
+        var responseList = ticket.Categories!.Select(cat =>
+            new Category
+            {
+                CategoryId = cat.CategoryId,
+                Name = cat.Name
+            })
+            .ToList();
+
         return new TicketResponse()
         {
             TicketId = ticket.TicketId,
