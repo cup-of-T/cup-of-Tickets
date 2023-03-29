@@ -1,59 +1,66 @@
-import { Form, Formik, FormikHelpers } from 'formik';
-import React, { SyntheticEvent, useContext, useState } from 'react'
+import { Form, Formik } from 'formik';
+import { useContext, } from 'react'
 import { UserContext } from '../../context/UserProvider';
 import { UserContextType } from '../../types';
-import Loader from '../loader/Loader';
+import { Categories } from './Categories';
+import { SelectOptions } from './SelectOptions';
+import { TextArea } from './TextArea';
 import { TextField } from './TextField'
-
-
+import { validationSchema } from './ValidationSchema';
+import "./AddTicketForm.css";
 
 export const AddTicketForm = () => {
   const { dbUser } = useContext(UserContext) as UserContextType;
-
-  const [formState, setFormState] = useState({
+  const initialValues = {
     title: '',
     description: '',
-    timeEstimate: '',
+    timeEstimate: 'm',
     urgency: 0,
     categoryNames: [],
     userId: dbUser?.userId
-  });
-
-  const handleChangeEvent = (e: SyntheticEvent) => {
-    const event = e.target as HTMLInputElement;
-    setFormState((prevState) => ({
-      ...prevState, [event.name]: event.value
-    }))
-  }
+  };
 
   return (
     <Formik
-      initialValues={formState}
+      initialValues={initialValues}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
           setSubmitting(false);
         }, 400);
       }}
+      validationSchema={validationSchema}
     >
       <Form>
-        <TextField
-          label='Title'
-          name='title'
-          type="text"
-          placeholder='Title'
-          value={formState.title}
-          onChange={handleChangeEvent}
-        />
-        <label>
-          description
-          <textarea
-            name='description'
-            placeholder={'Enter your ticket description here please'}
-            value={formState.description}
-            onChange={handleChangeEvent}
+        <div className='form-container'>
+          <h3>Add a ticket</h3>
+          <TextField
+            label="Title"
+            name="title"
+            type="text"
+            placeholder='Title'
           />
-        </label>
+          <TextArea
+            label="Description"
+            name="description"
+            rows={6}
+            placeholder="pls put descp thx"
+          />
+          <SelectOptions label="Time Estimate" name="timeEstimate">
+            <option value="xs">xs</option>
+            <option value="s">s</option>
+            <option value="m">m</option>
+            <option value="l">l</option>
+            <option value="xl">l</option>
+          </SelectOptions>
+          <SelectOptions label="urgency" name="urgency">
+            <option value={0}>0</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+          </SelectOptions>
+          <Categories />
+          <button className='btn btn--bordered' type="submit">submit</button>
+        </div>
       </Form>
     </Formik>
   )

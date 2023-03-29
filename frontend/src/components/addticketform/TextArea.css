@@ -1,0 +1,10 @@
+.text-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-area__error {
+    font-size: 12px;
+    color: red;
+    margin-top: 0.25rem;
+}
