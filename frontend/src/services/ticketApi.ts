@@ -33,15 +33,14 @@ export const deleteTicket = async (ticketId: number, accessToken: string) => {
 export const updateTicketStatus = async (ticketId: number, status: number, accessToken: string) => {
   const statusRequest: IStatusRequest = { status: status };
   const statusToJson = JSON.stringify(statusRequest);
-  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/status`, {
+  fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/status`, {
     method: 'PATCH',
     body: statusToJson,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken}`
     },
-  })
-  return await response.json() as ITicket[];
+  });
 }
 
 export const updateTicketAssignedTo = async (ticketId: number, assigneeId: number, accessToken: string) => {
