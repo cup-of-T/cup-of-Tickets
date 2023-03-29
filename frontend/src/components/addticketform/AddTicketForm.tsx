@@ -1,3 +1,4 @@
+import { Form, Formik, FormikHelpers } from 'formik';
 import React, { SyntheticEvent, useContext, useState } from 'react'
 import { UserContext } from '../../context/UserProvider';
 import { UserContextType } from '../../types';
@@ -25,29 +26,34 @@ export const AddTicketForm = () => {
 
 
   return (
-    <form>
-      <TextField
-        label={'Title'}
-        name={'title'}
-        placeholder={'Title'}
-        value={formState.title}
-        onChange={handleChangeEvent}
-      />
-      <TextField
-        label={'Description'}
-        name={'description'}
-        placeholder={'Description'}
-        value={formState.description}
-        onChange={handleChangeEvent}
-      />
-      <TextField
-        label={'label'}
-        name={'title'}
-        placeholder={'Enter your ticket title here please'}
-        value={formState.title}
-        onChange={handleChangeEvent}
-      />
-
-    </form>
+    <Formik
+      initialValues={formState}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      <Form>
+        <TextField
+          label='Title'
+          name='title'
+          type="text"
+          placeholder='Title'
+          value={formState.title}
+          onChange={handleChangeEvent}
+        />
+        <label>
+          description
+          <textarea
+            name='description'
+            placeholder={'Enter your ticket description here please'}
+            value={formState.description}
+            onChange={handleChangeEvent}
+          />
+        </label>
+      </Form>
+    </Formik>
   )
 }
