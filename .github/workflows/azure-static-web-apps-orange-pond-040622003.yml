@@ -34,8 +34,7 @@ jobs:
         env:
           VITE_AUTH0_DOMAIN: ${{ secrets.VITE_AUTH0_DOMAIN }}
       - name: Using the previously defined environment variable
-        run: |
-          echo ${{ secrets.VITE_AUTH0_DOMAIN }}
+        run: echo "The API key is:${{secrets.VITE_AUTH0_DOMAIN}}"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
