@@ -1,4 +1,3 @@
-import React from 'react'
 import './ticketheader.css'
 
 export const TicketHeader = () => {

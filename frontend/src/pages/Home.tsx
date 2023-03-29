@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { StatsBar } from "../components/statsbar/StatsBar";
 import { TicketBoard } from "../components/ticketboard/TicketBoard";
-import { ITicket } from "../interfaces/interface";
 
 interface IHomeProps {
 }
