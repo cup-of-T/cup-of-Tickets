@@ -1,8 +1,8 @@
-import React, { FC, useContext } from 'react'
+import { FC, useContext } from 'react'
 import { TicketCard } from './ticketcard/TicketCard'
 import { TicketHeader } from './ticketheader/TicketHeader'
 import './ticketboard.css'
-import TicketProvider, { TicketsContext } from '../../context/TicketsProvider'
+import { TicketsContext } from '../../context/TicketsProvider'
 import { TicketsContextType } from '../../types'
 import { ITicket } from '../../interfaces/interface'
 

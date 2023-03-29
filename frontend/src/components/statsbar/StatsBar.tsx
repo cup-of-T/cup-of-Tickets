@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react'
+import { FC, useContext } from 'react'
 import { StatsCard } from './statscard/StatsCard'
 import './statsbar.css'
 import { OpenTicketCard } from './statscard/OpenTicketCard'

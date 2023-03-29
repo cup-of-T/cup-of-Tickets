@@ -8,9 +8,8 @@
 
 
 .main {
-    padding: 0 0 0 64px;
+    padding: 14px 0 0 64px;
     box-sizing: border-box;
-
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 64px);
@@ -20,6 +19,7 @@
     border-radius: 25px;
     padding: 6px 16px;
     background-color: transparent;
+    font-family: 'Barlow', sans-serif;
 }
 
 .btn:hover {
@@ -58,7 +58,16 @@
     border: 1px solid rgb(213, 210, 210);
 }
 
+.btn--large {
+    padding: 10px 40px;
+    font-size: 24px;
+    font-weight: 400;
+}
 
+.btn:hover {
+    color: #407a88;
+    font-weight: 500;
+}
 .btn--bordered:hover {
     border: 1px solid rgb(150, 149, 149);
 }

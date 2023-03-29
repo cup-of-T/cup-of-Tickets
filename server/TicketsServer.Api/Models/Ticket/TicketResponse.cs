@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 namespace TicketsServer.Api.Models;
 
-public class Ticket
+public class TicketResponse
 {
-    [Key]
     public int TicketId { get; set; }
     public required string Title { get; set; }
     public required string CreatedAt { get; set; }
@@ -14,5 +13,5 @@ public class Ticket
     public required string TimeEstimate { get; set; }
     public required User Creator { get; set; }
     public User? AssignedUser { get; set; }
-    public List<Category>? Categories { get; set; }
+    public List<string>? Categories { get; set; }
 }
