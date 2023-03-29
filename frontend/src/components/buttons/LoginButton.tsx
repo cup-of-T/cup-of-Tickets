@@ -1,6 +1,4 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import * as React from 'react';
-
 interface ILoginButtonProps {
 }
 
@@ -19,8 +17,8 @@ const LoginButton = ({ }: ILoginButtonProps) => {
     };
 
     return (
-        <button className="btn btn--bordered" onClick={LoginHandler}>
-            Log in
+        <button className="btn btn--blue btn--large" onClick={LoginHandler}>
+            Proceed to login
         </button>
     );
 }

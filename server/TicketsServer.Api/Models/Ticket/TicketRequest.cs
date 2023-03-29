@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace TicketsServer.Api.Models;
 
 public class TicketRequest

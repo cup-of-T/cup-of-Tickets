@@ -1,12 +1,11 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
 import Loader from "../loader/Loader";
-import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogOutButton";
 import './navbar.css';
 import { useContext } from "react";
 import { UserContext } from "../../context/UserProvider";
 import { UserContextType } from "../../types";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
@@ -14,13 +13,12 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container navbar__container center">
-        <Link className="btn" to="/">Home</Link>
         {isLoading && <Loader />}
-        {!isAuthenticated && !isLoading && <LoginButton />}
         {isAuthenticated && (
           <>
             <LogoutButton />
-            <img className="navbar__avatar" src={dbUser?.imageUrl} />
+            {dbUser?.imageUrl == null && <Loader/>}
+            {dbUser?.imageUrl != null && <Link to='/profile'><img className="navbar__avatar" src={dbUser?.imageUrl} /></Link>}
           </>
         )}
       </div>

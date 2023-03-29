@@ -7,14 +7,9 @@ import { TicketsContextType } from "../../types";
 import Column from "./Column";
 import './KanbanBoard.css'
 import Card from "./Card";
-import {
-    arrayMove
-} from '@dnd-kit/sortable';
+import { arrayMove } from '@dnd-kit/sortable';
 import { updateTicketStatus } from "../../services/ticketApi";
 import { useAuth0 } from "@auth0/auth0-react";
-
-interface IKanbanBoardProps {
-}
 
 
 const findTicketContainer = (columns: IColumn, id: number) => {
@@ -30,7 +25,7 @@ const findTicketContainer = (columns: IColumn, id: number) => {
 
 
 
-const KanbanBoard = ({ }: IKanbanBoardProps) => {
+const KanbanBoard = () => {
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const { getAccessTokenSilently } = useAuth0();
     const [active, setActive] = useState<null | number>(null);
@@ -98,10 +93,10 @@ const KanbanBoard = ({ }: IKanbanBoardProps) => {
         );
 
         if (activeIndex !== overIndex) {
-            setColumns((boardSection) => ({
-                ...boardSection,
+            setColumns((prevState) => ({
+                ...prevState,
                 [overContainer]: arrayMove(
-                    boardSection[overContainer],
+                    prevState[overContainer],
                     activeIndex,
                     overIndex
                 ),
