@@ -14,6 +14,7 @@ import { UserContext } from './context/UserProvider'
 import { postUser } from './services/userApi'
 import Kanban from './pages/Kanban'
 import { Login } from './pages/Login'
+import { AddTicket } from './pages/AddTicket'
 import Dashboard from './pages/TicketDashboard'
 
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
+            <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
             <Route path="/teams" element={<ProtectedRoute component={Teams} />} />
             <Route path="/home" element={<ProtectedRoute component={Home} />} />
             <Route path="*" element={<NotFound />} />
@@ -53,7 +55,7 @@ function App() {
       </>
       }
       {!isAuthenticated &&
-        <Routes>         
+        <Routes>
           <Route path="*" element={<Login />} />
         </Routes>
       }
