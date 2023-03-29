@@ -12,21 +12,45 @@ type TicketBoardProps = {
 
 export const TicketBoard: FC<TicketBoardProps> = ({ toggleAddBtn }) => {
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
-
-  const sortedByUrgency = (tickets: ITicket[]) => tickets.sort((a, b) => b.urgency - a.urgency);
-
-  const sortedTicketsByAssignee = () => {
-    var unassignedTickets = tickets.filter(ticket => ticket.assignedUser == null);
-    var assignedTickets = tickets.filter(ticket => ticket.assignedUser !== null);
-
-    return new Array().concat(sortedByUrgency(unassignedTickets), sortedByUrgency(assignedTickets));
-  }
+  
+  const completedTickets = tickets.filter(t => t.status == 2);
+  const availableTickets = tickets.filter(t=>t.status != 2);
+  const unassignedTickets = availableTickets.filter(ticket => ticket.assignedUser == null).sort((a, b) => b.urgency - a.urgency);
+  const assignedTickets = availableTickets.filter(ticket => ticket.assignedUser !== null).sort((a, b) => b.urgency - a.urgency);
 
   return (
     <section className="ticket-board">
+      <h3>Available tickets</h3>
       <TicketHeader />
-
-      {sortedTicketsByAssignee().map(ticket => {
+      {/* <div className="ticket-board--category"> */}
+      {unassignedTickets.map(ticket => {
+        return (
+          <div className="ticket-card">
+            <TicketCard
+              toggleAddBtn={toggleAddBtn}
+              ticket={ticket}
+              key={ticket.ticketId}
+            />
+          </div>
+        )
+      })}
+      {/* </div> */}
+      <h3>Assigned tickets</h3>
+      <TicketHeader />
+      {assignedTickets.map(ticket => {
+        return (
+          <div className="ticket-card">
+            <TicketCard
+              toggleAddBtn={toggleAddBtn}
+              ticket={ticket}
+              key={ticket.ticketId}
+            />
+          </div>
+        )
+      })}
+      <h3>Closed tickets</h3>
+      <TicketHeader />
+      {completedTickets.map(ticket => {
         return (
           <div className="ticket-card">
             <TicketCard

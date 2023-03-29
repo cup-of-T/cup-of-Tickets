@@ -55,3 +55,13 @@
 .ticket-card {
     border-bottom: 1px solid rgba(100, 100, 100, 0.2);
 }
+    
+.ticket-board h3 {
+    padding: 0 5%;
+}
+
+.ticket-board--category{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin: 0 14px;
+}
