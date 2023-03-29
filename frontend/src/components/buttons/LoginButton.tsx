@@ -8,7 +8,7 @@ const LoginButton = ({ }: ILoginButtonProps) => {
     const LoginHandler = async () => {
         await loginWithRedirect({
             appState: {
-                returnTo: "/profile",
+                returnTo: "/",
             },
             authorizationParams: {
                 prompt: "login",
