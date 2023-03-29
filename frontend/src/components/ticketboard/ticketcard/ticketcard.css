@@ -1,11 +1,12 @@
-.popup-card{
+.popup-card {
     position: absolute;
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     width: 30vw;
-    min-height: 100px; /* Need a specific value to work */
+    min-height: 100px;
+    /* Need a specific value to work */
     padding: 16px;
     background-color: white;
     border: 1px solid rgb(233, 230, 230);
@@ -13,10 +14,10 @@
     flex-direction: column;
     justify-content: center;
     border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
 }
 
-.status-icon{
+.status-icon {
     padding: 4px 8px;
     border-radius: 4px;
     text-align: center;
@@ -26,10 +27,23 @@
     font-weight: 600;
 }
 
-.popup-card__title{
+.popup-card__title {
     font-weight: 500;
 }
 
 .popup-card__description {
     font-weight: 300;
 }
+
+.ticket-board--medium {
+    background-color: rgba(255, 253, 197, 0.356);
+}
+
+.ticket-board--urgent {
+    background-color: rgba(255, 214, 197, 0.28);
+}
+
+/* .ticket-board--taken {
+    color: lightgray;
+    background-color: rgba(100,100,100,0.1);
+} */

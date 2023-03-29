@@ -7,13 +7,13 @@ import { TicketsContextType } from '../../types'
 import { ITicket } from '../../interfaces/interface'
 
 type TicketBoardProps = {
-  toggleAddBtn : (ticketId : number) => void
+  toggleAddBtn: (ticketId: number) => void
 }
 
-export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
+export const TicketBoard: FC<TicketBoardProps> = ({ toggleAddBtn }) => {
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
 
-  const sortedByUrgency = (tickets : ITicket[]) => tickets.sort((a, b) => b.urgency - a.urgency);
+  const sortedByUrgency = (tickets: ITicket[]) => tickets.sort((a, b) => b.urgency - a.urgency);
 
   const sortedTicketsByAssignee = () => {
     var unassignedTickets = tickets.filter(ticket => ticket.assignedUser == null);
@@ -24,9 +24,19 @@ export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
 
   return (
     <section className="ticket-board">
-        <TicketHeader />
-        {sortedTicketsByAssignee().map( ticket => <TicketCard toggleAddBtn = {toggleAddBtn} ticket={ticket} key={ticket.ticketId}/>)}
+      <TicketHeader />
+
+      {sortedTicketsByAssignee().map(ticket => {
+        return (
+          <div className="ticket-card">
+            <TicketCard
+              toggleAddBtn={toggleAddBtn}
+              ticket={ticket}
+              key={ticket.ticketId}
+            />
+          </div>
+        )
+      })}
     </section>
   )
 }
- 
