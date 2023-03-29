@@ -1,7 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
 import Loader from "../loader/Loader";
-import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogOutButton";
 import './navbar.css';
 import { useContext } from "react";
