@@ -26,12 +26,10 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
 
   const handleStatus = () => {
     switch (ticket.status) {
-      case 1: {
+      case 2:
         return <span className='status-icon bg--grey'>CLOSED</span>;
-      }
-      default: {
+      default:
         return <span className='status-icon bg--red'>OPEN</span>;
-      }
     }
   }
 
