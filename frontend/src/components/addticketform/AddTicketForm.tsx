@@ -2,19 +2,21 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import React, { SyntheticEvent, useContext, useState } from 'react'
 import { UserContext } from '../../context/UserProvider';
 import { UserContextType } from '../../types';
+import Loader from '../loader/Loader';
 import { TextField } from './TextField'
 
 
 
 export const AddTicketForm = () => {
   const { dbUser } = useContext(UserContext) as UserContextType;
+
   const [formState, setFormState] = useState({
     title: '',
     description: '',
     timeEstimate: '',
     urgency: 0,
     categoryNames: [],
-    userId: dbUser.userId
+    userId: dbUser?.userId
   });
 
   const handleChangeEvent = (e: SyntheticEvent) => {
@@ -23,7 +25,6 @@ export const AddTicketForm = () => {
       ...prevState, [event.name]: event.value
     }))
   }
-
 
   return (
     <Formik
