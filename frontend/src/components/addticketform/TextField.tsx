@@ -1,30 +1,27 @@
 import { useField } from 'formik';
-import React from 'react'
+import './TextField.css';
 
 type TextFieldProps = {
   label: string,
   name: string,
   type: string,
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string,
-  value: string
 }
 
-export const TextField = (props: TextFieldProps) => {
+export const TextField = ({ label, ...props }: TextFieldProps) => {
   const [field, meta] = useField(props);
 
   return (
-    <>
-      <label htmlFor={props.name}>
-        {props.label}
-        <input
-          {...field}
-          {...props}
-        />
-      </label>
+    <label className='text-field' htmlFor={label}>
+      {label}
+      <input
+        {...field}
+        {...props}
+      />
+
       {meta.touched && meta.error ? (
-        <div>{meta.error}</div>) : null
+        <div className='text-field__error'>{meta.error}</div>) : null
       }
-    </>
+    </label>
   )
 }

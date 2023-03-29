@@ -1,0 +1,10 @@
+.select {
+    display: flex;
+    flex-direction: column;
+}
+
+.select__error {
+    font-size: 12px;
+    color: red;
+    margin-top: 0.25rem;
+}
