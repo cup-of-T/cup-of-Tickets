@@ -33,7 +33,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
       - name: Using the previously defined environment variable
         run: |
-          echo ${{ env.VITE_AUTH0_DOMAIN }}
+          echo ${{ secrets.VITE_AUTH0_DOMAIN }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
