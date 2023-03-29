@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketsServer.Api.Models;
+using TicketsServer.Api.Services;
 
 namespace TicketsServer.Api.Controllers;
 
@@ -18,22 +19,24 @@ public class TicketsController : ControllerBase
 
     [HttpGet]
     [Authorize("User")]
-    public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
+    public async Task<ActionResult<IList<TicketResponse>>> GetTicket()
     {
         if (_context.Tickets == null)
         {
             return NotFound();
         }
-        return await _context.Tickets
+        var tickets = await _context.Tickets
         .Include(ticket => ticket.AssignedUser)
         .Include(ticket => ticket.Creator)
         .Include(ticket => ticket.Categories)
         .ToListAsync();
+
+        return tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
     }
 
     [HttpGet("{id}")]
     [Authorize("User")]
-    public async Task<ActionResult<Ticket>> GetTicket(int id)
+    public async Task<ActionResult<TicketResponse>> GetTicket(int id)
     {
         if (_context.Tickets == null)
         {
@@ -51,12 +54,12 @@ public class TicketsController : ControllerBase
             return NotFound();
         }
 
-        return ticket;
+        return TicketHelper.TicketToResponse(ticket);
     }
 
     [HttpPost]
     [Authorize("Manager")]
-    public async Task<ActionResult<Ticket>> PostTicket(TicketRequest request)
+    public async Task<ActionResult<TicketResponse>> PostTicket(TicketRequest request)
     {
         var creator = await _context.Users.FirstOrDefaultAsync(u => u.UserId == request.UserId);
         if (creator == null)
@@ -89,20 +92,11 @@ public class TicketsController : ControllerBase
         var result = _context.Tickets.Add(newTicket).Entity;
         await _context.SaveChangesAsync();
 
-        var ticketResponse = new TicketResponse()
-        {
-            TicketId = result.TicketId,
-            Title = result.Title,
-            CreatedAt = result.CreatedAt,
-            Description = result.Description,
-            Urgency = result.Urgency,
-            TimeEstimate = result.TimeEstimate,
-            Creator = result.Creator,
-            AssignedUser = result.AssignedUser,
-            Categories = request.CategoryNames
-        };
-
-        return CreatedAtAction(nameof(GetTicket), new { id = result.TicketId }, ticketResponse);
+        return CreatedAtAction(
+            nameof(GetTicket),
+             new { id = result.TicketId },
+             TicketHelper.TicketToResponse(result)
+         );
     }
 
     [HttpDelete("{id}")]
