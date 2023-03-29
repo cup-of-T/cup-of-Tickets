@@ -81,7 +81,7 @@ public class TicketsController : ControllerBase
         var newTicket = new Ticket()
         {
             Title = request.Title,
-            CreatedAt = DateTime.Now.ToLongDateString(),
+            CreatedAt = DateTime.Now.ToString("yyyy/MM/dd HH:mm"),
             Description = request.Description,
             Urgency = request.Urgency,
             TimeEstimate = request.TimeEstimate,
