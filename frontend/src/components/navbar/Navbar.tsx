@@ -5,6 +5,7 @@ import './navbar.css';
 import { useContext } from "react";
 import { UserContext } from "../../context/UserProvider";
 import { UserContextType } from "../../types";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
@@ -17,7 +18,7 @@ const Navbar = () => {
           <>
             <LogoutButton />
             {dbUser?.imageUrl == null && <Loader/>}
-            {dbUser?.imageUrl != null && <img className="navbar__avatar" src={dbUser?.imageUrl} />}
+            {dbUser?.imageUrl != null && <Link to='/profile'><img className="navbar__avatar" src={dbUser?.imageUrl} /></Link>}
           </>
         )}
       </div>
