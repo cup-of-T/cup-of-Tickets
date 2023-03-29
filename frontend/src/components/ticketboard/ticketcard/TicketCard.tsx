@@ -47,9 +47,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
     <>
       <ul onMouseEnter={() => setShowPopUp(!showPopUp)}
         onMouseLeave={() => setShowPopUp(!showPopUp)}
-        className={handleBgColor[ticket.urgency] + ' ' +
-          ((ticket.assignedUser != null) ? 'ticket-board--taken' : '') + ' '
-          + 'ticket-board__grid fw-300 ticket-board__card-styling container'}>
+        className={handleBgColor[ticket.urgency] + ' ticket-board__grid fw-300 ticket-board__card-styling'}>
         {ticket.assignedUser == null && (
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
