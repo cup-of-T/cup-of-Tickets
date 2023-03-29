@@ -14,13 +14,12 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container navbar__container center">
-        <Link className="btn" to="/">Home</Link>
         {isLoading && <Loader />}
-        {!isAuthenticated && !isLoading && <LoginButton />}
         {isAuthenticated && (
           <>
             <LogoutButton />
-            <img className="navbar__avatar" src={dbUser?.imageUrl} />
+            {dbUser?.imageUrl == null && <Loader/>}
+            {dbUser?.imageUrl != null && <img className="navbar__avatar" src={dbUser?.imageUrl} />}
           </>
         )}
       </div>
