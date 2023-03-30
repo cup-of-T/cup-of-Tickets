@@ -27,10 +27,11 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
   const { tickets, setTickets } = useContext(TicketsContext) as TicketsContextType;
 
   const onCloseClick = (e: SyntheticEvent) => {
-    let newArr = {...tickets};
+    let newArr = [...tickets];
     const i = newArr.findIndex(t => t.ticketId == ticket.ticketId);
     newArr[i].archived == true;
     setTickets(newArr);
+
   }
 
   const style = {
