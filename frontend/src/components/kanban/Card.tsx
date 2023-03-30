@@ -35,7 +35,7 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
 
     let newArr = [...tickets];
     const i = newArr.findIndex(t => t.ticketId == ticket.ticketId);
-    newArr[i].archived == true;
+    newArr[i].archived = true;
     setTickets(newArr);
   }
 
