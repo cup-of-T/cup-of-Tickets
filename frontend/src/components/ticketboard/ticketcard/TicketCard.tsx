@@ -11,17 +11,21 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
   const [showPopUp, setShowPopUp] = useState(false);
 
   const handleUrgencySign = () => {
-    switch (ticket.urgency) {
-      case 1: {
-        return <li className='center status-icon bg--orange ticket-board__urgency'>MEDIUM</li>
-      }
-      case 2: {
-        return <li className='center status-icon bg--red ticket-board__urgency'>URGENT</li>
-      }
-      default: {
-        return <li className='center status-icon bg--grey ticket-board__urgency'>NORMAL</li>
-      }
+    if (ticket.archived == true)
+    {
+      return <li className='center status-icon bg--grey ticket-board__urgency'>COMPLETED</li>
     }
+      switch (ticket.urgency) {
+        case 1: {
+          return <li className='center status-icon bg--orange ticket-board__urgency'>MEDIUM</li>
+        }
+        case 2: {
+          return <li className='center status-icon bg--red ticket-board__urgency'>URGENT</li>
+        }
+        default: {
+          return <li className='center status-icon bg--green ticket-board__urgency'>NORMAL</li>
+        }
+      }
   }
 
   const handleStatus = () => {
