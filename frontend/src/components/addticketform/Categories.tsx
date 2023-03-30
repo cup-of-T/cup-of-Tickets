@@ -33,7 +33,7 @@ export const Categories = ({ label }: CategoriesProps) => {
             <div className="form-categories">
                 {categories.map((category, index) => (
                     <button
-                        className={"btn btn--bordered form-categories__btn " + (field.value.indexOf(category) > -1 ? colors[index] : " ")}
+                        className={"btn btn--bordered form-categories__btn bg--btn " + (field.value.indexOf(category) > -1 ? colors[index] : " ")}
                         key={category}
                         onClick={() => changeCategoryHandler(category)}
                         type="button"

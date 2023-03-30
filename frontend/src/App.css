@@ -68,6 +68,7 @@
 }
 
 .btn--bordered {
+    color: #407a88;
     border: 1px solid rgb(213, 210, 210);
 }
 
@@ -82,7 +83,7 @@
     font-weight: 500;
 }
 .btn--bordered:hover {
-    border: 1px solid rgb(150, 149, 149);
+    border: 1px solid #407a88;;
 }
 
 .fw-300 {
@@ -98,7 +99,7 @@
     color: #F1D601;
 }
 
-.color-red {
+.color-orange {
     color: #FF9E19;
 }
 
@@ -163,10 +164,18 @@
     color: white;
 }
 
+/* .bg--btn:hover{
+    color: white;
+} */
+
 .grey--border {
     border: 1px solid rgb(233, 230, 230);
 }
 
 .align-center {
     text-align: center;
+}
+
+.base-font{
+    font-family: 'Barlow', sans-serif;;
 }
