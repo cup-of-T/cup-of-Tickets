@@ -17,7 +17,7 @@ export const TextField = ({ label, ...props }: TextFieldProps) => {
       <input
         {...field}
         {...props}
-        className='grey--border'
+        className='grey--border ticket-form__input'
       />
 
       {meta.touched && meta.error ? (

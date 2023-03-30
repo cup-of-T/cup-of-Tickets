@@ -29,6 +29,8 @@
 
 .ticket-form__input {
     width: 100%;
+    padding: 4px;
+    border-radius: 4px;
 }
 
 .ticket-form__submit-btn {

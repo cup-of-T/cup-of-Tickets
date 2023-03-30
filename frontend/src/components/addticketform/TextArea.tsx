@@ -18,7 +18,7 @@ export const TextArea = ({ label, ...props }: TextAreaProps) => {
                 {...field}
                 {...props}
                 rows={props.rows}
-                className='grey--border'
+                className='grey--border ticket-form__input'
             >
             </textarea>
             {meta.touched && meta.error ? (
