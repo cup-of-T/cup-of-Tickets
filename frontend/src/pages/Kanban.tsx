@@ -16,7 +16,6 @@ const Kanban = ({ }: IKanbanProps) => {
     }
     return (
         <>
-            <h2>My Tickets</h2>
             <KanbanBoard filteredTickets={tickets?.filter(tic =>
             tic.assignedUser?.userId == dbUser?.userId &&
                 tic.archived != true)} />

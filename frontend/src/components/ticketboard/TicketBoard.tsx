@@ -9,12 +9,11 @@ import { AddTicketForm } from '../addticketform/AddTicketForm'
 import { TicketsTable } from './ticketstable/TicketsTable'
 
 type TicketBoardProps = {
-  toggleAddBtn : (ticketId : number) => void
+  toggleAddBtn : (ticketId : number) => void,
+  tickets: ITicket[]
 }
 
-export const TicketBoard = ({ toggleAddBtn }: TicketBoardProps) => {
-
-  const { tickets } = useContext(TicketsContext) as TicketsContextType;
+export const TicketBoard = ({ toggleAddBtn, tickets }: TicketBoardProps) => {
 
   const completedTickets = tickets.filter(t => t.status == 2);
   const availableTickets = tickets.filter(t => t.status != 2);

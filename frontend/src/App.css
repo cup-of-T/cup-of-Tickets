@@ -68,6 +68,7 @@
 }
 
 .btn--bordered {
+    color: #407a88;
     border: 1px solid rgb(213, 210, 210);
 }
 
@@ -82,7 +83,7 @@
     font-weight: 500;
 }
 .btn--bordered:hover {
-    border: 1px solid rgb(150, 149, 149);
+    border: 1px solid #407a88;;
 }
 
 .fw-300 {
@@ -93,11 +94,12 @@
     width: 100%;
 }
 
+
 .color-yellow {
     color: #F1D601;
 }
 
-.color-red {
+.color-orange {
     color: #FF9E19;
 }
 
@@ -105,8 +107,46 @@
     color: #51b53f;
 }
 
+.color-red {
+    color: #a30000;
+}
+
+.bg--blue{
+    background-color: #58a4b0;
+    color: white;
+}
+
+.bg--lightgray{
+    background-color: #90A9B7;
+    color: white;
+}
+
+.bg--caribbean {
+    background-color: #114B5F;
+    color: white;
+}
+
+.bg--brightyellow{
+    background-color: #EFA00B;
+    color: white;
+}
+
+.bg--lightgreen{
+    background-color: #43AA8B;
+    color: white;
+}
+.bg--cambridge{
+    background-color: #80B192;
+    color: white;
+}
+
 .bg--red {
     background-color: #a30000;
+    color: white;
+}
+
+.bg--firebrick{
+    background-color: #ab3428;
     color: white;
 }
 
@@ -122,4 +162,20 @@
 .bg--green {
     background-color: #51b53f;
     color: white;
+}
+
+/* .bg--btn:hover{
+    color: white;
+} */
+
+.grey--border {
+    border: 1px solid rgb(233, 230, 230);
+}
+
+.align-center {
+    text-align: center;
+}
+
+.base-font{
+    font-family: 'Barlow', sans-serif;;
 }

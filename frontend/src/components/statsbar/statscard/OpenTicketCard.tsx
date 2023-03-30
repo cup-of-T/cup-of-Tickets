@@ -12,11 +12,11 @@ export const OpenTicketCard = () => {
       <div className="stats-card__header">Open tickets (current)</div>
       <div className="stats-card__content">
         <div className="stats-card__content-square">
-          <strong>{tickets.filter(ticket => ticket?.assignedUser?.userId == dbUser?.userId).length}</strong>
+          <strong>{tickets.filter(ticket => (ticket?.assignedUser?.userId == dbUser?.userId) && ticket?.archived !== true).length}</strong>
           YOU
         </div>
         <div className="stats-card__content-square border-left">
-        <strong>{tickets.filter(ticket => ticket?.status != 2).length}</strong>
+        <strong>{tickets.filter(ticket => ticket?.status != 2 && ticket?.archived !== true).length}</strong>
           TEAM
         </div>
       </div>

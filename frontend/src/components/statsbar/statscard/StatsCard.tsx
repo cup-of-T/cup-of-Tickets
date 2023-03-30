@@ -8,15 +8,15 @@ export const StatsCard = () => {
 
   return (
     <div className="stats-card">
-      <div className="stats-card__header">Tickets statistics (today)</div>
+      <div className="stats-card__header">Completed tickets statistics (today)</div>
       <div className="stats-card__content">
-        <div className="stats-card__content-square">
-        <strong>{tickets?.filter(ticket => ticket.urgency == 2).filter(ticket => new Date(ticket.createdAt).toDateString() == new Date().toDateString()).length}</strong>
-          Urgent {}
-        </div>
         <div className="stats-card__content-square border-left">
-          <strong>{tickets?.filter(ticket => ticket.timeEstimate == 'XL').filter(ticket => new Date(ticket.createdAt).toDateString() == new Date().toDateString()).length}</strong>
-          Complex
+          <strong>{tickets?.filter(ticket => ticket.status == 2).filter(ticket => new Date(ticket.createdAt).toDateString() == new Date().toDateString()).length}</strong>
+          ALL
+        </div>
+        <div className="stats-card__content-square">
+        <strong>{tickets?.filter(ticket => ticket.status == 2).filter(ticket => ticket.urgency == 2).filter(ticket => new Date(ticket.createdAt).toDateString() == new Date().toDateString()).length}</strong>
+          URGENT
         </div>
       </div>
     </div>
