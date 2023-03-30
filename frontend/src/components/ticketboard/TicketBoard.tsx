@@ -12,7 +12,8 @@ type TicketBoardProps = {
   toggleAddBtn: (ticketId: number) => void
 }
 
-export const TicketBoard: FC<TicketBoardProps> = ({ toggleAddBtn }) => {
+export const TicketBoard = ({ toggleAddBtn }: TicketBoardProps) => {
+
   const { tickets } = useContext(TicketsContext) as TicketsContextType;
 
   const completedTickets = tickets.filter(t => t.status == 2);
