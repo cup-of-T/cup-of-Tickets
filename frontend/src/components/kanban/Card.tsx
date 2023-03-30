@@ -69,13 +69,18 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
                 <i className="fa-solid fa-chevron-down"></i>
               )}
             </button>
-            {ticket.assignedUser && (
-              <img
-                className="card__assigned-user"
-                src={ticket.assignedUser.imageUrl}
-                alt={ticket.assignedUser.email}
-              />
-            )}
+            <div className="card--deletable">
+              {ticket.status == 2 && (
+                <button className="btn btn--red">Close</button>
+              )}
+              {ticket.assignedUser && (
+                <img
+                  className="card__assigned-user"
+                  src={ticket.assignedUser.imageUrl}
+                  alt={ticket.assignedUser.email}
+                />
+              )}
+            </div>
           </div>
         </section>
       </div>
