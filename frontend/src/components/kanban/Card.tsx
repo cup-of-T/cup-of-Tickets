@@ -5,6 +5,8 @@ import "./Card.css";
 import { SyntheticEvent, useContext, useState } from "react";
 import { TicketsContextType } from "../../types";
 import { TicketsContext } from "../../context/TicketsProvider";
+import { updateTicketArchived } from "../../services/ticketApi";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface ICardProps {
   ticket: ITicket;
@@ -25,13 +27,16 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
     data: { title: ticket.title, index: ticket.ticketId, parent },
   });
   const { tickets, setTickets } = useContext(TicketsContext) as TicketsContextType;
+  const {getAccessTokenSilently} = useAuth0();
 
-  const onCloseClick = (e: SyntheticEvent) => {
+  const onCloseClick = async (e: SyntheticEvent) => {
+    const accessToken = await getAccessTokenSilently();
+    updateTicketArchived(ticket.ticketId, true, accessToken);
+
     let newArr = [...tickets];
     const i = newArr.findIndex(t => t.ticketId == ticket.ticketId);
     newArr[i].archived == true;
     setTickets(newArr);
-
   }
 
   const style = {

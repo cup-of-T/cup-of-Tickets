@@ -20,6 +20,7 @@ internal static class TicketHelper
             Title = ticket.Title,
             CreatedAt = ticket.CreatedAt,
             Description = ticket.Description,
+            Archived = ticket.Archived,
             Urgency = ticket.Urgency,
             Status = ticket.Status,
             TimeEstimate = ticket.TimeEstimate,
