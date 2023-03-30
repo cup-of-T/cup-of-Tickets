@@ -32,12 +32,12 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
         return <span className='status-icon bg--red'>OPEN</span>;
     }
   }
-  
+
   return (
     <>
       <ul onMouseEnter={() => setShowPopUp(!showPopUp)}
         onMouseLeave={() => setShowPopUp(!showPopUp)}
-        className=' ticket-board__grid fw-300 ticket-board__card-styling'>
+        className='ticket-board__grid fw-300 ticket-board__card-styling'>
         {ticket.assignedUser == null && (
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
