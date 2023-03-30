@@ -1,0 +1,4 @@
+        let newArr = { ...tickets };
+        const i = tickets.findIndex(t => t.ticketId == active.id);
+        newArr[i].status = ticketStatuses[activeContainer];
+        setTickets(newArr);

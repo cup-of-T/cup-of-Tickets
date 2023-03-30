@@ -2,7 +2,9 @@ import { useSortable } from "@dnd-kit/sortable";
 import { ITicket } from "../../interfaces/interface";
 import { CSS } from "@dnd-kit/utilities";
 import "./Card.css";
-import { useState } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
+import { TicketsContextType } from "../../types";
+import { TicketsContext } from "../../context/TicketsProvider";
 
 interface ICardProps {
   ticket: ITicket;
@@ -22,6 +24,16 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
     id: ticket.ticketId,
     data: { title: ticket.title, index: ticket.ticketId, parent },
   });
+  const { tickets, setTickets } = useContext(TicketsContext) as TicketsContextType;
+
+  const onCloseClick = (e: SyntheticEvent) => {
+    let newArr = {...tickets};
+    const i = newArr.findIndex(t => t.ticketId == ticket.ticketId);
+    newArr[i].status == ticket.status;
+    setTickets(newArr);
+    console.log(tickets);
+    alert('click');
+  }
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -71,7 +83,7 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
             </button>
             <div className="card--deletable">
               {ticket.status == 2 && (
-                <button className="btn btn--red">Close</button>
+                <button onClick={onCloseClick} className="btn btn--red">Close</button>
               )}
               {ticket.assignedUser && (
                 <img
