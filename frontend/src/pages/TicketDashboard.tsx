@@ -29,7 +29,7 @@ const TicketDashboard = () => {
     return (
         <>
             <StatsBar addBtnToggle={addBtnToggle} ticketIds={currentTicketIds} resetTicketsClaims={resetTicketsClaims}/>
-            <TicketBoard toggleAddBtn={toggleAddBtn} />
+            <TicketBoard toggleAddBtn={toggleAddBtn} tickets={tickets} />
         </>
     );
 };

@@ -124,6 +124,8 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ filteredTickets }) => {
 
     return (
         <section className="kanban-container">
+            <h3 className="center page__title align-center">My Tickets</h3>
+
             <DndContext
                 sensors={sensors}
                 collisionDetection={rectIntersection}

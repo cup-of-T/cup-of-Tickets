@@ -11,16 +11,17 @@ export const SelectOptions = ({ label, children, ...props }: SelectOptionsProps)
     const [field, meta] = useField(props);
 
     return (
-        <label className='select' htmlFor={label}>
+        <label className='ticket-form__label' htmlFor={label}>
             {label}
             <select
                 {...field}
                 {...props}
+                className='grey--border  ticket-form__input base-font'
             >
                 {children}
             </select>
             {meta.touched && meta.error ? (
-                <div className='select__error'>{meta.error}</div>) : null
+                <div className='ticket-form__label--error'>{meta.error}</div>) : null
             }
         </label>
     )
