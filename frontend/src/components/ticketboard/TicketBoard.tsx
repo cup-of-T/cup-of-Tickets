@@ -5,28 +5,35 @@ import './ticketboard.css'
 import { TicketsContext } from '../../context/TicketsProvider'
 import { TicketsContextType } from '../../types'
 import { ITicket } from '../../interfaces/interface'
+import { AddTicketForm } from '../addticketform/AddTicketForm'
+import { TicketsTable } from './ticketstable/TicketsTable'
 
 type TicketBoardProps = {
-  toggleAddBtn : (ticketId : number) => void
+  toggleAddBtn: (ticketId: number) => void
 }
 
-export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
-  const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
+export const TicketBoard: FC<TicketBoardProps> = ({ toggleAddBtn }) => {
+  const { tickets } = useContext(TicketsContext) as TicketsContextType;
 
-  const sortedByUrgency = (tickets : ITicket[]) => tickets.sort((a, b) => b.urgency - a.urgency);
-
-  const sortedTicketsByAssignee = () => {
-    var unassignedTickets = tickets.filter(ticket => ticket.assignedUser == null);
-    var assignedTickets = tickets.filter(ticket => ticket.assignedUser !== null);
-
-    return new Array().concat(sortedByUrgency(unassignedTickets), sortedByUrgency(assignedTickets));
-  }
+  const completedTickets = tickets.filter(t => t.status == 2);
+  const availableTickets = tickets.filter(t => t.status != 2);
+  const unassignedTickets = availableTickets.filter(ticket => ticket.assignedUser == null).sort((a, b) => b.urgency - a.urgency);
+  const assignedTickets = availableTickets.filter(ticket => ticket.assignedUser !== null).sort((a, b) => b.urgency - a.urgency);
 
   return (
     <section className="ticket-board">
-        <TicketHeader />
-        {sortedTicketsByAssignee().map( ticket => <TicketCard toggleAddBtn = {toggleAddBtn} ticket={ticket} key={ticket.ticketId}/>)}
+      <TicketsTable title={'Available tickets'}
+        tickets={unassignedTickets}
+        toggleAddBtn={toggleAddBtn}
+      />
+      <TicketsTable title={'Assigned tickets'}
+        tickets={assignedTickets}
+        toggleAddBtn={toggleAddBtn}
+      />
+      {/* <TicketsTable title={'Closed tickets'}
+        tickets={completedTickets}
+        toggleAddBtn={toggleAddBtn}
+      /> */}
     </section>
   )
 }
- 
