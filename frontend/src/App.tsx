@@ -15,7 +15,11 @@ import { postUser } from './services/userApi'
 import Kanban from './pages/Kanban'
 import { Login } from './pages/Login'
 import { AddTicket } from './pages/AddTicket'
+import Dashboard from './pages/TicketDashboard'
+import { Archive } from './pages/Archive'
+import './pages/pages.css'
 import TicketDashboard from './pages/TicketDashboard'
+
 
 
 function App() {
@@ -49,6 +53,7 @@ function App() {
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
             <Route path="/teams" element={<ProtectedRoute component={Teams} />} />
             <Route path="/home" element={<ProtectedRoute component={Home} />} />
+            <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
