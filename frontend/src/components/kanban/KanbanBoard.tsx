@@ -1,8 +1,8 @@
 import { defaultDropAnimation, DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, PointerSensor, rectIntersection, useSensor, useSensors } from "@dnd-kit/core";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { find } from "lodash";
 import { TicketsContext } from "../../context/TicketsProvider";
-import { IColumn, Istatuses } from "../../interfaces/interface";
+import { IColumn, Istatuses, ITicket } from "../../interfaces/interface";
 import { TicketsContextType } from "../../types";
 import Column from "./Column";
 import './KanbanBoard.css'
@@ -11,6 +11,9 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { updateTicketStatus } from "../../services/ticketApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
+type KanbanBoardProps = {
+    filteredTickets: ITicket[]
+}
 
 const findTicketContainer = (columns: IColumn, id: number) => {
     if (id in columns) {
@@ -25,16 +28,16 @@ const findTicketContainer = (columns: IColumn, id: number) => {
 
 
 
-const KanbanBoard = () => {
-    const { tickets } = useContext(TicketsContext) as TicketsContextType;
+const KanbanBoard: React.FC<KanbanBoardProps> = ({ filteredTickets }) => {
+    const { tickets, setTickets } = useContext(TicketsContext) as TicketsContextType;
     const { getAccessTokenSilently } = useAuth0();
     const [active, setActive] = useState<null | number>(null);
     const [columns, setColumns] = useState<IColumn>({
-        "To Do": tickets.filter(ticket => ticket.status == 0),
-        "Doing": tickets.filter(ticket => ticket.status == 1),
-        "Done": tickets.filter(ticket => ticket.status == 2)
+        "To Do": filteredTickets.filter(ticket => ticket.status == 0),
+        "Doing": filteredTickets.filter(ticket => ticket.status == 1),
+        "Done": filteredTickets.filter(ticket => ticket.status == 2)
     });
-    const activeTicket = find(tickets, (task) => task.ticketId === active);
+    const activeTicket = find(filteredTickets, (task) => task.ticketId === active);
     const ticketStatuses = {
         "To Do": 0,
         "Doing": 1,
@@ -104,6 +107,10 @@ const KanbanBoard = () => {
         }
 
         updateTicketStatus(active.id as number, ticketStatuses[activeContainer], await getAccessTokenSilently());
+        let newArr = [ ...tickets ];
+        const i = tickets.findIndex(t => t.ticketId == active.id);
+        newArr[i].status = ticketStatuses[activeContainer];
+        setTickets(newArr);
         setActive(null);
     };
 
