@@ -79,10 +79,11 @@ namespace TicketsServer.Api.Controllers
             {
                 return NotFound();
             }
-            
+
             var picturePath = "";
             if (userRequest.Picture != null)
             {
+                _fileservice.DeleteImage(userToUpdate.ImageUrl!);
                 picturePath = await _fileservice.UploadImage(userRequest.Picture);
             }
 
