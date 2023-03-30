@@ -2,7 +2,11 @@ import { useSortable } from "@dnd-kit/sortable";
 import { ITicket } from "../../interfaces/interface";
 import { CSS } from "@dnd-kit/utilities";
 import "./Card.css";
-import { useState } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
+import { TicketsContextType } from "../../types";
+import { TicketsContext } from "../../context/TicketsProvider";
+import { updateTicketArchived } from "../../services/ticketApi";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface ICardProps {
   ticket: ITicket;
@@ -22,6 +26,18 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
     id: ticket.ticketId,
     data: { title: ticket.title, index: ticket.ticketId, parent },
   });
+  const { tickets, setTickets } = useContext(TicketsContext) as TicketsContextType;
+  const {getAccessTokenSilently} = useAuth0();
+
+  const onCloseClick = async (e: SyntheticEvent) => {
+    const accessToken = await getAccessTokenSilently();
+    updateTicketArchived(ticket.ticketId, true, accessToken);
+
+    let newArr = [...tickets];
+    const i = newArr.findIndex(t => t.ticketId == ticket.ticketId);
+    newArr[i].archived = true;
+    setTickets(newArr);
+  }
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -69,13 +85,18 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
                 <i className="fa-solid fa-chevron-down"></i>
               )}
             </button>
-            {ticket.assignedUser && (
-              <img
-                className="card__assigned-user"
-                src={ticket.assignedUser.imageUrl}
-                alt={ticket.assignedUser.email}
-              />
-            )}
+            <div className="card--deletable">
+              {ticket.status == 2 && (
+                <button onClick={onCloseClick} className="btn btn--red">Close</button>
+              )}
+              {ticket.assignedUser && (
+                <img
+                  className="card__assigned-user"
+                  src={ticket.assignedUser.imageUrl}
+                  alt={ticket.assignedUser.email}
+                />
+              )}
+            </div>
           </div>
         </section>
       </div>
