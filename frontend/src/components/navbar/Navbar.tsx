@@ -17,8 +17,8 @@ const Navbar = () => {
         {isAuthenticated && (
           <>
             <LogoutButton />
-            {dbUser?.imageUrl == null && <Loader/>}
-            {dbUser?.imageUrl != null && <Link to='/profile'><img className="navbar__avatar" src={dbUser?.imageUrl} /></Link>}
+            {dbUser?.imageUrl == null && <Loader />}
+            {dbUser?.imageUrl != null && <Link to='/profile'><img className="navbar__avatar" src={import.meta.env.VITE_API_SERVER_URL + '/Images/' + dbUser?.imageUrl} /></Link>}
           </>
         )}
       </div>
