@@ -105,7 +105,7 @@ app.UseSwaggerUI();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Images")),
-    RequestPath = "/Images"
+    RequestPath = "/api/Images"
 });
 
 app.UseCors(cors =>
