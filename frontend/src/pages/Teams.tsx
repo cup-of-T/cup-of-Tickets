@@ -1,4 +1,6 @@
 import { defaultAttributes } from "@dnd-kit/sortable/dist/hooks/defaults";
+import { divide } from "lodash";
+import Loader from "../components/loader/Loader";
 import { Team } from "../components/team/Team";
 import { ITeam, IUser } from "../interfaces/interface";
 
@@ -8,10 +10,13 @@ interface ITeamsProps {
 }
 
 const Teams = ({ teams, user }: ITeamsProps) => {
-    if (user == null) return;
+    if (user == null) return (<Loader />);
+    if (teams == null) return (<Loader />);
 
     const team = teams.find(t => t.users.find(u => u.userId == user.userId));
-
+    if (team == null) {
+        return (<Loader />);
+    }
     return (
         <Team team={team} />
     );

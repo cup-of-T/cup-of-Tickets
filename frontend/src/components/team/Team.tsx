@@ -1,5 +1,7 @@
 import React from 'react'
 import { ITeam } from '../../interfaces/interface'
+import { UserCard } from './UserCard'
+import './Team.css'
 
 type TeamProps = {
     team: ITeam
@@ -7,9 +9,10 @@ type TeamProps = {
 
 export const Team = ({ team }: TeamProps) => {
     return (
-        <>
-            {team.users.map(u => u.name)}
-            {team.users.map(u => <img src={import.meta.env.VITE_API_SERVER_URL + '/Images/' + u.imageUrl} />)}
-        </>
+        <div className='team-card'>
+            <h2 className='team-card__header'>{team.name}</h2>
+            {team.users.map(user => <UserCard key={user.userId} user={user} />)}
+
+        </div>
     )
 }
