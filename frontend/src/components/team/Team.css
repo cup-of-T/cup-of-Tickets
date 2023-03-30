@@ -1,0 +1,11 @@
+.team-card {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.team-card__header {
+    text-align: center;
+    width: 100%;
+}
