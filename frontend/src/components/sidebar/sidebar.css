@@ -43,7 +43,3 @@
     padding: 8px;
     border-radius: 50%;
 }
-
-.fa-kanban{
-    transform: scale(-1, 1) rotate(270deg);
-}

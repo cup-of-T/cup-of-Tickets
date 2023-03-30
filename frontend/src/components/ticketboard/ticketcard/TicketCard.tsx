@@ -13,13 +13,13 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
   const handleUrgencySign = () => {
     switch (ticket.urgency) {
       case 1: {
-        return "color-yellow fa-solid fa-circle";
+        return <li className='center status-icon bg--orange ticket-board__urgency'>MEDIUM</li>
       }
       case 2: {
-        return "color-red  fa-solid fa-circle";
+        return <li className='center status-icon bg--red ticket-board__urgency'>URGENT</li>
       }
       default: {
-        return "";
+        return <li className='center status-icon bg--grey ticket-board__urgency'>NORMAL</li>
       }
     }
   }
@@ -32,25 +32,17 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
         return <span className='status-icon bg--red'>OPEN</span>;
     }
   }
-
-  const handleBgColor = [
-    '',
-    'ticket-board--medium',
-    'ticket-board--urgent'
-  ]
-
-
-
+  
   return (
     <>
       <ul onMouseEnter={() => setShowPopUp(!showPopUp)}
         onMouseLeave={() => setShowPopUp(!showPopUp)}
-        className={handleBgColor[ticket.urgency] + ' ticket-board__grid fw-300 ticket-board__card-styling'}>
+        className=' ticket-board__grid fw-300 ticket-board__card-styling'>
         {ticket.assignedUser == null && (
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
             className='ticket-board__checkbox' type="checkbox" />)}
-        <li className='ticket-board__urgency'><i className={handleUrgencySign()}></i></li>
+        {handleUrgencySign()}
         <li className='ticket-board__text'>{ticket.title}</li>
         <li className='ticket-board__requester'>{ticket.creator.name ? ticket.creator.name : ticket.creator.email}</li>
         <li className='ticket-board__requester-update'>{ticket.createdAt}</li>

@@ -98,5 +98,10 @@
 }
 
 .bg--grey {
-    background-color: lightgray;
+    background-color: rgb(235, 235, 235);
+}
+
+.bg--orange {
+    background-color: rgb(255, 158, 25);
+    color: white;
 }
