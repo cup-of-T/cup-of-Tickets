@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketsServer.Api.Models;
+using TicketsServer.Api.Services;
 
 namespace TicketsServer.Api.Controllers;
 [Route("api/[controller]")]
@@ -21,19 +22,20 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Authorize("User")]
-    public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers()
     {
         if (_context.Users == null)
         {
             return NotFound();
         }
-        return await _context.Users.ToListAsync();
+        var users = await _context.Users.ToListAsync();
+        return users.Select(user => UserHelper.UserToUserResponse(user)).ToList();
     }
 
 
     [HttpPost]
     [Authorize("User")]
-    public async Task<ActionResult<User>> PostUser()
+    public async Task<ActionResult<UserResponse>> GetOrPostUser()
     {
         string token = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
         var handler = new JwtSecurityTokenHandler();
@@ -72,7 +74,7 @@ public class UsersController : ControllerBase
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, user);
+        return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, UserHelper.UserToUserResponse(user));
     }
 
     //__________I DONT THINK WE NEED THIS SPAGHETTI ANYMORE________
