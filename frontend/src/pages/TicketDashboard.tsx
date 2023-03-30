@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StatsBar } from "../components/statsbar/StatsBar";
 import { TicketBoard } from "../components/ticketboard/TicketBoard";
-interface IDashboardProps {
-}
+import { TicketsContext } from "../context/TicketsProvider";
+import { TicketsContextType } from "../types";
 
-const TicketDashboard = ({ }: IDashboardProps) => {
+const TicketDashboard = () => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
+    const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
 
     const toggleAddBtn = (ticketId: number) => {
@@ -19,10 +20,6 @@ const TicketDashboard = ({ }: IDashboardProps) => {
         }
         setCurrentTicketIds([...currentTicketIds, ticketId]);
     }
-
-    // useEffect(() => {
-        
-    // }, [])
 
     const resetTicketsClaims = () => {
         setCurrentTicketIds([]);
