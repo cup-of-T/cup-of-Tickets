@@ -27,7 +27,7 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
     data: { title: ticket.title, index: ticket.ticketId, parent },
   });
   const { tickets, setTickets } = useContext(TicketsContext) as TicketsContextType;
-  const {getAccessTokenSilently} = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
 
   const onCloseClick = async (e: SyntheticEvent) => {
     const accessToken = await getAccessTokenSilently();
@@ -92,7 +92,7 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
               {ticket.assignedUser && (
                 <img
                   className="card__assigned-user"
-                  src={ticket.assignedUser.imageUrl}
+                  src={import.meta.env.VITE_API_SERVER_URL + '/Images/' + ticket.assignedUser.imageUrl}
                   alt={ticket.assignedUser.email}
                 />
               )}
