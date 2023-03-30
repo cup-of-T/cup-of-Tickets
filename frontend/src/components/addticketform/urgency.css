@@ -7,14 +7,19 @@
 .urgency__btn{
     border: none;
     background-color: transparent;
-    border-bottom: 1px solid transparent;
 }
 
 .urgency__sign {
     font-size: 32px;
+    padding-bottom: 1px;
+    border-bottom: 2px solid transparent;
 }
 
 
-.urgency__btn:hover{
-   border-bottom: 1px solid rgb(199, 197, 197);
+.urgency__sign:hover{
+    border-bottom: 2px solid rgb(200,200,200);
+}
+
+.urgency_sign--border {
+    border-bottom: 2px solid rgb(200,200,200);
 }
