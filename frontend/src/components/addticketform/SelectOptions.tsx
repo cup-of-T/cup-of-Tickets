@@ -16,7 +16,7 @@ export const SelectOptions = ({ label, children, ...props }: SelectOptionsProps)
             <select
                 {...field}
                 {...props}
-                className='grey--border base-font'
+                className='grey--border  ticket-form__input base-font'
             >
                 {children}
             </select>
