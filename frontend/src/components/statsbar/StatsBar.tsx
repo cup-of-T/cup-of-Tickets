@@ -5,7 +5,6 @@ import { OpenTicketCard } from './statscard/OpenTicketCard'
 import { UserContext } from '../../context/UserProvider'
 import { TicketsContextType, UserContextType } from '../../types'
 import { TicketsContext } from '../../context/TicketsProvider'
-import { UNSAFE_getPathContributingMatches } from '@remix-run/router'
 import { useNavigate } from 'react-router-dom'
 
 

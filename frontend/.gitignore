@@ -1,4 +1,4 @@
-.env.*
+.env.development
 
 # Logs
 logs
@@ -24,4 +24,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.env.*

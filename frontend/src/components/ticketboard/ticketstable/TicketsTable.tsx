@@ -15,11 +15,10 @@ export const TicketsTable = ({ title, tickets, toggleAddBtn }: TicketsTableProps
             <TicketHeader />
             {tickets.map(ticket => {
                 return (
-                    <div className="ticket-card">
+                    <div className="ticket-card" key={ticket.ticketId}>
                         <TicketCard
                             toggleAddBtn={toggleAddBtn}
                             ticket={ticket}
-                            key={ticket.ticketId}
                         />
                     </div>
                 )
