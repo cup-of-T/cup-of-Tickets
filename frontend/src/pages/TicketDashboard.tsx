@@ -4,7 +4,7 @@ import { TicketBoard } from "../components/ticketboard/TicketBoard";
 import { TicketsContext } from "../context/TicketsProvider";
 import { TicketsContextType } from "../types";
 
-const TicketDashboard = ({ }: IDashboardProps) => {
+const TicketDashboard = () => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
