@@ -105,6 +105,10 @@
     color: #51b53f;
 }
 
+.color-red {
+    color: #a30000;
+}
+
 .bg--red {
     background-color: #a30000;
     color: white;

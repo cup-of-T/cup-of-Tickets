@@ -44,7 +44,7 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
     transition,
     opacity: isDragging ? 0 : 1,
   };
-  const urgencyColors = ["#51b53f", "#FF9E19", "#FF9E19"];
+  const urgencyColors = ["#51b53f", "#FF9E19", "#a30000"];
 
   return (
     <div {...listeners} style={style} {...attributes} ref={setNodeRef}>
