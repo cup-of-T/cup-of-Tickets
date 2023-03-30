@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/header/Header'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './pages/ProtectedRoute'
 import Profile from './pages/Profile'
@@ -46,7 +46,7 @@ function App() {
         <Header />
         <main className="main center">
           <Routes>
-            <Route path="/" element={< Navigate to='/dashboard' />}/> 
+            <Route path="/" element={<TicketDashboard />} />
             <Route path="/dashboard" element={<TicketDashboard />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
