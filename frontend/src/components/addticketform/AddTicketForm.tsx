@@ -26,9 +26,9 @@ export const AddTicketForm = () => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values : ITicket,{ setSubmitting } :(isSubmitting : boolean)  => void ) => {
+      onSubmit={(values , {setSubmitting} ) => {
         setSubmitting(false);
-        postingTicket( values)
+        postingTicket( values as Partial<ITicket> )
       }}
       validationSchema={validationSchema}
     >
