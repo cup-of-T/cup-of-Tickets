@@ -29,10 +29,8 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
   const onCloseClick = (e: SyntheticEvent) => {
     let newArr = {...tickets};
     const i = newArr.findIndex(t => t.ticketId == ticket.ticketId);
-    newArr[i].status == ticket.status;
+    newArr[i].archived == true;
     setTickets(newArr);
-    console.log(tickets);
-    alert('click');
   }
 
   const style = {
