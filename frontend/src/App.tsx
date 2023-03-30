@@ -3,7 +3,6 @@ import './App.css'
 import Header from './components/header/Header'
 import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
-import Home from './pages/Home'
 import ProtectedRoute from './pages/ProtectedRoute'
 import Profile from './pages/Profile'
 import Teams from './pages/Teams'
@@ -52,7 +51,6 @@ function App() {
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
             <Route path="/teams" element={<ProtectedRoute component={Teams} />} />
-            <Route path="/home" element={<ProtectedRoute component={Home} />} />
             <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
