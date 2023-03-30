@@ -11,7 +11,7 @@ type TicketBoardProps = {
 }
 
 export const TicketBoard: FC<TicketBoardProps> = ({ toggleAddBtn }) => {
-  const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
+  const { tickets } = useContext(TicketsContext) as TicketsContextType;
   
   const completedTickets = tickets.filter(t => t.status == 2);
   const availableTickets = tickets.filter(t=>t.status != 2);
