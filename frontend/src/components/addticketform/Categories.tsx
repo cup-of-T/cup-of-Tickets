@@ -1,7 +1,7 @@
 import { useField, useFormikContext } from "formik";
 import "./Categories.css";
 
-const categories = ["backend", "frontend", "bug", "tests"];
+const categories = ["Backend", "Frontend", "Bug", "Tests", "Support", "Other"];
 
 type CategoriesProps = {
   label: string;

@@ -10,14 +10,16 @@ import { validationSchema } from "./ValidationSchema";
 import "./AddTicketForm.css";
 import { ITicket } from "../../interfaces/interface";
 import { TicketsContext } from "../../context/TicketsProvider";
+import { useNavigate } from "react-router-dom";
 
 export const AddTicketForm = () => {
+  const navigate = useNavigate();
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { postingTicket } = useContext(TicketsContext) as TicketsContextType
   const initialValues = {
     title: "",
     description: "",
-    timeEstimate: "m",
+    timeEstimate: "XS",
     urgency: 0,
     categoryNames: [],
     userId: dbUser?.userId,
@@ -29,6 +31,7 @@ export const AddTicketForm = () => {
       onSubmit={(values , {setSubmitting} ) => {
         setSubmitting(false);
         postingTicket( values as Partial<ITicket> )
+        navigate('/');
       }}
       validationSchema={validationSchema}
     >
@@ -48,11 +51,11 @@ export const AddTicketForm = () => {
             placeholder="Some more info.."
           />
           <SelectOptions label="Time Estimate" name="timeEstimate">
-            <option value="xs">XS</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-            <option value="xl">XL</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
           </SelectOptions>
           <SelectOptions label="Urgency" name="urgency">
             <option value={0}>0</option>
@@ -61,7 +64,7 @@ export const AddTicketForm = () => {
           </SelectOptions>
           <Categories label="Categories"/>
           <button className="btn btn--blue w-100 ticket-form__submit-btn" type="submit">
-            submit
+            Submit
           </button>
         </Form>
       </div>
