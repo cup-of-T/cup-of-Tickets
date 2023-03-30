@@ -31,7 +31,7 @@ export const Urgency = ({ label, name }: UrgencyProps) => {
         >
           <i
             className={
-              " fa-solid fa-triangle-exclamation urgency__sign " + classColor
+              " fa-solid fa-triangle-exclamation urgency__sign " + (field.value == value ? "urgency_sign--border " : "" ) + classColor
             }
           ></i>
         </button>
