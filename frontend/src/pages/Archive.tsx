@@ -7,18 +7,31 @@ import { TicketsContextType } from '../types';
 
 export const Archive = () => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
-    const [currentTicketId, setCurrentTicketId] = useState<number>(0);
+    const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([]);
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
 
     const toggleAddBtn = (ticketId: number) => {
-        setCurrentTicketId(ticketId);
-        setAddToggleBtn(!addBtnToggle);
+        if ( currentTicketIds.some(id => id == ticketId)) {
+            console.log(currentTicketIds)
+            setCurrentTicketIds([...currentTicketIds.filter(id => id !== ticketId)])
+            return;
+        }
+        if (currentTicketIds.length == 0 ) {
+            setAddToggleBtn(!addBtnToggle);
+        }
+        setCurrentTicketIds([...currentTicketIds, ticketId]);
     }
+
+    const resetTicketsClaims = () => {
+        setCurrentTicketIds([]);
+        setAddToggleBtn(false);
+    }
+
 
     return (
         <>
-            <StatsBar addBtnToggle={addBtnToggle} ticketId={currentTicketId} />
-            <h3 className='container center archive-page__title'>Archived tickets</h3>
+            <StatsBar addBtnToggle={addBtnToggle} ticketIds={currentTicketIds} resetTicketsClaims={resetTicketsClaims}/>
+            <h3 className='container center page__title'>Archived tickets</h3>
             <TicketBoard toggleAddBtn={toggleAddBtn} tickets={tickets?.filter(ticket => ticket.archived == true )} />
         </>
     );
