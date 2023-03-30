@@ -28,7 +28,9 @@ public class UsersController : ControllerBase
         {
             return NotFound();
         }
-        var users = await _context.Users.ToListAsync();
+        var users = await _context.Users
+            .Include(u => u.Teams)
+            .ToListAsync();
         return users.Select(user => UserHelper.UserToUserResponse(user)).ToList();
     }
 
