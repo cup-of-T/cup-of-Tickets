@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketsServer.Api.Models;
+using TicketsServer.Api.Services;
 
 namespace TicketsServer.Api.Controllers
 {
@@ -23,36 +24,40 @@ namespace TicketsServer.Api.Controllers
 
         [Authorize("User")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Team>>> GetTeam()
+        public async Task<ActionResult<IEnumerable<TeamResponse>>> GetTeam()
         {
-          if (_context.Team == null)
-          {
-              return NotFound();
-          }
-            return await _context.Team.ToListAsync();
+            if (_context.Teams == null)
+            {
+                return NotFound();
+            }
+            var teams = await _context.Teams
+                .Include(t => t.Users)
+                .ToListAsync();
+
+            return teams.Select(t => TeamHelper.TeamToTeamResponse(t)).ToList();
         }
 
         [Authorize("User")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Team>> GetTeam(int id)
+        public async Task<ActionResult<TeamResponse>> GetTeam(int id)
         {
-          if (_context.Team == null)
-          {
-              return NotFound();
-          }
-            var team = await _context.Team.FindAsync(id);
+            if (_context.Teams == null)
+            {
+                return NotFound();
+            }
+            var team = await _context.Teams.FindAsync(id);
 
             if (team == null)
             {
                 return NotFound();
             }
 
-            return team;
+            return TeamHelper.TeamToTeamResponse(team);
         }
 
         private bool TeamExists(int id)
         {
-            return (_context.Team?.Any(e => e.TeamId == id)).GetValueOrDefault();
+            return (_context.Teams?.Any(e => e.TeamId == id)).GetValueOrDefault();
         }
     }
 }

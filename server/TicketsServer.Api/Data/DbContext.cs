@@ -11,5 +11,5 @@ using TicketsServer.Api.Models;
         public DbSet<User> Users { get; set; } = default!;
         public DbSet<Ticket> Tickets { get; set; } = default!;
         public DbSet<Category> Categories { get; set; } = default!;
-        public DbSet<Team> Team { get; set; } = default!;
+        public DbSet<Team> Teams { get; set; } = default!;
     }
