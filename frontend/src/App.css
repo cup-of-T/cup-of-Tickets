@@ -93,6 +93,7 @@
     width: 100%;
 }
 
+
 .color-yellow {
     color: #F1D601;
 }
@@ -109,8 +110,42 @@
     color: #a30000;
 }
 
+.bg--blue{
+    background-color: #58a4b0;
+    color: white;
+}
+
+.bg--lightgray{
+    background-color: #90A9B7;
+    color: white;
+}
+
+.bg--caribbean {
+    background-color: #114B5F;
+    color: white;
+}
+
+.bg--brightyellow{
+    background-color: #EFA00B;
+    color: white;
+}
+
+.bg--lightgreen{
+    background-color: #43AA8B;
+    color: white;
+}
+.bg--cambridge{
+    background-color: #80B192;
+    color: white;
+}
+
 .bg--red {
     background-color: #a30000;
+    color: white;
+}
+
+.bg--firebrick{
+    background-color: #ab3428;
     color: white;
 }
 
