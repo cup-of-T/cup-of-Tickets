@@ -151,7 +151,7 @@ public class TicketsController : ControllerBase
 
     [HttpPatch("{id}/status")]
     [Authorize("User")]
-    public async Task<IActionResult> PatchTicketStatus(int id, [FromBody] TicketStatusRequest request)
+    public async Task<IActionResult> PatchTicketStatus(int id, TicketStatusRequest request)
     {
         var ticketToUpdate = await _context.Tickets.FindAsync(id);
 
@@ -178,7 +178,6 @@ public class TicketsController : ControllerBase
                 throw;
             }
         }
-        Console.WriteLine("Hello\n\n\n\n\n\n");
         return NoContent();
     }
 
