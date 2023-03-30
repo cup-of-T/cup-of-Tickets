@@ -15,7 +15,7 @@ import { postUser } from './services/userApi'
 import Kanban from './pages/Kanban'
 import { Login } from './pages/Login'
 import { AddTicket } from './pages/AddTicket'
-import Dashboard from './pages/TicketDashboard'
+import TicketDashboard from './pages/TicketDashboard'
 
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
         <Header />
         <main className="main center">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<TicketDashboard />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
