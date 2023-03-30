@@ -6,13 +6,14 @@ internal static class UserHelper
 {
     public static UserResponse UserToUserResponse(User user)
     {
-        var responseList = user.Teams!.Select(t =>
+        var responseList = user.Teams?.Select(t =>
             new Team
             {
                 TeamId = t.TeamId,
                 Name = t.Name,
             })
             .ToList();
+
         return new UserResponse()
         {
             UserId = user.UserId,
