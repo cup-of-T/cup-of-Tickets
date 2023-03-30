@@ -54,6 +54,19 @@
     border: 1px solid #51b53f;
 }
 
+.btn--red {
+    color: white;
+    border: none;
+    background-color:#565656;
+    border: 1px solid #565656 ;
+}
+.btn--red:hover {
+    background-color: transparent;
+    color: #565656 !important;
+    font-weight: 500;
+    border: 1px solid #565656;
+}
+
 .btn--bordered {
     border: 1px solid rgb(213, 210, 210);
 }
@@ -98,5 +111,15 @@
 }
 
 .bg--grey {
-    background-color: lightgray;
+    background-color: rgb(235, 235, 235);
+}
+
+.bg--orange {
+    background-color: rgb(255, 158, 25);
+    color: white;
+}
+
+.bg--green {
+    background-color: #51b53f;
+    color: white;
 }
