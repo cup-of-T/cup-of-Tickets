@@ -26,12 +26,12 @@ export const Categories = ({ label }: CategoriesProps) => {
     };
 
     return (
-        <>
+        <div>
             <label htmlFor={label}>{label}</label>
-            <div className="categories">
+            <div className="form-categories">
                 {categories.map((category) => (
                     <button
-                        className={field.value.indexOf(category) > -1 ? "btn btn--bordered  btn--category" : "btn btn--bordered"}
+                        className={"btn btn--bordered form-categories__btn" + (field.value.indexOf(category) > -1 ? "btn--category" : "")}
                         key={category}
                         onClick={() => changeCategoryHandler(category)}
                         type="button"
@@ -41,6 +41,6 @@ export const Categories = ({ label }: CategoriesProps) => {
                 ))}
                 {meta.touched && meta.error ? <div>{meta.error}</div> : null}
             </div>
-        </>
+        </div>
     );
 };
