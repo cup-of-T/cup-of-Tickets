@@ -1,11 +1,16 @@
-.categories {
+.form-categories {
     display: flex;
     gap: 10px;
-    margin: 32px 0;
+    margin: 16px 0;
+    flex-wrap: wrap;
+}
+
+.form-categories__btn {
+    flex-grow: 1;
 }
 
 
-.btn--category {
+.form-categories__btn--selected {
     color: white;
     background-color: red;
 }
