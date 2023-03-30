@@ -11,6 +11,7 @@ import "./AddTicketForm.css";
 import { ITicket } from "../../interfaces/interface";
 import { TicketsContext } from "../../context/TicketsProvider";
 import { useNavigate } from "react-router-dom";
+import { Urgency } from "./Urgency";
 
 export const AddTicketForm = () => {
   const navigate = useNavigate();
@@ -44,12 +45,6 @@ export const AddTicketForm = () => {
             type="text"
             placeholder="Title.."
           />
-          <TextArea
-            label="Description"
-            name="description"
-            rows={6}
-            placeholder="Some more info.."
-          />
           <SelectOptions label="Time Estimate" name="timeEstimate">
             <option value="XS">XS</option>
             <option value="S">S</option>
@@ -57,11 +52,18 @@ export const AddTicketForm = () => {
             <option value="L">L</option>
             <option value="XL">XL</option>
           </SelectOptions>
-          <SelectOptions label="Urgency" name="urgency">
+          <TextArea
+            label="Description"
+            name="description"
+            rows={6}
+            placeholder="Some more info.."
+          />
+          {/* <SelectOptions label="Urgency" name="urgency">
             <option value={0}>0</option>
             <option value={1}>1</option>
             <option value={2}>2</option>
-          </SelectOptions>
+          </SelectOptions> */}
+          <Urgency label="Urgency" name="urgency" />
           <Categories label="Categories"/>
           <button className="btn btn--blue w-100 ticket-form__submit-btn" type="submit">
             Submit

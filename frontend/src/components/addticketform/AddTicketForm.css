@@ -18,10 +18,11 @@
     flex-wrap:wrap;
     border: 1px solid rgb(233, 230, 230);
     gap: 8px;
+    font-family: 'Barlow', sans-serif;
 }
 
 .ticket-form__title{
-    margin-top: 8px;
+    margin: 8px 0;
     font-weight: 400;
     font-size: 28px;
 }
