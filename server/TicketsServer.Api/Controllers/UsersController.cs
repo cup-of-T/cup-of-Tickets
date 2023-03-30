@@ -75,17 +75,17 @@ namespace TicketsServer.Api.Controllers
         public async Task<IActionResult> PutUser(int id, [FromForm] ChangeUserRequest userRequest)
         {
             var userToUpdate = await _context.Users.FindAsync(id);
+            if (userToUpdate == null)
+            {
+                return NotFound();
+            }
+            
             var picturePath = "";
-
             if (userRequest.Picture != null)
             {
                 picturePath = await _fileservice.UploadImage(userRequest.Picture);
             }
 
-            if (userToUpdate == null)
-            {
-                return NotFound();
-            }
 
             if (String.IsNullOrEmpty(picturePath))
             {
