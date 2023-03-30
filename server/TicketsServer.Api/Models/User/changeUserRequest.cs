@@ -4,6 +4,6 @@ namespace TicketsServer.Api.Models;
 
 public class ChangeUserRequest
 {
-    public string? Name { get; set; }
+    public required string? Name { get; set; }
     public IFormFile? Picture { get; set; }
 }
