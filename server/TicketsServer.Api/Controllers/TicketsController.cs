@@ -218,7 +218,6 @@ public class TicketsController : ControllerBase
                 throw;
             }
         }
-
         return NoContent();
     }
 
