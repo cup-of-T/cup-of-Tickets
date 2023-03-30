@@ -13,7 +13,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
   const handleUrgencySign = () => {
     if (ticket.archived == true)
     {
-      return <li className='center status-icon bg--grey ticket-board__urgency'>ARCHIVED</li>
+      return <li className='center status-icon bg--grey ticket-board__urgency'>COMPLETED</li>
     }
       switch (ticket.urgency) {
         case 1: {
