@@ -19,6 +19,8 @@ import Dashboard from './pages/TicketDashboard'
 import { Archive } from './pages/Archive'
 import './pages/pages.css'
 import TicketDashboard from './pages/TicketDashboard'
+import { getTeams } from './services/teamApi'
+import { ITeam } from './interfaces/interface'
 
 
 
@@ -27,19 +29,21 @@ function App() {
   const { dbUser, setDbUser } = useContext(UserContext) as UserContextType;
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [postedUser, setPostedUser] = useState(false);
-
-  const getOrPostUser = async () => {
-    const accessToken = await getAccessTokenSilently();
-    setDbUser(await postUser(accessToken));
-    setPostedUser(true);
-  }
+  const [teams, setTeams] = useState<ITeam[]>([]);
 
   useEffect(() => {
-    if (isAuthenticated && !postedUser) {
-      getOrPostUser();
+    const useEffectAsync = async () => {
+      const accessToken = await getAccessTokenSilently();
+      if (isAuthenticated && !postedUser) {
+        setDbUser(await postUser(accessToken));
+        setPostedUser(true);
+      }
+      setTeams(await getTeams(accessToken));
+      fetchTickets();
     }
-    fetchTickets();
+    useEffectAsync();
   }, [isAuthenticated])
+
 
   return (
     <div className="app">
@@ -51,7 +55,7 @@ function App() {
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
-            <Route path="/teams" element={<ProtectedRoute component={Teams} />} />
+            <Route path="/teams" element={<Teams teams={teams} user={dbUser}/>} />
             <Route path="/home" element={<ProtectedRoute component={Home} />} />
             <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
             <Route path="*" element={<NotFound />} />

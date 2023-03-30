@@ -40,7 +40,7 @@ export interface ICategory {
   name: string,
 }
 
-interface ITeam {
+export interface ITeam {
   teamId: number,
   name: string,
   users: IUser[]
