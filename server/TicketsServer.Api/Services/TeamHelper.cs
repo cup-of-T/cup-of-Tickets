@@ -6,14 +6,14 @@ internal static class TeamHelper
 {
     public static TeamResponse TeamToTeamResponse(Team team)
     {
-        var responseList = team.Users!.Select(t =>
+        var responseList = team.Users!.Select(u =>
             new User
             {
-                UserId = t.UserId,
-                Email = t.Email,
-                Name = t.Name,
-                Role = t.Role,
-                ImageUrl = t.ImageUrl
+                UserId = u.UserId,
+                Email = u.Email,
+                Name = u.Name,
+                Role = u.Role,
+                ImageUrl = u.ImageUrl
             })
             .ToList();
         return new TeamResponse()
