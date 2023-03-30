@@ -87,18 +87,18 @@ namespace TicketsServer.Api.Controllers
                 return NotFound();
             }
 
-            var newUser = new User()
+            if (String.IsNullOrEmpty(picturePath))
             {
-                Email = userToUpdate.Email,
-                Name = userRequest.Name,
-                ImageUrl = String.IsNullOrEmpty(picturePath) ? userToUpdate.ImageUrl : picturePath,
-                Role = userToUpdate.Role
-            };
+                picturePath = userToUpdate.ImageUrl;
+            }
 
-            _context.Entry(newUser).State = EntityState.Modified;
+            userToUpdate.Name = userRequest.Name;
+            userToUpdate.ImageUrl = picturePath!;
+
+            _context.Entry(userToUpdate).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return Ok(newUser);
+            return Ok(userToUpdate);
         }
 
         //__________I DONT THINK WE NEED THIS SPAGHETTI ANYMORE________
