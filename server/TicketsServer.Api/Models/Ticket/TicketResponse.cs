@@ -13,5 +13,5 @@ public class TicketResponse
     public required string TimeEstimate { get; set; }
     public required User Creator { get; set; }
     public User? AssignedUser { get; set; }
-    public List<string>? Categories { get; set; }
+    public List<Category>? Categories { get; set; }
 }

@@ -18,6 +18,8 @@ import { AddTicket } from './pages/AddTicket'
 import Dashboard from './pages/TicketDashboard'
 import { Archive } from './pages/Archive'
 import './pages/pages.css'
+import TicketDashboard from './pages/TicketDashboard'
+
 
 
 function App() {
@@ -45,7 +47,7 @@ function App() {
         <Header />
         <main className="main center">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<TicketDashboard />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
