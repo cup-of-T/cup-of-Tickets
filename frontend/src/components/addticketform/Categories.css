@@ -3,3 +3,9 @@
     gap: 10px;
     margin: 10px 0;
 }
+
+
+.btn--category {
+    color: white;
+    background-color: red;
+}
