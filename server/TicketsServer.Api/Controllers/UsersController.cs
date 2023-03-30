@@ -13,11 +13,12 @@ public class UsersController : ControllerBase
 {
     private readonly string teamName = "</salt>";
     private readonly DbContext _context;
+    private readonly IFileService _fileservice;
 
-
-    public UsersController(DbContext context)
+    public UsersController(DbContext context, IFileService fileService)
     {
         _context = context;
+        _fileservice = fileService;
     }
 
     [HttpGet]
@@ -33,7 +34,6 @@ public class UsersController : ControllerBase
             .ToListAsync();
         return users.Select(user => UserHelper.UserToUserResponse(user)).ToList();
     }
-
 
     [HttpPost]
     [Authorize("User")]
@@ -79,92 +79,36 @@ public class UsersController : ControllerBase
         return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, UserHelper.UserToUserResponse(user));
     }
 
-    //__________I DONT THINK WE NEED THIS SPAGHETTI ANYMORE________
+    [HttpPut("{id}")]
+    [Authorize("User")]
+    public async Task<IActionResult> PutUser(int id, [FromForm] ChangeUserRequest userRequest)
+    {
+        var userToUpdate = await _context.Users.FindAsync(id);
+        if (userToUpdate == null)
+        {
+            return NotFound();
+        }
 
-    // [HttpGet("/email/{email}")]
-    // [Authorize("User")]
-    // public async Task<ActionResult<User>> GetUser(string email)
-    // {
-    //     if (_context.Users == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //     var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-    //     if (user == null)
-    //     {
-    //         return NoContent();
-    //     }
-    //     return user;
-    // }
-
-    // [HttpGet("{id}")]
-    // public async Task<ActionResult<User>> GetUser(int id)
-    // {
-    //   if (_context.Users == null)
-    //   {
-    //       return NotFound();
-    //   }
-    //     var user = await _context.Users.FindAsync(id);
-
-    //     if (user == null)
-    //     {
-    //         return NotFound();
-    //     }
-
-    //     return user;
-    // }
-
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> PutUser(int id, User user)
-    // {
-    //     if (id != user.UserId)
-    //     {
-    //         return BadRequest();
-    //     }
-
-    //     _context.Entry(user).State = EntityState.Modified;
-
-    //     try
-    //     {
-    //         await _context.SaveChangesAsync();
-    //     }
-    //     catch (DbUpdateConcurrencyException)
-    //     {
-    //         if (!UserExists(id))
-    //         {
-    //             return NotFound();
-    //         }
-    //         else
-    //         {
-    //             throw;
-    //         }
-    //     }
-
-    //     return NoContent();
-    // }
+        var picturePath = "";
+        if (userRequest.Picture != null)
+        {
+            _fileservice.DeleteImage(userToUpdate.ImageUrl!);
+            picturePath = await _fileservice.UploadImage(userRequest.Picture);
+        }
 
 
-    // [HttpDelete("{id}")]
-    // public async Task<IActionResult> DeleteUser(int id)
-    // {
-    //     if (_context.Users == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //     var user = await _context.Users.FindAsync(id);
-    //     if (user == null)
-    //     {
-    //         return NotFound();
-    //     }
+        if (String.IsNullOrEmpty(picturePath))
+        {
+            picturePath = userToUpdate.ImageUrl;
+        }
 
-    //     _context.Users.Remove(user);
-    //     await _context.SaveChangesAsync();
+        userToUpdate.Name = userRequest.Name;
+        userToUpdate.ImageUrl = picturePath!;
 
-    //     return NoContent();
-    // }
+        _context.Entry(userToUpdate).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
 
-    // private bool UserExists(int id)
-    // {
-    //     return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
-    // }
+        return Ok(userToUpdate);
+    }
+
 }
