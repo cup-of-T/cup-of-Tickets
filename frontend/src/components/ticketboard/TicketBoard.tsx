@@ -11,7 +11,7 @@ type TicketBoardProps = {
 }
 
 export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
-  const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
+  const { tickets } = useContext(TicketsContext) as TicketsContextType;
 
   const sortedByUrgency = (tickets : ITicket[]) => tickets.sort((a, b) => b.urgency - a.urgency);
 

@@ -9,8 +9,10 @@ const TicketDashboard = ({ }: IDashboardProps) => {
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
 
     const toggleAddBtn = (ticketId: number) => {
-        if (currentTicketIds.length == 0 )
-        {
+        if ( currentTicketIds.some(id => id == ticketId)) {
+            setCurrentTicketIds([...currentTicketIds.filter(id => id == ticketId)])
+        }
+        if (currentTicketIds.length == 0 ) {
             setAddToggleBtn(!addBtnToggle);
         }
         setCurrentTicketIds([...currentTicketIds, ticketId]);
