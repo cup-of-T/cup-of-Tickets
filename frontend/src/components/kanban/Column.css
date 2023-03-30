@@ -4,6 +4,7 @@
     background-color: #ecedee;
     border: 1px solid #E3E4E6;
     border-radius: 6px;
+    min-height: 400px;
 }
 
 .column-container{
