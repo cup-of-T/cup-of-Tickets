@@ -12,7 +12,7 @@ import { updateTicketStatus } from "../../services/ticketApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
 type KanbanBoardProps = {
-    ticketsProp: ITicket[]
+    filteredTickets: ITicket[]
 }
 
 const findTicketContainer = (columns: IColumn, id: number) => {
@@ -28,16 +28,16 @@ const findTicketContainer = (columns: IColumn, id: number) => {
 
 
 
-const KanbanBoard: React.FC<KanbanBoardProps> = ({ ticketsProp }) => {
+const KanbanBoard: React.FC<KanbanBoardProps> = ({ filteredTickets }) => {
     const { tickets, setTickets } = useContext(TicketsContext) as TicketsContextType;
     const { getAccessTokenSilently } = useAuth0();
     const [active, setActive] = useState<null | number>(null);
     const [columns, setColumns] = useState<IColumn>({
-        "To Do": ticketsProp.filter(ticket => ticket.status == 0),
-        "Doing": ticketsProp.filter(ticket => ticket.status == 1),
-        "Done": ticketsProp.filter(ticket => ticket.status == 2)
+        "To Do": filteredTickets.filter(ticket => ticket.status == 0),
+        "Doing": filteredTickets.filter(ticket => ticket.status == 1),
+        "Done": filteredTickets.filter(ticket => ticket.status == 2)
     });
-    const activeTicket = find(ticketsProp, (task) => task.ticketId === active);
+    const activeTicket = find(filteredTickets, (task) => task.ticketId === active);
     const ticketStatuses = {
         "To Do": 0,
         "Doing": 1,

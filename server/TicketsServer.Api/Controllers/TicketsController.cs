@@ -210,7 +210,6 @@ public class TicketsController : ControllerBase
                 throw;
             }
         }
-        Console.Write("/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n");
         return NoContent();
     }
 
