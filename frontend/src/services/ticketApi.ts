@@ -1,4 +1,4 @@
-import { IAssigneeRequest, IStatusRequest, ITicket } from "../interfaces/interface";
+import { IArchivedRequest, IAssigneeRequest, IStatusRequest, ITicket } from "../interfaces/interface";
 
 export const getTickets = async (accessToken: string) => {
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets`, {
@@ -49,6 +49,19 @@ export const updateTicketAssignedTo = async (ticketId: number, assigneeId: numbe
   return await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/assignedto`, {
     method: 'PATCH',
     body: assigneeIdToJson,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    },
+  })
+}
+
+export const updateTicketArchived = async (ticketId: number, archived: boolean, accessToken: string) => {
+  const archivedRequest: IArchivedRequest = { archived: archived };
+  const requestToJson = JSON.stringify(archivedRequest);
+  return await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${ticketId}/archived`, {
+    method: 'PATCH',
+    body: requestToJson,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken}`
