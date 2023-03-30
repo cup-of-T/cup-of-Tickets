@@ -11,6 +11,7 @@ const Sidebar = () => {
         <Link className="sidebar__links-item"to=""><i className="fa-solid fa-ticket"></i></Link>
         <Link className="sidebar__links-item" to="/kanban"><i className="fa-solid fa-chart-simple fa-kanban"></i></Link>
         <Link className="sidebar__links-item"to=""><i className="fa-solid fa-gear"></i></Link>
+        <Link className="sidebar__links-item"to="/archive"><i className="fa-solid fa-box-archive"></i></Link>
       </menu >
     </aside >
   )
