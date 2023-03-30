@@ -11,10 +11,12 @@ namespace TicketsServer.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DbContext _context;
+        private readonly IFileService _fileservice;
 
-        public UsersController(DbContext context)
+        public UsersController(DbContext context, IFileService fileService)
         {
             _context = context;
+            _fileservice = fileService;
         }
 
         [HttpGet]
@@ -66,6 +68,37 @@ namespace TicketsServer.Api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUsers), new { id = user.UserId }, user);
+        }
+
+        [HttpPut("{id}")]
+        [Authorize("User")]
+        public async Task<IActionResult> PutUser(int id, [FromForm] ChangeUserRequest userRequest)
+        {
+            var userToUpdate = await _context.Users.FindAsync(id);
+            var picturePath = "";
+
+            if (userRequest.Picture != null)
+            {
+                picturePath = await _fileservice.UploadImage(userRequest.Picture);
+            }
+
+            if (userToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            var newUser = new User()
+            {
+                Email = userToUpdate.Email,
+                Name = userRequest.Name,
+                ImageUrl = String.IsNullOrEmpty(picturePath) ? userToUpdate.ImageUrl : picturePath,
+                Role = userToUpdate.Role
+            };
+
+            _context.Entry(newUser).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return Ok(newUser);
         }
 
         //__________I DONT THINK WE NEED THIS SPAGHETTI ANYMORE________
