@@ -6,17 +6,24 @@ interface IDashboardProps {
 
 const TicketDashboard = ({ }: IDashboardProps) => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
-    const [currentTicketId, setCurrentTicketId] = useState<number>(0)
+    const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
 
     const toggleAddBtn = (ticketId: number) => {
-        setCurrentTicketId(ticketId);
-        // toggleAddBtn needs to take and id 
-        setAddToggleBtn(!addBtnToggle);
+        if (currentTicketIds.length == 0 )
+        {
+            setAddToggleBtn(!addBtnToggle);
+        }
+        setCurrentTicketIds([...currentTicketIds, ticketId]);
+    }
+
+    const resetTicketsClaims = () => {
+        setCurrentTicketIds([]);
+        setAddToggleBtn(false);
     }
 
     return (
         <>
-            <StatsBar addBtnToggle={addBtnToggle} ticketId={currentTicketId} />
+            <StatsBar addBtnToggle={addBtnToggle} ticketIds={currentTicketIds} resetTicketsClaims={resetTicketsClaims}/>
             <TicketBoard toggleAddBtn={toggleAddBtn} />
         </>
     );
