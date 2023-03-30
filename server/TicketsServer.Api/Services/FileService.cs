@@ -20,4 +20,11 @@ public class FileService : IFileService
         return imageName;
     }
 
+    public void DeleteImage(string imageUrl)
+    {
+        if (File.Exists(imageUrl))
+        {
+            File.Delete(imageUrl);
+        }
+    }
 }
