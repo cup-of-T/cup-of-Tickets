@@ -17,6 +17,10 @@ export interface IStatusRequest {
   status: number
 }
 
+export interface IArchivedRequest {
+  archived: boolean
+}
+
 export interface ITicket {
   ticketId: number
   title: string,

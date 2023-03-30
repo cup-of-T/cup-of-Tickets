@@ -46,7 +46,7 @@
     align-items: baseline;
 }
 
-.card__time-description{
+.card__time-description {
     margin-bottom: 24px;
     font-size: 12px;
 }
@@ -89,4 +89,16 @@
     background-color: transparent;
     background-color: rgb(233, 230, 230);
     transition: 0.3 s ease-in;
+}
+
+.card--deletable {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card--deletable button {
+    height:25px;
+    display: flex;
+    align-items: center;
 }

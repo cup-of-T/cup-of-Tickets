@@ -181,6 +181,38 @@ public class TicketsController : ControllerBase
         return NoContent();
     }
 
+    [HttpPatch("{id}/archived")]
+    [Authorize("User")]
+    public async Task<IActionResult> PatchTicketArchived(int id, TicketArchivedRequest request)
+    {
+        var ticketToUpdate = await _context.Tickets.FindAsync(id);
+
+        if (ticketToUpdate == null)
+        {
+            return NotFound();
+        }
+
+        ticketToUpdate.Archived = request.Archived;
+        _context.Entry(ticketToUpdate).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!TicketExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+        return NoContent();
+    }
+
     [HttpPatch("{id}/assignedto")]
     [Authorize("User")]
     public async Task<IActionResult> PatchTicketAssignedTo(int id, [FromBody] TicketAssigneeRequest request)
@@ -218,7 +250,6 @@ public class TicketsController : ControllerBase
                 throw;
             }
         }
-
         return NoContent();
     }
 
