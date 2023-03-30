@@ -7,11 +7,11 @@ import { TicketsContextType } from '../../types'
 import { ITicket } from '../../interfaces/interface'
 
 type TicketBoardProps = {
-  toggleAddBtn : (ticketId : number) => void
+  toggleAddBtn : (ticketId : number) => void,
+  tickets : ITicket[]
 }
 
-export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn }) => {
-  const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
+export const TicketBoard :FC<TicketBoardProps> = ({ toggleAddBtn, tickets }) => {
 
   const sortedByUrgency = (tickets : ITicket[]) => tickets.sort((a, b) => b.urgency - a.urgency);
 

@@ -37,6 +37,10 @@ a:hover {
   font-weight: 500;
 }
 
+h3 {
+  font-weight: 400;
+}
+
 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
