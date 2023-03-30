@@ -9,7 +9,7 @@ import { AddTicketForm } from '../addticketform/AddTicketForm'
 import { TicketsTable } from './ticketstable/TicketsTable'
 
 type TicketBoardProps = {
-  toggleAddBtn : (ticketId : number) => void,
+  toggleAddBtn : (ticketId : number) => void
 }
 
 export const TicketBoard = ({ toggleAddBtn }: TicketBoardProps) => {
