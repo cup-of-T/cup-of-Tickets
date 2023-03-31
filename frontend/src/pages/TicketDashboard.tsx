@@ -6,11 +6,12 @@ import { TicketsContextType } from "../types";
 
 const TicketDashboard = () => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
 
     const toggleAddBtn = (ticketId: number) => {
-        if ( currentTicketIds.some(id => id == ticketId)) {
+        if (currentTicketIds.some(id => id == ticketId)) {
             setCurrentTicketIds([...currentTicketIds.filter(id => id !== ticketId)]);
         } else {
             setCurrentTicketIds([...currentTicketIds, ticketId]);
@@ -19,10 +20,16 @@ const TicketDashboard = () => {
     }
 
     useEffect(() => {
-        if (currentTicketIds.length  == 0 ) {
+        if (currentTicketIds.length == 0) {
             setAddToggleBtn(false)
         }
-    }, [currentTicketIds])
+
+        if (showAlert) {
+            setTimeout(() => {
+                setShowAlert(false);
+            }, 2500);
+        }
+    }, [currentTicketIds, showAlert])
 
     const resetTicketsClaims = () => {
         setCurrentTicketIds([]);
@@ -31,8 +38,8 @@ const TicketDashboard = () => {
 
     return (
         <>
-            <StatsBar addBtnToggle={addBtnToggle} ticketIds={currentTicketIds} resetTicketsClaims={resetTicketsClaims}/>
-            <TicketBoard toggleAddBtn={toggleAddBtn} tickets={tickets} />
+            <StatsBar setShowAlert={setShowAlert} addBtnToggle={addBtnToggle} ticketIds={currentTicketIds} resetTicketsClaims={resetTicketsClaims} />
+            <TicketBoard showAlert={showAlert} toggleAddBtn={toggleAddBtn} tickets={tickets} />
         </>
     );
 };

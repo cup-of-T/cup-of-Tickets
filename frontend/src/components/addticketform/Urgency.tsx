@@ -21,21 +21,21 @@ export const Urgency = ({ label, name }: UrgencyProps) => {
     <>
       <label className="ticket-form__label" htmlFor={label}>{label}</label>
       <div className="urgency-container">
-      {values.map(({ value, classColor }) => (
-        <button
-          className="urgency__btn"
-          key={label}
-          onClick={() => setFieldValue("urgency", value)}
-          type="button"
-          value={value}
-        >
-          <i
-            className={
-              " fa-solid fa-triangle-exclamation urgency__sign " + (field.value == value ? "urgency_sign--border " : "" ) + classColor
-            }
-          ></i>
-        </button>
-      ))}
+        {values.map(({ value, classColor }) => (
+          <button
+            className="urgency__btn"
+            key={value}
+            onClick={() => setFieldValue("urgency", value)}
+            type="button"
+            value={value}
+          >
+            <i
+              className={
+                " fa-solid fa-triangle-exclamation urgency__sign " + (field.value == value ? "urgency_sign--border " : "") + classColor
+              }
+            ></i>
+          </button>
+        ))}
       </div>
     </>
     //   {meta.touched && meta.error ? <div>{meta.error}</div> : null}
