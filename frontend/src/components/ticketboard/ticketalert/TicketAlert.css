@@ -1,0 +1,23 @@
+.ticket-alert {
+    background-color: #edf8ed;
+    padding: 10px;
+    width: 90%;
+    border-radius: 10px;
+    display: flex;
+    border: 1px solid transparent;
+    color: #1d4620;
+    margin: auto 5%;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 1;
+}
+
+.ticket-alert__information {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ticket-alert__paragraph {
+    margin: 0;
+}
