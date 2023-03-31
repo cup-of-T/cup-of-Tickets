@@ -5,6 +5,7 @@ export type TicketsContextType = {
     setTickets: React.Dispatch<React.SetStateAction<ITicket[]>>;
     fetchTickets: () => void;
     updateTicketAssignee: (ticketId: number, userId: number) => void;
+    patchTicketsStatus: (ticketId: number, status: number) => void;
     postingTicket: (ticket : Partial<ITicket>) => void;
     deletingTicket: (ticketId: number) => void;
 };
