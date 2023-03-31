@@ -11,7 +11,9 @@ const TeamsPage = ({ teams, user }: ITeamsProps) => {
     const team = teams.find(t => t.users.find(u => u.userId == user.userId));
 
     if (team == null) {
-        return (<>please join a team</>);
+        return (<div className="team-card__header">
+            <h2>Please join a team</h2>
+        </div>);
     }
 
     return (
