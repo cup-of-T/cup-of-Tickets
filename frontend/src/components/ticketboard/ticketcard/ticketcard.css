@@ -17,7 +17,7 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
 }
 
-.status-icon {
+.tag-icon {
     padding: 4px 8px;
     border-radius: 4px;
     text-align: center;
@@ -33,4 +33,18 @@
 
 .popup-card__description {
     font-weight: 300;
+}
+
+.popup-card__categories{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: start;
+    gap: 8px;
+
+}
+
+.popup-card__tags {
+    display: flex;
+    justify-content: space-between;
 }
