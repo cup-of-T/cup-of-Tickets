@@ -10,6 +10,7 @@ type TicketCardProps = {
 
 export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setReviewStatus }) => {
   const [showPopUp, setShowPopUp] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleUrgencySign = () => {
 
@@ -48,11 +49,15 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
     <>
       <ul onMouseEnter={() => setShowPopUp(true)}
         onMouseLeave={() => setShowPopUp(false)}
+        onClick={() => {
+          toggleAddBtn(ticket.ticketId)
+          setIsChecked(!isChecked)
+        }}
         className='ticket-board__grid fw-300 ticket-board__card-styling container'>
         {(ticket.assignedUser == null)&& (
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
-            className='ticket-board__checkbox' type="checkbox" />)}
+            className='ticket-board__checkbox' type="checkbox" checked={isChecked} />)}
         {(ticket.status == 2)&& (
           <div className='ticket-review__btns'>
           <button
