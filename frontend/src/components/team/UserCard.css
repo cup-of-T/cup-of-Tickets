@@ -6,7 +6,7 @@
     align-items: center;
     border-radius: 10px;
     background-color: #f6f6f6;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .user-card__info {
@@ -22,4 +22,15 @@
 .user-card__image {
     width: 49%;
     border-radius: 10px;
+}
+
+.user-card__icons {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+.icons--mail:hover {
+    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(200deg) brightness(118%) contrast(119%);
 }

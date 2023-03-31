@@ -1,5 +1,6 @@
 import React from 'react'
 import { IUser } from '../../interfaces/interface'
+import { MailIcon } from './MailIcon'
 import './UserCard.css'
 
 type UserCardProps = {
@@ -24,6 +25,7 @@ export const UserCard = ({ user }: UserCardProps) => {
             <div className="user-card__info">
                 <p>{user.name}</p>
                 <p>{Roles[user.role]}</p>
+                <MailIcon name={user.name} mail={user.email} />
             </div>
         </div>
     )
