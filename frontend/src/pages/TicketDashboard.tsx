@@ -11,16 +11,18 @@ const TicketDashboard = () => {
 
     const toggleAddBtn = (ticketId: number) => {
         if ( currentTicketIds.some(id => id == ticketId)) {
-            const newIds = [...currentTicketIds.filter(id => id !== ticketId)];
-            setCurrentTicketIds(newIds);
-            if (newIds.length == 0 ) {
-                setAddToggleBtn(false);
-            }
+            setCurrentTicketIds([...currentTicketIds.filter(id => id !== ticketId)]);
         } else {
             setCurrentTicketIds([...currentTicketIds, ticketId]);
             setAddToggleBtn(true);
         }
     }
+
+    useEffect(() => {
+        if (currentTicketIds.length  == 0 ) {
+            setAddToggleBtn(false)
+        }
+    }, [currentTicketIds])
 
     const resetTicketsClaims = () => {
         setCurrentTicketIds([]);
