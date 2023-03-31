@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './pages/ProtectedRoute'
 import Profile from './pages/Profile'
-import Teams from './pages/Teams'
+import TeamsPage from './pages/TeamsPage'
 import { TicketsContext } from './context/TicketsProvider'
 import { TicketsContextType, UserContextType } from './types'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -18,6 +18,9 @@ import Dashboard from './pages/TicketDashboard'
 import { Archive } from './pages/Archive'
 import './pages/pages.css'
 import TicketDashboard from './pages/TicketDashboard'
+import { getTeams } from './services/teamApi'
+import { ITeam } from './interfaces/interface'
+import { Team } from './components/team/Team'
 import Settings from './pages/Settings'
 
 
@@ -27,19 +30,22 @@ function App() {
   const { dbUser, setDbUser } = useContext(UserContext) as UserContextType;
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [postedUser, setPostedUser] = useState(false);
+  const [teams, setTeams] = useState<ITeam[]>([]);
 
-  const getOrPostUser = async () => {
+  const getData = async () => {
     const accessToken = await getAccessTokenSilently();
-    setDbUser(await postUser(accessToken));
-    setPostedUser(true);
-  }
-
-  useEffect(() => {
     if (isAuthenticated && !postedUser) {
-      getOrPostUser();
+      setDbUser(await postUser(accessToken));
+      setPostedUser(true);
     }
+    setTeams(await getTeams(accessToken));
     fetchTickets();
-  }, [isAuthenticated])
+  }
+  
+  useEffect(() => {
+    getData();
+  }, [isAuthenticated]);
+
 
   return (
     <div className="app">
@@ -52,7 +58,7 @@ function App() {
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
-            <Route path="/teams" element={<Teams />} />
+            <Route path="/teams" element={<TeamsPage teams={teams} user={dbUser} />} />
             <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
             <Route path="/settings" element={<ProtectedRoute component={Settings} />} />
             <Route path="*" element={<ProtectedRoute component={NotFound} />} />

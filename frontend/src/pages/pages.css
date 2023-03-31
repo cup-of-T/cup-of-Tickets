@@ -2,3 +2,10 @@
     padding: 16px 0;
     font-size: 24px;
 }
+
+.team-page{
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    background-color: rgb(247, 247, 247);
+    
+}
