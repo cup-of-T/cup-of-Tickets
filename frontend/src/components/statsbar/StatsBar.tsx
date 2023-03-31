@@ -11,22 +11,24 @@ import { useNavigate } from 'react-router-dom'
 type StatsBarProps = {
   addBtnToggle: boolean,
   ticketIds: number[],
-  resetTicketsClaims: Function   
+  resetTicketsClaims: Function,
+  setShowAlert: Function
 }
 
-export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims} :StatsBarProps) => {
+export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowAlert }: StatsBarProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
   const navigate = useNavigate();
-  
+
   const onCreateButtonClick = () => {
     navigate('/addticket');
   }
 
   const handleUpdateTicketAssignee = () => {
-    ticketIds.forEach( (ticketId) => {
+    ticketIds.forEach((ticketId) => {
       updateTicketAssignee(ticketId, dbUser.userId)
     })
+    setShowAlert(true);
     resetTicketsClaims();
   }
 
@@ -43,7 +45,7 @@ export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims} :StatsBa
             <button
               onClick={() => handleUpdateTicketAssignee()}
               className='btn btn--blue'>
-              Claim ticket
+              Claim
             </button>)}
           {(dbUser?.role == "Admin" || dbUser?.role == "Manager") &&
             <button
