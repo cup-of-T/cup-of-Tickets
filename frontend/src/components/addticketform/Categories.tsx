@@ -25,13 +25,15 @@ export const Categories = ({ label }: CategoriesProps) => {
         }
     };
 
+    const colors = ["bg--firebrick", "bg--lightgray", "bg--lightgreen", "bg--cambridge", "bg--brightyellow" , "bg--caribbean"]
+
     return (
-        <>
+        <div>
             <label htmlFor={label}>{label}</label>
-            <div className="categories">
-                {categories.map((category) => (
+            <div className="form-categories">
+                {categories.map((category, index) => (
                     <button
-                        className={field.value.indexOf(category) > -1 ? "btn btn--bordered  btn--category" : "btn btn--bordered"}
+                        className={"btn btn--bordered form-categories__btn bg--btn " + (field.value.indexOf(category) > -1 ? colors[index] : " ")}
                         key={category}
                         onClick={() => changeCategoryHandler(category)}
                         type="button"
@@ -41,6 +43,6 @@ export const Categories = ({ label }: CategoriesProps) => {
                 ))}
                 {meta.touched && meta.error ? <div>{meta.error}</div> : null}
             </div>
-        </>
+        </div>
     );
 };

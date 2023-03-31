@@ -7,7 +7,7 @@
     background-position: right;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url(../../../public/bloblarge.png);
+    background-image: url(/bloblarge.png);
     width: 100vw;
 }
 

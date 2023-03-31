@@ -1,0 +1,25 @@
+.urgency-container {
+    display: flex;
+    width: 100% ;
+    justify-content: space-evenly;
+}
+
+.urgency__btn{
+    border: none;
+    background-color: transparent;
+}
+
+.urgency__sign {
+    font-size: 32px;
+    padding-bottom: 1px;
+    border-bottom: 2px solid transparent;
+}
+
+
+.urgency__sign:hover{
+    border-bottom: 2px solid rgb(200,200,200);
+}
+
+.urgency_sign--border {
+    border-bottom: 2px solid rgb(200,200,200);
+}

@@ -19,7 +19,7 @@ const Navbar = () => {
             <LogoutButton />
             {dbUser?.imageUrl == null && <Loader />}
             {dbUser?.imageUrl != null && <Link to='/profile'><img className="navbar__avatar"
-              src={dbUser?.imageUrl}
+              src={import.meta.env.VITE_API_SERVER_URL + '/Images/' + dbUser?.imageUrl}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
                 currentTarget.src = "/default_pfp.png";

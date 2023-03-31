@@ -12,15 +12,16 @@ export const TextField = ({ label, ...props }: TextFieldProps) => {
   const [field, meta] = useField(props);
 
   return (
-    <label className='text-field' htmlFor={label}>
+    <label className='ticket-form__label' htmlFor={label}>
       {label}
       <input
         {...field}
         {...props}
+        className='grey--border ticket-form__input'
       />
 
       {meta.touched && meta.error ? (
-        <div className='text-field__error'>{meta.error}</div>) : null
+        <div className='ticket-form__label--error'>{meta.error}</div>) : null
       }
     </label>
   )
