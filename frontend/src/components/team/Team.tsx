@@ -10,7 +10,10 @@ type TeamProps = {
 export const Team = ({ team }: TeamProps) => {
     return (
         <div className='team-card'>
-            <h2 className='team-card__header'>{team.name}</h2>
+            <div className="team-card__header">
+                <h2>{team.name}</h2>
+                <h4>Meet the crew</h4>
+            </div>
             {team.users.map(user => <UserCard key={user.userId} user={user} />)}
 
         </div>

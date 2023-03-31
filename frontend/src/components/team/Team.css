@@ -3,6 +3,7 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    max-width: 90%;
 }
 
 .team-card__header {

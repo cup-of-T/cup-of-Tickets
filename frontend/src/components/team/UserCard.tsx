@@ -6,12 +6,25 @@ type UserCardProps = {
     user: IUser
 }
 
+type RoleType = {
+    [propKey: string]: string,
+}
+
 
 export const UserCard = ({ user }: UserCardProps) => {
+    const Roles: RoleType = {
+        'Admin': 'Admin',
+        'Manager': 'Manager',
+        'User': 'Developer'
+    }
+
     return (
         <div className='user-card'>
-            {user.name}
-            {user.role}
+            <img className='user-card__image' src={user.imageUrl} />
+            <div className="user-card__info">
+                <p>{user.name}</p>
+                <p>{Roles[user.role]}</p>
+            </div>
         </div>
     )
 }
