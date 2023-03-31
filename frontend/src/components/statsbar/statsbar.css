@@ -46,3 +46,20 @@
     align-items: end;
     gap: 25px;
 }
+
+@media screen and (max-width: 1024px) {
+    .statsbar__buttons {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+
+@media screen and (max-width: 769px) {
+    .statsbar__cards {
+        display: block;
+    }
+    
+  }
+

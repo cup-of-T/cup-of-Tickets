@@ -19,6 +19,20 @@ html{
   width: 92vw;
 }
 
+@media screen and (max-width: 769px) {
+  .container {
+    width: 75vw;
+  }
+  
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 85vw;
+  }
+  
+}
+
 .center {
   margin: 0 auto;
 }
