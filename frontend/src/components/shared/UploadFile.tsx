@@ -13,9 +13,6 @@ const FileUpload = ({ accept, children }: UploadFileProps) => {
     const [field, meta] = useField("picture");
     const { setFieldValue } = useFormikContext();
 
-
-    console.log(field.value);
-
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) {
             return;
@@ -24,7 +21,6 @@ const FileUpload = ({ accept, children }: UploadFileProps) => {
         setPreviewImg(URL.createObjectURL(e.target.files[0]));
     };
 
-    console.log(previewImg)
 
     return (
         <div className='uploadfile-container' onClick={() => ref.current?.click()}>
