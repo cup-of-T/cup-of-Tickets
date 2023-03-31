@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './pages/ProtectedRoute'
 import Profile from './pages/Profile'
-import Teams from './pages/Teams'
+import TeamsPage from './pages/Teams'
 import { TicketsContext } from './context/TicketsProvider'
 import { TicketsContextType, UserContextType } from './types'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -20,6 +20,7 @@ import './pages/pages.css'
 import TicketDashboard from './pages/TicketDashboard'
 import { getTeams } from './services/teamApi'
 import { ITeam } from './interfaces/interface'
+import { Team } from './components/team/Team'
 
 
 
@@ -55,7 +56,7 @@ function App() {
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
-            <Route path="/teams" element={<ProtectedRoute component={Teams} />} />
+            <Route path="/teams" element={<TeamsPage teams={teams} user={dbUser} />} />
             <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
