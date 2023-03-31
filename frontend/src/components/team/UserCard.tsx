@@ -1,6 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { IUser } from '../../interfaces/interface'
-import { MailIcon } from './MailIcon'
 import './UserCard.css'
 
 type UserCardProps = {
@@ -31,7 +31,11 @@ export const UserCard = ({ user }: UserCardProps) => {
             <div className="user-card__info">
                 <p className='user-card__info__name'>{user.name}</p>
                 <p className="user-card__info__role">{Roles[user.role]}</p>
-                <MailIcon name={user.name} mail={user.email} />
+                <div className='user-card__icons'>
+                    <Link to={"mailto:" + user.email} title={"Email - " + user.name}>
+                        <i className="fa-solid fa-envelope"></i>
+                    </Link>
+                </div>
             </div>
         </div>
     )
