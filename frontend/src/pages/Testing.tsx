@@ -29,7 +29,7 @@ export const Testing = () => {
 
     return (
          <section className="ticket-board">
-            <TicketsTable title={'Tickets to be reviewed/tested'}
+            <TicketsTable title={'Tickets to be reviewed'}
                 tickets={filteredTicketByStatus}
                 toggleAddBtn={toggleAddBtn}
             />

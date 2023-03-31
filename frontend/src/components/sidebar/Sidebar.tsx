@@ -19,9 +19,7 @@ const Sidebar = () => {
         <Link className="sidebar__links-item" to="/teams"><i className="fa-solid fa-people-group"></i></Link>
         <Link className="sidebar__links-item" to="/archive"><i className="fa-solid fa-box-archive"></i></Link>
 
-        {dbUser.role == "Tester" && (
         <Link className="sidebar__links-item" to="/testing"><i className="fa-solid fa-flask"></i></Link>
-        )}
         {(dbUser.role == "Manager" || dbUser.role == "Admin" ) && (
           <Link className="sidebar__links-item" to="/inprogress"><i className="fa-solid fa-person-digging"></i></Link>
         )}
