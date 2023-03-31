@@ -43,9 +43,7 @@
 }
 
 .user-card__icons {
-    display: flex;
-    justify-content: flex-end;
-    /* padding-right: 10px; */
+    text-align: right;
 }
 
 .icons--mail:hover {
