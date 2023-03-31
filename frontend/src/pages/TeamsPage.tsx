@@ -11,12 +11,11 @@ interface ITeamsProps {
 }
 
 const TeamsPage = ({ teams, user }: ITeamsProps) => {
-    if (user == null) return (<Loader />);
-    if (teams == null) return (<Loader />);
 
     const team = teams.find(t => t.users.find(u => u.userId == user.userId));
+    console.log(teams, team)
     if (team == null) {
-        return (<Loader />);
+        return (<>please join a team</>);
     }
     return (
         <div className="team-page">
