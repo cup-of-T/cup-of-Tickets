@@ -48,14 +48,14 @@ function App() {
         <main className="main center">
           <Routes>
             <Route path="/" element={<TicketDashboard />} />
-            <Route path="/dashboard" element={<TicketDashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/kanban" element={<Kanban />} />
-            <Route path="/addticket" element={<AddTicket />} />
+            <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />} />
+            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+            <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
+            <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
             <Route path="/teams" element={<Teams />} />
-            <Route path="/archive" element={<Archive />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
+            <Route path="/settings" element={<ProtectedRoute component={Settings} />} />
+            <Route path="*" element={<ProtectedRoute component={NotFound} />} />
           </Routes>
         </main>
       </>
