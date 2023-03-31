@@ -16,6 +16,7 @@
 
 .ticket-board__checkbox{
     grid-area: checkbox;
+    cursor: pointer;
 }
 
 .ticket-board__urgency {
@@ -47,6 +48,7 @@
 .ticket-board__card-styling {
     padding: 8px 0;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .border-bottom {
