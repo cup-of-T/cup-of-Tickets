@@ -18,7 +18,7 @@ const Navbar = () => {
           <>
             <LogoutButton />
             {dbUser?.imageUrl == null && <Loader />}
-            {dbUser?.imageUrl != null && <Link to='/profile'><img className="navbar__avatar"
+            {dbUser?.imageUrl != null && <Link to='/settings'><img className="navbar__avatar"
               src={import.meta.env.VITE_API_SERVER_URL + '/Images/' + dbUser?.imageUrl}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
