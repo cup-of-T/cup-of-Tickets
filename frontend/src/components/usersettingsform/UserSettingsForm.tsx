@@ -11,7 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Loader from "../loader/Loader";
 
 export const UserSettingsForm = () => {
-  const { dbUser } = useContext(UserContext) as UserContextType;
+  const { dbUser, setDbUser } = useContext(UserContext) as UserContextType;
   const { getAccessTokenSilently } = useAuth0();
 
   if (dbUser == null) {
@@ -24,8 +24,6 @@ export const UserSettingsForm = () => {
     userId: dbUser?.userId,
   };
 
-
-
   return (
     <Formik
       initialValues={initialValues}
@@ -34,7 +32,10 @@ export const UserSettingsForm = () => {
         const formData = new FormData();
         formData.append('Name', values.name);
         formData.append('Picture', values.picture);
-        putUser(await getAccessTokenSilently(), dbUser?.userId, formData);
+        putUser(await getAccessTokenSilently(), dbUser?.userId, formData)
+          .then(response => {
+            setDbUser(prevState => ({ ...prevState, imageUrl: response.imageUrl, name: response.name }))
+          });
 
       }}
       validationSchema={validationSchema}
