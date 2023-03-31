@@ -1,4 +1,4 @@
 .ticket-board__header {
     border-bottom: 1px solid rgb(172, 172, 172);
-    margin-bottom: 8px;
+    font-weight: 500;
 }

@@ -164,6 +164,11 @@
     color: white;
 }
 
+.bg--black {
+    background-color: rgb(36, 36, 36);
+    color: white;
+}
+
 /* .bg--btn:hover{
     color: white;
 } */

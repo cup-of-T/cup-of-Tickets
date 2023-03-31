@@ -32,7 +32,7 @@ export interface ITicket {
   timeEstimate: string,
   creator: IUser,
   assignedUser: IUser,
-  categories: ICategory,
+  categories: ICategory[],
 }
 
 export interface ICategory {

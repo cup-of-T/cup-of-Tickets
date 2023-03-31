@@ -15,10 +15,9 @@ type TicketBoardProps = {
 
 export const TicketBoard = ({ toggleAddBtn, tickets }: TicketBoardProps) => {
 
-  const completedTickets = tickets.filter(t => t.status == 2);
   const availableTickets = tickets.filter(t => t.status != 2);
   const unassignedTickets = availableTickets.filter(ticket => ticket.assignedUser == null).sort((a, b) => b.urgency - a.urgency);
-  const assignedTickets = availableTickets.filter(ticket => ticket.assignedUser !== null).sort((a, b) => b.urgency - a.urgency);
+  const assignedTickets = availableTickets.filter(ticket => ticket.assignedUser !== null  && ticket.archived !== true).sort((a, b) => b.urgency - a.urgency);
 
   return (
     <section className="ticket-board">

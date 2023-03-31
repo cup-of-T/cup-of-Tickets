@@ -13,17 +13,17 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
   const handleUrgencySign = () => {
     if (ticket.archived == true)
     {
-      return <li className='center status-icon bg--grey ticket-board__urgency'>COMPLETED</li>
+      return <li className='center tag-icon bg--grey ticket-board__urgency'>COMPLETED</li>
     }
       switch (ticket.urgency) {
         case 1: {
-          return <li className='center status-icon bg--orange ticket-board__urgency'>MEDIUM</li>
+          return <li className='center tag-icon bg--orange ticket-board__urgency'>MEDIUM</li>
         }
         case 2: {
-          return <li className='center status-icon bg--red ticket-board__urgency'>URGENT</li>
+          return <li className='center tag-icon bg--red ticket-board__urgency'>URGENT</li>
         }
         default: {
-          return <li className='center status-icon bg--green ticket-board__urgency'>NORMAL</li>
+          return <li className='center tag-icon bg--green ticket-board__urgency'>NORMAL</li>
         }
       }
   }
@@ -31,16 +31,16 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
   const handleStatus = () => {
     switch (ticket.status) {
       case 2:
-        return <span className='status-icon bg--grey'>CLOSED</span>;
+        return <span className='tag-icon bg--black'>CLOSED</span>;
       default:
-        return <span className='status-icon bg--red'>OPEN</span>;
+        return <span className='tag-icon bg--grey'>OPEN</span>;
     }
   }
 
   return (
     <>
-      <ul onMouseEnter={() => setShowPopUp(!showPopUp)}
-        onMouseLeave={() => setShowPopUp(!showPopUp)}
+      <ul onMouseEnter={() => setShowPopUp(true)}
+        onMouseLeave={() => setShowPopUp(false)}
         className='ticket-board__grid fw-300 ticket-board__card-styling'>
         {ticket.assignedUser == null && (
           <input
@@ -53,10 +53,19 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
         <li className='ticket-board__group'>{ticket.timeEstimate}</li>
         <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : "-"}</li>
       </ul>
+
       {showPopUp && (
         <div className='popup-card'>
           <div className="popup-card__header">
-            <p>{handleStatus()} Issue # {ticket.ticketId} </p>
+            <div className="popup-card__tags">
+                {handleStatus()}
+              <ul className='popup-card__categories'>
+                {
+                ticket.categories.map( category => <li className="tag-icon bg--caribbean">{category.name.toUpperCase()}</li>)
+                }
+              </ul>
+            </div>
+              <p> Issue # {ticket.ticketId} </p>
             <p className='popup-card__title '>{ticket.title}</p>
           </div>
           <p className='popup-card__description'>{ticket.description}</p>
