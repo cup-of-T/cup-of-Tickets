@@ -11,13 +11,11 @@ interface IKanbanProps {
 const Kanban = ({ }: IKanbanProps) => {
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const { dbUser } = useContext(UserContext) as UserContextType;
-    if (dbUser == null) {
-        return null;
-    }
+
     return (
         <>
             <KanbanBoard filteredTickets={tickets?.filter(tic =>
-            tic.assignedUser?.userId == dbUser?.userId &&
+                tic.assignedUser?.userId == dbUser?.userId &&
                 tic.archived != true)} />
         </>
     );
