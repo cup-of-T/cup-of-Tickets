@@ -13,10 +13,12 @@ export const UserSettingsForm = () => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { getAccessTokenSilently } = useAuth0();
   const initialValues = {
-    name: dbUser?.name || "",
+    name: dbUser.name ? dbUser.name : "",
     picture: '',
     userId: dbUser?.userId,
   };
+
+
 
   return (
     <Formik
