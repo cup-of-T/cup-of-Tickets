@@ -21,6 +21,7 @@ import TicketDashboard from './pages/TicketDashboard'
 import { getTeams } from './services/teamApi'
 import { ITeam } from './interfaces/interface'
 import { Team } from './components/team/Team'
+import Settings from './pages/Settings'
 
 
 
@@ -53,13 +54,14 @@ function App() {
         <main className="main center">
           <Routes>
             <Route path="/" element={<TicketDashboard />} />
-            <Route path="/dashboard" element={<TicketDashboard />} />
+            <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
             <Route path="/teams" element={<TeamsPage teams={teams} user={dbUser} />} />
             <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/settings" element={<ProtectedRoute component={Settings} />} />
+            <Route path="*" element={<ProtectedRoute component={NotFound} />} />
           </Routes>
         </main>
       </>
