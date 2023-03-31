@@ -1,12 +1,12 @@
 .user-card {
-    height: auto;
     width: 25%;
+    height: auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     border-radius: 90px 20px 20px 90px;
-    background-color: #f3f2f2;
-    /* box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); */
+    background-color: #ffffff;
+    border: 1px solid rgb(233, 230, 230);
 }
 
 .user-card__info {
