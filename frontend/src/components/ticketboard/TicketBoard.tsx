@@ -8,11 +8,12 @@ import Loader from '../loader/Loader'
 
 type TicketBoardProps = {
   toggleAddBtn: (ticketId: number) => void,
+  setReviewStatus?: (ticketId: number) => void,
   tickets: ITicket[],
   showAlert?: boolean,
 }
 
-export const TicketBoard = ({ toggleAddBtn, tickets, showAlert }: TicketBoardProps) => {
+export const TicketBoard = ({ toggleAddBtn, tickets, showAlert, setReviewStatus }: TicketBoardProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   if (dbUser == null) return (<Loader />);
 
@@ -30,6 +31,7 @@ export const TicketBoard = ({ toggleAddBtn, tickets, showAlert }: TicketBoardPro
       {(dbUser.role == 'Manager' || dbUser.role == 'Admin') &&
         <TicketsTable title={`Claimed tickets by ${'${team}'}`}
           tickets={assignedTickets}
+          setReviewStatus={setReviewStatus}
           toggleAddBtn={toggleAddBtn}
         />
 
