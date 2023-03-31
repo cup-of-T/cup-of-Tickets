@@ -14,7 +14,7 @@ type StatsBarProps = {
   resetTicketsClaims: Function   
 }
 
-export const StatsBar: FC<StatsBarProps> = ({ addBtnToggle, ticketIds, resetTicketsClaims}) => {
+export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims} :StatsBarProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
   const navigate = useNavigate();
