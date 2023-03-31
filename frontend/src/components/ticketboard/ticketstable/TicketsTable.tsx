@@ -7,11 +7,12 @@ import { TicketHeader } from '../ticketheader/TicketHeader'
 type TicketsTableProps = {
     title: string,
     tickets: ITicket[],
-    toggleAddBtn: (ticketId: number) => void
+    toggleAddBtn: (ticketId: number) => void,
+    setReviewStatus?: (ticketId: number) => void,
     showAlert?: boolean
 }
 
-export const TicketsTable = ({ title, tickets, toggleAddBtn, showAlert }: TicketsTableProps) => {
+export const TicketsTable = ({ title, tickets, toggleAddBtn, showAlert, setReviewStatus }: TicketsTableProps) => {
 
     return (
         <>
@@ -24,6 +25,7 @@ export const TicketsTable = ({ title, tickets, toggleAddBtn, showAlert }: Ticket
                         <TicketCard
                             toggleAddBtn={toggleAddBtn}
                             ticket={ticket}
+                            setReviewStatus={setReviewStatus}
                         />
                     </div>
                 )

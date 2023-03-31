@@ -26,7 +26,7 @@ export const Archive = () => {
     return (
          <section className="ticket-board">
             <TicketsTable title={'Archived tickets'}
-                tickets={tickets.filter(ticket => ticket.archived == true)}
+                tickets={tickets.filter(ticket => ticket.archived == true && ticket.status == 4 )}
                 toggleAddBtn={toggleAddBtn}
             />
         </section>

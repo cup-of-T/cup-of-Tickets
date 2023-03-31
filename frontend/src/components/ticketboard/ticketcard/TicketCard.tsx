@@ -4,14 +4,21 @@ import './ticketcard.css'
 
 type TicketCardProps = {
   toggleAddBtn: (ticketId: number) => void,
+  setReviewStatus?: (ticketId: number) => void,
   ticket: ITicket
 }
 
-export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
+export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setReviewStatus }) => {
   const [showPopUp, setShowPopUp] = useState(false);
 
   const handleUrgencySign = () => {
-    if (ticket.archived == true)
+
+    // fix this after table drop
+    if (ticket.archived == true && ticket.status == 4)
+    {
+      return <li className='center tag-icon bg--black ticket-board__urgency'>ARCHIVED</li>
+    }
+    if (ticket.archived == true )
     {
       return <li className='center tag-icon bg--grey ticket-board__urgency'>COMPLETED</li>
     }
@@ -21,7 +28,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
         }
         case 2: {
           return <li className='center tag-icon bg--red ticket-board__urgency'>URGENT</li>
-        }
+        }        
         default: {
           return <li className='center tag-icon bg--green ticket-board__urgency'>NORMAL</li>
         }
@@ -42,9 +49,13 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
       <ul onMouseEnter={() => setShowPopUp(true)}
         onMouseLeave={() => setShowPopUp(false)}
         className='ticket-board__grid fw-300 ticket-board__card-styling container'>
-        {ticket.assignedUser == null && (
+        {(ticket.assignedUser == null)&& (
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
+            className='ticket-board__checkbox' type="checkbox" />)}
+        {(ticket.status == 2)&& (
+          <input
+            onChange={() => setReviewStatus!(ticket.ticketId)}
             className='ticket-board__checkbox' type="checkbox" />)}
         {handleUrgencySign()}
         <li className='ticket-board__text'>{ticket.title}</li>
