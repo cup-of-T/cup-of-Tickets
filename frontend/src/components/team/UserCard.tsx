@@ -30,7 +30,7 @@ export const UserCard = ({ user }: UserCardProps) => {
             />
             <div className="user-card__info">
                 <p className='user-card__info__name'>{user.name}</p>
-                <p>{Roles[user.role]}</p>
+                <p className="user-card__info__role">{Roles[user.role]}</p>
                 <MailIcon name={user.name} mail={user.email} />
             </div>
         </div>
