@@ -12,12 +12,13 @@
 .user-card__info {
     display: flex;
     justify-content: flex-end;
-    align-items: flex-start;
+    align-items: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    width: calc(50% - 10px);
-    margin-left: 10%;
+    margin: 0 16px;
+    
     gap: 10px;
+    flex-grow: 1;
 }
 
 .user-card__info p {
@@ -29,6 +30,10 @@
     font-weight: 500;
 }
 
+.user-card__info__role {
+    color: #888888;
+}
+
 .user-card__image {
     width: 49%;
     margin: -2px;
@@ -38,10 +43,9 @@
 }
 
 .user-card__icons {
-    width: 90%;
     display: flex;
     justify-content: flex-end;
-    margin-right: 10%;
+    /* padding-right: 10px; */
 }
 
 .icons--mail:hover {
