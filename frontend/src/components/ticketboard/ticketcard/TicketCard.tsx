@@ -41,7 +41,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
     <>
       <ul onMouseEnter={() => setShowPopUp(true)}
         onMouseLeave={() => setShowPopUp(false)}
-        className='ticket-board__grid fw-300 ticket-board__card-styling'>
+        className='ticket-board__grid fw-300 ticket-board__card-styling container'>
         {ticket.assignedUser == null && (
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
