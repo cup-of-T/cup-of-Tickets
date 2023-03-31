@@ -1,5 +1,4 @@
 import { useField } from 'formik';
-import './SelectOptions.css';
 
 type SelectOptionsProps = {
     label: string,
