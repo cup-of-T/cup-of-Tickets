@@ -169,9 +169,10 @@
     color: white;
 }
 
-/* .bg--btn:hover{
+.bg--black {
+    background-color: rgb(36, 36, 36);
     color: white;
-} */
+}
 
 .grey--border {
     border: 1px solid rgb(233, 230, 230);

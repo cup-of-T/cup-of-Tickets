@@ -20,7 +20,7 @@ export const TicketsTable = ({ title, tickets, toggleAddBtn, showAlert }: Ticket
             <TicketHeader />
             {tickets.map(ticket => {
                 return (
-                    <div className="ticket-card" key={ticket.ticketId}>
+                    <div className="ticket-card container center" key={ticket.ticketId}>
                         <TicketCard
                             toggleAddBtn={toggleAddBtn}
                             ticket={ticket}

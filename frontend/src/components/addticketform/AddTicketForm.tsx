@@ -58,11 +58,6 @@ export const AddTicketForm = () => {
             rows={6}
             placeholder="Some more info.."
           />
-          {/* <SelectOptions label="Urgency" name="urgency">
-            <option value={0}>0</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-          </SelectOptions> */}
           <Urgency label="Urgency" name="urgency" />
           <Categories label="Categories"/>
           <button className="btn btn--blue w-100 ticket-form__submit-btn" type="submit">
