@@ -7,6 +7,15 @@
 }
 
 .team-card__header {
-    text-align: center;
+    padding: 0 11%;
     width: 100%;
+}
+
+.team-card__header h2{
+    font-weight: 500;
+    font-size: xx-large;
+}
+
+.team-card__header h4{
+    font-weight: 500;
 }

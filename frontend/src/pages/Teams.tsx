@@ -3,6 +3,7 @@ import { divide } from "lodash";
 import Loader from "../components/loader/Loader";
 import { Team } from "../components/team/Team";
 import { ITeam, IUser } from "../interfaces/interface";
+import './pages.css'
 
 interface ITeamsProps {
     teams: ITeam[],
@@ -18,7 +19,9 @@ const Teams = ({ teams, user }: ITeamsProps) => {
         return (<Loader />);
     }
     return (
-        <Team team={team} />
+        <div className="team-page">
+            <Team team={team} />
+        </div>
     );
 };
 

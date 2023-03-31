@@ -5,8 +5,8 @@
     justify-content: flex-start;
     align-items: center;
     border-radius: 10px;
-    background-color: #f6f6f6;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    /* background-color: #f6f6f6; */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
 }
 
 .user-card__info {
