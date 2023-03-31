@@ -18,6 +18,7 @@ import Dashboard from './pages/TicketDashboard'
 import { Archive } from './pages/Archive'
 import './pages/pages.css'
 import TicketDashboard from './pages/TicketDashboard'
+import Settings from './pages/Settings'
 
 
 
@@ -48,11 +49,12 @@ function App() {
           <Routes>
             <Route path="/" element={<TicketDashboard />} />
             <Route path="/dashboard" element={<TicketDashboard />} />
-            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
-            <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
-            <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
-            <Route path="/teams" element={<ProtectedRoute component={Teams} />} />
-            <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/kanban" element={<Kanban />} />
+            <Route path="/addticket" element={<AddTicket />} />
+            <Route path="/teams" element={<Teams />} />
+            <Route path="/archive" element={<Archive />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
