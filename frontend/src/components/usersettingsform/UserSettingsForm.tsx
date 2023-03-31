@@ -8,10 +8,16 @@ import "./UserSettingsForm.css";
 import UploadFile from "../shared/UploadFile";
 import { putUser } from "../../services/userApi";
 import { useAuth0 } from "@auth0/auth0-react";
+import Loader from "../loader/Loader";
 
 export const UserSettingsForm = () => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { getAccessTokenSilently } = useAuth0();
+
+  if (dbUser == null) {
+    return <Loader />
+  }
+
   const initialValues = {
     name: dbUser.name == undefined ? "" : dbUser.name,
     picture: '',
