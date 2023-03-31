@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { IUser } from '../../interfaces/interface'
-import { MailIcon } from './MailIcon'
 import './UserCard.css'
 
 type UserCardProps = {
@@ -37,7 +36,6 @@ export const UserCard = ({ user }: UserCardProps) => {
                         <i className="fa-solid fa-envelope"></i>
                     </Link>
                 </div>
-                {/* <MailIcon name={user.name} mail={user.email} /> */}
             </div>
         </div>
     )
