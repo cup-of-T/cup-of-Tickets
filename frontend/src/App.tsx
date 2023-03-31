@@ -31,18 +31,19 @@ function App() {
   const [postedUser, setPostedUser] = useState(false);
   const [teams, setTeams] = useState<ITeam[]>([]);
 
-  useEffect(() => {
-    const useEffectAsync = async () => {
-      const accessToken = await getAccessTokenSilently();
-      if (isAuthenticated && !postedUser) {
-        setDbUser(await postUser(accessToken));
-        setPostedUser(true);
-      }
-      setTeams(await getTeams(accessToken));
-      fetchTickets();
+  const getData = async () => {
+    const accessToken = await getAccessTokenSilently();
+    if (isAuthenticated && !postedUser) {
+      setDbUser(await postUser(accessToken));
+      setPostedUser(true);
     }
-    useEffectAsync();
-  }, [isAuthenticated])
+    setTeams(await getTeams(accessToken));
+    fetchTickets();
+  }
+  
+  useEffect(() => {
+    getData();
+  }, [isAuthenticated]);
 
 
   return (
