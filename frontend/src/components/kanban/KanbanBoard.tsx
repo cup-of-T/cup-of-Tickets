@@ -35,7 +35,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ filteredTickets }) => {
     const [columns, setColumns] = useState<IColumn>({
         "To Do": filteredTickets.filter(ticket => ticket.status == 0),
         "Doing": filteredTickets.filter(ticket => ticket.status == 1),
-        "Done": filteredTickets.filter(ticket => ticket.status == 2)
+        "Done": filteredTickets.filter(ticket => ticket.status >= 2)
     });
     const activeTicket = find(filteredTickets, (task) => task.ticketId === active);
     const ticketStatuses = {
