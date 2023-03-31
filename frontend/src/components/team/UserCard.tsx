@@ -21,7 +21,13 @@ export const UserCard = ({ user }: UserCardProps) => {
 
     return (
         <div className='user-card'>
-            <img className='user-card__image' src={user.imageUrl} />
+            <img className='user-card__image'
+                src={user.imageUrl}
+                onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = "/default_pfp.png";
+                }}
+            />
             <div className="user-card__info">
                 <p className='user-card__info__name'>{user.name}</p>
                 <p>{Roles[user.role]}</p>
