@@ -10,7 +10,7 @@ interface ITeamsProps {
     user: IUser
 }
 
-const Teams = ({ teams, user }: ITeamsProps) => {
+const TeamsPage = ({ teams, user }: ITeamsProps) => {
     if (user == null) return (<Loader />);
     if (teams == null) return (<Loader />);
 
@@ -25,4 +25,4 @@ const Teams = ({ teams, user }: ITeamsProps) => {
     );
 };
 
-export default Teams;
+export default TeamsPage;
