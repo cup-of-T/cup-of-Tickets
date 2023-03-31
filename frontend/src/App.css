@@ -10,7 +10,6 @@
 .main {
     padding: 14px 0 0 64px;
     box-sizing: border-box;
-    display: flex;
     flex-direction: column;
     align-items: center;
     min-height: calc(100vh - 64px);
