@@ -48,3 +48,22 @@
     display: flex;
     justify-content: space-between;
 }
+
+.ticket-review__btns {
+    display: flex;
+    gap: 4px;
+}
+
+.ticket-review__btn{
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    padding: none;
+}
+
+.ticket-review__btn--icon{
+    font-size: 18px;
+}
+.ticket-review__btn--icon:hover{
+    opacity: 0.5;
+}

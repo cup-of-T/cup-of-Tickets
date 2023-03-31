@@ -4,10 +4,11 @@
     background-color: #ecedee;
     border: 1px solid #E3E4E6;
     border-radius: 6px;
-    min-height: 400px;
+    /* min-height: 400px; */
+    height: 100%;
 }
 
-.column-container{
+.column-container {
     flex-grow: 1;
     flex-basis: 0;
     display: flex;
@@ -19,6 +20,9 @@
 }
 
 .column-title {
+    position: sticky;
+    top: 24px;
     font-weight: 500;
     margin-bottom: 6px;
+    z-index: 3;
 }

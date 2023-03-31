@@ -22,6 +22,8 @@ import { getTeams } from './services/teamApi'
 import { ITeam } from './interfaces/interface'
 import { Team } from './components/team/Team'
 import Settings from './pages/Settings'
+import { InProgress } from './pages/InProgress'
+import { Testing } from './pages/Testing'
 
 
 
@@ -61,6 +63,8 @@ function App() {
             <Route path="/teams" element={<TeamsPage teams={teams} user={dbUser} />} />
             <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
             <Route path="/settings" element={<ProtectedRoute component={Settings} />} />
+            <Route path="/inprogress" element={<ProtectedRoute component={InProgress} />} />
+            <Route path="/testing" element={<ProtectedRoute component={Testing} />} />
             <Route path="*" element={<ProtectedRoute component={NotFound} />} />
           </Routes>
         </main>
