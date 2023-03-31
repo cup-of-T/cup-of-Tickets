@@ -23,7 +23,7 @@ export const UserCard = ({ user }: UserCardProps) => {
         <div className='user-card'>
             <img className='user-card__image' src={user.imageUrl} />
             <div className="user-card__info">
-                <p>{user.name}</p>
+                <p className='user-card__info__name'>{user.name}</p>
                 <p>{Roles[user.role]}</p>
                 <MailIcon name={user.name} mail={user.email} />
             </div>
