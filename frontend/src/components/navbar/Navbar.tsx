@@ -17,8 +17,13 @@ const Navbar = () => {
         {isAuthenticated && (
           <>
             <LogoutButton />
-            {dbUser?.imageUrl == null && <Loader/>}
-            {dbUser?.imageUrl != null && <Link to='/profile'><img className="navbar__avatar" src={dbUser?.imageUrl} /></Link>}
+            {dbUser?.imageUrl == null && <Loader />}
+            {dbUser?.imageUrl != null && <Link to='/profile'><img className="navbar__avatar"
+              src={dbUser?.imageUrl}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src = "/default_pfp.png";
+              }} /></Link>}
           </>
         )}
       </div>
