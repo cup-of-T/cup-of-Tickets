@@ -5,7 +5,6 @@ import { OpenTicketCard } from './statscard/OpenTicketCard'
 import { UserContext } from '../../context/UserProvider'
 import { TicketsContextType, UserContextType } from '../../types'
 import { TicketsContext } from '../../context/TicketsProvider'
-import { UNSAFE_getPathContributingMatches } from '@remix-run/router'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -15,7 +14,7 @@ type StatsBarProps = {
   resetTicketsClaims: Function   
 }
 
-export const StatsBar: FC<StatsBarProps> = ({ addBtnToggle, ticketIds, resetTicketsClaims}) => {
+export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims} :StatsBarProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
   const navigate = useNavigate();

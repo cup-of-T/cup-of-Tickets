@@ -11,15 +11,14 @@ type TicketsTableProps = {
 export const TicketsTable = ({ title, tickets, toggleAddBtn }: TicketsTableProps) => {
     return (
         <>
-            <h3>{title}</h3>
+            <h3 className='page__title'>{title}</h3>
             <TicketHeader />
             {tickets.map(ticket => {
                 return (
-                    <div className="ticket-card">
+                    <div className="ticket-card" key={ticket.ticketId}>
                         <TicketCard
                             toggleAddBtn={toggleAddBtn}
                             ticket={ticket}
-                            key={ticket.ticketId}
                         />
                     </div>
                 )

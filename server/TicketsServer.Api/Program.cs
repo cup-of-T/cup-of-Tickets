@@ -8,6 +8,7 @@ using TicketsServer.Api.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Microsoft.Net.Http.Headers;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     serverOptions.AddServerHeader = false;
 });
 
-
+builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddControllers();
 builder.Host.ConfigureServices(services =>
@@ -100,6 +101,12 @@ foreach (var key in requiredVars)
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Images")),
+    RequestPath = "/api/Images"
+});
 
 app.UseCors(cors =>
    {
