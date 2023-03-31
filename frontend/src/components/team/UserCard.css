@@ -2,7 +2,7 @@
     height: auto;
     width: 25%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 10px;
     background-color: #f6f6f6;
@@ -15,12 +15,24 @@
     align-items: flex-start;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 39%;
+    width: calc(50% - 10px);
     margin-left: 10%;
+    gap: 10px;
+}
+
+.user-card__info p {
+    margin: 0;
+    padding: 0;
+}
+
+.user-card__info__name {
+    font-weight: 500;
 }
 
 .user-card__image {
     width: 49%;
+    max-height: 100px;
+    max-width: 100px;
     border-radius: 10px;
 }
 
