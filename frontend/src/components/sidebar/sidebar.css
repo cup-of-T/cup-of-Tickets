@@ -1,45 +1,70 @@
 .sidebar {
-    height: 100vh;
-    position: fixed;
-    background-color: #57a5b8;
-    border-right: 1px solid #3c90a5;
-    top: 0;
-    z-index: 2;
+  height: 100vh;
+  position: fixed;
+  background-color: #57a5b8;
+  border-right: 1px solid #3c90a5;
+  top: 0;
+  z-index: 2;
 }
 
 .sidebar__links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
 .sidebar__links-item {
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
-    /* styling */
-    padding: 16px;
-    color: #e9e9e9;
-    font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  /* styling */
+  padding: 16px;
+  color: #e9e9e9;
+  font-size: 1.5rem;
 }
 
 .sidebar__links-item:hover {
-    color: rgb(119, 119, 119);
-    background-color: #91ccdb;
+  color: rgb(119, 119, 119);
+  background-color: #91ccdb;
+}
+
+.sidebar__tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.sidebar__tooltiptext {
+  visibility: hidden;
+  width: 110px;
+  background-color: rgb(119, 119, 119);
+  color: #e3e7ec;
+  text-align: center;
+  padding: 3px 0;
+  border-radius: 6px;
+  border: 1px solid rgb(119, 119, 119);
+  /* Position the sidebar__tooltip text */
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  left: 125%;
+}
+
+.sidebar__tooltip:hover .sidebar__tooltiptext {
+  visibility: visible;
+  font-size: 1rem;
 }
 
 .sidebar__logo {
-    /* background-color: #95cddb ; */
-    color: #4d7298;
-    text-align: center;
-    height: 64px;
+  color: #4d7298;
+  text-align: center;
+  height: 64px;
 }
 
 .logo {
-    box-sizing: border-box;
-    height: 100%;
-    padding: 8px;
-    border-radius: 50%;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 8px;
+  border-radius: 50%;
 }
