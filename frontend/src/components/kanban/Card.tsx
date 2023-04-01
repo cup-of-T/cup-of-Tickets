@@ -87,7 +87,7 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
             </button>
             <div className="card--deletable">
               {ticket.status == 4 && (
-                <button onClick={onCloseClick} className="btn btn--red">Close</button>
+                <button onClick={onCloseClick} className="btn btn--grey">Close</button>
               )}
                  {ticket.status == 2 && (
                 <p>Pending review...</p>

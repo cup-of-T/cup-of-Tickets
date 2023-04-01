@@ -62,13 +62,13 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
         {(ticket.status == 2)&& (
           <div className='ticket-review__btns'>
           <button
-            className='ticket-review__btn'
-            onClick={() => setReviewStatus!(ticket.ticketId, 3)}
-            ><i className="fa-solid fa-circle-xmark color-red ticket-review__btn--icon"></i></button>
-          <button
             className='ticket-review__btn '
             onClick={() => setReviewStatus!(ticket.ticketId, 4)}
             ><i className="fa-solid fa-circle-check color-green ticket-review__btn--icon"></i></button>
+          <button
+            className='ticket-review__btn'
+            onClick={() => setReviewStatus!(ticket.ticketId, 3)}
+            ><i className="fa-solid fa-circle-xmark color-red ticket-review__btn--icon"></i></button>
             </div>)}
         {handleUrgencySign()}
         <li className='ticket-board__text'>{ticket.title}</li>
@@ -95,7 +95,17 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
             <p className='popup-card__title '>{ticket.title}</p>
           </div>
           <p className='popup-card__description'>{ticket.description}</p>
-          
+          {(ticket.status == 2)&& (
+          <div className='ticket-review__btns'>
+            <button
+              className='btn btn--green ticket-review__btn--large'
+              onClick={() => setReviewStatus!(ticket.ticketId, 4)}
+              >Approve <i className="fa-solid fa-circle-check ticket-review__btn--icon"></i></button>
+            <button
+              className='btn btn--red ticket-review__btn--large'
+              onClick={() => setReviewStatus!(ticket.ticketId, 3)}
+              > Request changes <i className="fa-solid fa-circle-xmark ticket-review__btn--icon"></i></button>
+            </div>)}
         </div>)}
     </>
   )

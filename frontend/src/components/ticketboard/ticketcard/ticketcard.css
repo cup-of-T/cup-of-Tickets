@@ -52,6 +52,7 @@
 .ticket-review__btns {
     display: flex;
     gap: 4px;
+    justify-content: center;
 }
 
 .ticket-review__btn{
@@ -60,6 +61,13 @@
     border-radius: 50%;
     padding: none;
 }
+
+.ticket-review__btn--large{
+    display: flex;  
+    align-items: center;
+    gap: 8px;
+}
+
 
 .ticket-review__btn--icon{
     font-size: 18px;
