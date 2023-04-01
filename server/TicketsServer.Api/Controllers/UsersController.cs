@@ -23,7 +23,7 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Authorize("User")]
-    public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers()
+    public async Task<ActionResult<List<UserResponse>>> GetUsers()
     {
         if (_context.Users == null)
         {
@@ -32,7 +32,7 @@ public class UsersController : ControllerBase
         var users = await _context.Users
             .Include(u => u.Teams)
             .ToListAsync();
-            
+
         return users.Select(user => UserHelper.UserToUserResponse(user)).ToList();
     }
 
