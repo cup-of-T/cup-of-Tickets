@@ -32,6 +32,7 @@ public class UsersController : ControllerBase
         var users = await _context.Users
             .Include(u => u.Teams)
             .ToListAsync();
+            
         return users.Select(user => UserHelper.UserToUserResponse(user)).ToList();
     }
 
