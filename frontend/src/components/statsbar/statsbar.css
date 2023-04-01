@@ -47,42 +47,6 @@
     gap: 25px;
 }
 
-.statsbar__help {
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    z-index: 1;
-    text-align: center;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    margin-top: 30px;
-    padding: 10px;
-    color: #fff;
-    background-color: orange;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .statsbar__help:hover {
-    background-color: #f60;
-    border-color: #f60;
-  }
-
-  .statsbar__help:hover::before {
-    content: attr(title);
-    /* display: block; */
-    position: absolute;
-    top: 60px;
-    width: 150px;
-    padding: 10px;
-    background-color:  orange;
-    color: white;
-    font-size: 0.8rem;
-    border-radius: 5px;
-    text-align: center;
-    z-index: 2;
-  }
-
 @media screen and (max-width: 1024px) {
     .statsbar__buttons {
         flex-direction: column;
