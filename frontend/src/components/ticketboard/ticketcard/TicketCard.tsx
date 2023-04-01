@@ -72,7 +72,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
             <p className='popup-card__title '>{ticket.title}</p>
           </div>
           <p className='popup-card__description'>{ticket.description}</p>
-
+          
         </div>)}
     </>
   )
