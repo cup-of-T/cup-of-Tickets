@@ -14,10 +14,6 @@ export const UserSettingsForm = () => {
   const { dbUser, setDbUser } = useContext(UserContext) as UserContextType;
   const { getAccessTokenSilently } = useAuth0();
 
-  if (dbUser == null) {
-    return <Loader />
-  }
-
   const initialValues = {
     name: dbUser.name == undefined ? "" : dbUser.name,
     picture: '',

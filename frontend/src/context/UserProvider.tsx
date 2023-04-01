@@ -8,7 +8,7 @@ interface UserProviderProps {
 export const UserContext = createContext({});
 
 const UserProvider = ({ children }: UserProviderProps) => {
-    const [dbUser, setDbUser] = useState<IUser>();
+    const [dbUser, setDbUser] = useState<IUser>({} as IUser);
 
     return (
         <UserContext.Provider value={{ dbUser, setDbUser }}>
