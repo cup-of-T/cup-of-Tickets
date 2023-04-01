@@ -4,15 +4,23 @@ import './ticketcard.css'
 
 type TicketCardProps = {
   toggleAddBtn: (ticketId: number) => void,
+  setReviewStatus?: (ticketId: number, status : number) => void,
   ticket: ITicket
 }
 
-export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
+export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setReviewStatus }) => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [isPopUpHovered, setIsPopupHovered] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleUrgencySign = () => {
-    if (ticket.archived == true)
+
+    // fix this after table drop
+    if (ticket.archived == true && ticket.status == 4)
+    {
+      return <li className='center tag-icon bg--black ticket-board__urgency'>ARCHIVED</li>
+    }
+    if (ticket.archived == true )
     {
       return <li className='center tag-icon bg--grey ticket-board__urgency'>COMPLETED</li>
     }
@@ -22,7 +30,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
         }
         case 2: {
           return <li className='center tag-icon bg--red ticket-board__urgency'>URGENT</li>
-        }
+        }        
         default: {
           return <li className='center tag-icon bg--green ticket-board__urgency'>NORMAL</li>
         }
@@ -42,11 +50,26 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
     <>
       <ul onMouseEnter={() => setShowPopUp(true)}
         onMouseLeave={() => setShowPopUp(false)}
+        onClick={() => {
+          toggleAddBtn(ticket.ticketId)
+          setIsChecked(!isChecked)
+        }}
         className='ticket-board__grid fw-300 ticket-board__card-styling container'>
-        {ticket.assignedUser == null && (
+        {(ticket.assignedUser == null)&& (
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
-            className='ticket-board__checkbox' type="checkbox" />)}
+            className='ticket-board__checkbox' type="checkbox" checked={isChecked} />)}
+        {(ticket.status == 2)&& (
+          <div className='ticket-review__btns'>
+          <button
+            className='ticket-review__btn'
+            onClick={() => setReviewStatus!(ticket.ticketId, 3)}
+            ><i className="fa-solid fa-circle-xmark color-red ticket-review__btn--icon"></i></button>
+          <button
+            className='ticket-review__btn '
+            onClick={() => setReviewStatus!(ticket.ticketId, 4)}
+            ><i className="fa-solid fa-circle-check color-green ticket-review__btn--icon"></i></button>
+            </div>)}
         {handleUrgencySign()}
         <li className='ticket-board__text'>{ticket.title}</li>
         <li className='ticket-board__requester'>{ticket.creator.name ? ticket.creator.name : ticket.creator.email}</li>

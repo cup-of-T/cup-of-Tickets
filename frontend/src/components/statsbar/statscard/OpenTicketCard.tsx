@@ -16,7 +16,7 @@ export const OpenTicketCard = () => {
           YOU
         </div>
         <div className="stats-card__content-square border-left">
-        <strong>{tickets.filter(ticket => ticket?.status != 2 && ticket?.archived !== true).length}</strong>
+        <strong>{tickets.filter(ticket => ticket?.status < 2).length}</strong>
           TEAM
         </div>
       </div>

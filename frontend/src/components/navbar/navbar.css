@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
     padding: 0 0 0 64px;
     position: fixed;
     width: 100%;
@@ -9,15 +9,16 @@
     border: 1px solid rgb(233, 230, 230);
     box-sizing: border-box;
     background-color: white;
+    z-index: 1;
 }
 
-.navbar__container{
+.navbar__container {
     display: flex;
     justify-content: end;
-    gap: 16px; 
-}   
+    gap: 16px;
+}
 
-.navbar__avatar{
+.navbar__avatar {
     width: 30px;
     height: 30px;
     border-radius: 50%;

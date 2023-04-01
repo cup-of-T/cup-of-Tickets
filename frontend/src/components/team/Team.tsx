@@ -11,7 +11,7 @@ type TeamProps = {
 export const Team = ({ team }: TeamProps) => {
 
     // team.users.sort((a, b) => a.role.localeCompare(b.role));
-    const adminsAndManagers = team.users.filter(u => u.role == ('Admin' || 'Manager'));
+    const adminsAndManagers = team.users.filter(u => (u.role == 'Admin' || u.role == 'Manager'));
     const users = team.users.filter(u => u.role == 'User');
 
     return (

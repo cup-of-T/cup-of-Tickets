@@ -1,15 +1,15 @@
+import { User } from '@auth0/auth0-react';
 import React, { useContext, useState } from 'react'
-import { StatsBar } from '../components/statsbar/StatsBar';
-import { TicketBoard } from '../components/ticketboard/TicketBoard';
 import { TicketsTable } from '../components/ticketboard/ticketstable/TicketsTable';
 import { TicketsContext } from '../context/TicketsProvider';
-import { TicketsContextType } from '../types';
-// import './pages.css';
+import { UserContext } from '../context/UserProvider';
+import { TicketsContextType, UserContextType } from '../types';
 
-export const Archive = () => {
+export const InProgress = () => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
+    const { dbUser } = useContext(UserContext) as UserContextType
 
     const toggleAddBtn = (ticketId: number) => {
         if ( currentTicketIds.some(id => id == ticketId)) {
@@ -23,13 +23,18 @@ export const Archive = () => {
         setCurrentTicketIds([...currentTicketIds, ticketId]);
     }
 
+    const filteredTicketByStatus = tickets.filter(ticket => ticket.status == 1);
+    // filter by team later
+
+
     return (
          <section className="ticket-board">
-            <TicketsTable title={'Archived tickets'}
-                tickets={tickets.filter(ticket => ticket.archived == true && ticket.status == 4 )}
+            <TicketsTable title={'In Progress tickets'}
+                tickets={filteredTicketByStatus}
                 toggleAddBtn={toggleAddBtn}
             />
         </section>
     );
 };
+
 

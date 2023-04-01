@@ -12,7 +12,7 @@ type RoleType = {
 }
 
 
-export const UserCard = ({ user }: UserCardProps) => {
+export const UserCard = ({ user: { name, imageUrl, email, role } }: UserCardProps) => {
     const Roles: RoleType = {
         'Admin': 'Admin/Manager',
         'Manager': 'Manager',
@@ -22,17 +22,17 @@ export const UserCard = ({ user }: UserCardProps) => {
     return (
         <div className='user-card'>
             <img className='user-card__image'
-                src={user.imageUrl}
+                src={import.meta.env.VITE_API_SERVER_URL + '/Images/' + imageUrl}
                 onError={({ currentTarget }) => {
                     currentTarget.onerror = null;
                     currentTarget.src = "/default_pfp.png";
                 }}
             />
             <div className="user-card__info">
-                <p className='user-card__info__name'>{user.name}</p>
-                <p className="user-card__info__role">{Roles[user.role]}</p>
+                <p className='user-card__info__name'>{name}</p>
+                <p className="user-card__info__role">{Roles[role]}</p>
                 <div className='user-card__icons'>
-                    <Link to={"mailto:" + user.email} title={"Email - " + user.name}>
+                    <Link to={"mailto:" + email} title={"Email - " + name}>
                         <i className="fa-solid fa-envelope"></i>
                     </Link>
                 </div>

@@ -86,8 +86,15 @@ const Card = ({ ticket, parent = null }: ICardProps) => {
               )}
             </button>
             <div className="card--deletable">
-              {ticket.status == 2 && (
+              {ticket.status == 4 && (
                 <button onClick={onCloseClick} className="btn btn--red">Close</button>
+              )}
+                 {ticket.status == 2 && (
+                <p>Pending review...</p>
+              )}
+              
+              {ticket.status == 3 && (
+                <p>Changes requested...</p>
               )}
               {ticket.assignedUser && (
                 <img
