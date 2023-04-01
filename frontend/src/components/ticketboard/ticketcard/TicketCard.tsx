@@ -9,6 +9,7 @@ type TicketCardProps = {
 
 export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
   const [showPopUp, setShowPopUp] = useState(false);
+  const [isPopUpHovered, setIsPopupHovered] = useState(false);
 
   const handleUrgencySign = () => {
     if (ticket.archived == true)
@@ -54,8 +55,10 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket }) => {
         <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : "-"}</li>
       </ul>
 
-      {showPopUp && (
-        <div className='popup-card'>
+      {(showPopUp || isPopUpHovered) && (
+        <div className='popup-card' 
+          onMouseEnter={() => setIsPopupHovered(true)}
+          onMouseLeave={() => setIsPopupHovered(false)}>
           <div className="popup-card__header">
             <div className="popup-card__tags">
                 {handleStatus()}
