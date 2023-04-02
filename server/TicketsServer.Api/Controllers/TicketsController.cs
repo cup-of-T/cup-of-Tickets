@@ -81,6 +81,7 @@ public class TicketsController : ControllerBase
             }
             newTicketCategoryList.Add(categoryToAdd);
         }
+
         var team = await _context.Teams.FirstOrDefaultAsync(t => t.TeamId == request.TeamId);
         if (team == null)
         {
@@ -104,7 +105,7 @@ public class TicketsController : ControllerBase
 
         return CreatedAtAction(
             nameof(GetTicket),
-             new { id = result.TicketId },
+             new { id = result.TicketId, teamId = result.Team.TeamId},
              TicketHelper.TicketToResponse(result)
          );
     }
