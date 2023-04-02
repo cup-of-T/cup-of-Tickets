@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useInsertionEffect, useState } from 'react'
 import './App.css'
 import Header from './components/header/Header'
 import { Route, Routes } from 'react-router-dom'
@@ -35,22 +35,30 @@ function App() {
   const [postedUser, setPostedUser] = useState(false);
   const [teams, setTeams] = useState<ITeam[]>([]);
 
-  const getData = async () => {
-    const accessToken = await getAccessTokenSilently();
-    if (isAuthenticated && !postedUser) {
-      setDbUser(await postUser(accessToken));
-      setPostedUser(true);
-    }
-    setTeams(await getTeams(accessToken));
-    fetchTickets(selectedTeam);
-  }
   useEffect(() => {
+    const getData = async () => {
+      const accessToken = await getAccessTokenSilently();
+      if (isAuthenticated && !postedUser) {
+        setDbUser(await postUser(accessToken));
+        setPostedUser(true);
+      }
+      setTeams(await getTeams(accessToken));
+    }
     getData();
   }, [isAuthenticated]);
 
   useEffect(() => {
+    if (dbUser.teams != null) {
+      setSelectedTeam(dbUser.teams[0]?.teamId);
+      // fetchTickets(selectedTeam);
+    }
+  }, [dbUser.teams]);
+
+  useEffect(() => {
     fetchTickets(selectedTeam);
-  }, [selectedTeam]);
+  }, [selectedTeam])
+
+  console.log(selectedTeam);
 
   return (
     <div className="app">
