@@ -15,8 +15,6 @@ const TicketDashboard = ({ teamName }: TicketDashboardProps) => {
     const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
 
-    console.log(showAlert);
-
     const toggleAddBtn = (ticketId: number) => {
         if (currentTicketIds.some(id => id == ticketId)) {
             setCurrentTicketIds([...currentTicketIds.filter(id => id !== ticketId)]);
