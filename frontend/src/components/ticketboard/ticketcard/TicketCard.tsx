@@ -15,8 +15,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
 
   const handleUrgencySign = () => {
 
-    // fix this after table drop
-    if (ticket.archived == true && ticket.status == 4)
+    if (ticket.archived == true)
     {
       return <li className='center tag-icon bg--black ticket-board__urgency'>ARCHIVED</li>
     }
@@ -45,7 +44,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
   return (
     <>
       <ul onMouseEnter={() => setShowPopUp(true)}
-        onMouseLeave={() => setShowPopUp(false)}
+        onMouseLeave={() =>  setShowPopUp(false)}
         onClick={() => {
           toggleAddBtn(ticket.ticketId)
           setIsChecked(!isChecked)
