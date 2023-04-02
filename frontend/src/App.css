@@ -83,6 +83,11 @@
     font-weight: 400;
 }
 
+.btn--large:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
 .btn:hover {
     color: #407a88;
     font-weight: 500;
