@@ -31,6 +31,7 @@ export interface ITicket {
   status: number,
   timeEstimate: string,
   creator: IUser,
+  teamId: number,
   assignedUser: IUser,
   categories: ICategory[],
 }
