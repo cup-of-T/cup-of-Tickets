@@ -10,7 +10,7 @@ import { TicketsContextType, UserContextType } from '../types';
 
 export const Testing = () => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
-    const { tickets, patchTicketsStatus, setTickets} = useContext(TicketsContext) as TicketsContextType;
+    const { tickets, setTickets} = useContext(TicketsContext) as TicketsContextType;
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
     const { getAccessTokenSilently } = useAuth0();
     const [filteredTicketsByStatus, setFilteredTicketsByStatus] = useState<ITicket[]>();

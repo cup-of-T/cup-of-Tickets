@@ -11,9 +11,10 @@ type TicketBoardProps = {
   setReviewStatus?: (ticketId: number) => void,
   tickets: ITicket[],
   showAlert?: boolean,
+  teamName: string
 }
 
-export const TicketBoard = ({ toggleAddBtn, tickets, showAlert, setReviewStatus }: TicketBoardProps) => {
+export const TicketBoard = ({ toggleAddBtn, tickets, showAlert, setReviewStatus, teamName }: TicketBoardProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   if (dbUser == null) return (<Loader />);
 
@@ -29,17 +30,13 @@ export const TicketBoard = ({ toggleAddBtn, tickets, showAlert, setReviewStatus 
         toggleAddBtn={toggleAddBtn}
       />
       {(dbUser.role == 'Manager' || dbUser.role == 'Admin') &&
-        <TicketsTable title={`Claimed tickets by ${'${team}'}`}
+        <TicketsTable title={`Claimed tickets by ${teamName}`}
           tickets={assignedTickets}
           setReviewStatus={setReviewStatus}
           toggleAddBtn={toggleAddBtn}
         />
 
       }
-      {/* <TicketsTable title={'Closed tickets'}
-        tickets={completedTickets}
-        toggleAddBtn={toggleAddBtn}
-      /> */}
     </section>
   )
 }

@@ -24,7 +24,7 @@ namespace TicketsServer.Api.Controllers
 
         [Authorize("User")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TeamResponse>>> GetTeam()
+        public async Task<ActionResult<IEnumerable<TeamResponse>>> GetTeams()
         {
             if (_context.Teams == null)
             {
@@ -45,7 +45,7 @@ namespace TicketsServer.Api.Controllers
             {
                 return NotFound();
             }
-            var team = await _context.Teams.FindAsync(id);
+            var team = await _context.Teams.Include(team => team.Users).FirstOrDefaultAsync(t => t.TeamId == id);
 
             if (team == null)
             {

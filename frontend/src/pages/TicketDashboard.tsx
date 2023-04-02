@@ -5,12 +5,16 @@ import { TicketsContext } from "../context/TicketsProvider";
 import { ITicket } from "../interfaces/interface";
 import { TicketsContextType } from "../types";
 
-const TicketDashboard = () => {
+type TicketDashboardProps = {
+    teamName: string
+}
+
+const TicketDashboard = ({ teamName }: TicketDashboardProps) => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-    const { tickets} = useContext(TicketsContext) as TicketsContextType;
+    const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
-    
+
     const toggleAddBtn = (ticketId: number) => {
         if (currentTicketIds.some(id => id == ticketId)) {
             setCurrentTicketIds([...currentTicketIds.filter(id => id !== ticketId)]);
@@ -30,7 +34,7 @@ const TicketDashboard = () => {
                 setShowAlert(false);
             }, 2500);
         }
-    }, [currentTicketIds, showAlert])
+    }, [currentTicketIds])
 
     const resetTicketsClaims = () => {
         setCurrentTicketIds([]);
@@ -40,7 +44,7 @@ const TicketDashboard = () => {
     return (
         <>
             <StatsBar setShowAlert={setShowAlert} addBtnToggle={addBtnToggle} ticketIds={currentTicketIds} resetTicketsClaims={resetTicketsClaims} />
-            <TicketBoard showAlert={showAlert} toggleAddBtn={toggleAddBtn} tickets={tickets} />
+            <TicketBoard showAlert={showAlert} toggleAddBtn={toggleAddBtn} tickets={tickets} teamName={teamName} />
         </>
     );
 };
