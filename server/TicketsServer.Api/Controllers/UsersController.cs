@@ -59,11 +59,13 @@ public class UsersController : ControllerBase
                                         .Select(role => role.Value)
                                         .ToList();
 
-        var team = await _context.Teams.FirstOrDefaultAsync(t => t.Name == teamName);
-        if (team == null)
-        {
-            return BadRequest();
-        }
+
+        // var team = await _context.Teams.FirstOrDefaultAsync(t => t.Name == teamName);
+        // if (team == null)
+        // {
+        //     return BadRequest();
+        // }
+
         roles.Sort();
         var role = roles[0];
 
@@ -76,7 +78,7 @@ public class UsersController : ControllerBase
             Name = textInfo.ToTitleCase(name),
             ImageUrl = picture,
             Role = role,
-            Teams = new List<Team> { team }
+            Teams = new List<Team>()
         };
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
