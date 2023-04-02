@@ -60,9 +60,6 @@ public class UsersController : ControllerBase
                                         .ToList();
 
 
-        var teamExtractedFromEmail = email.Split('@')[1].Split('.')[0];
-        var team = await _context.Teams.FirstOrDefaultAsync(t => t.Name.Contains(teamExtractedFromEmail));
-        
         roles.Sort();
         var role = roles[0];
 
@@ -75,8 +72,9 @@ public class UsersController : ControllerBase
             Name = textInfo.ToTitleCase(name),
             ImageUrl = picture,
             Role = role,
-            Teams = team != null ? new List<Team>() { team } : new List<Team>()
+            Teams = new List<Team>()
         };
+        
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
