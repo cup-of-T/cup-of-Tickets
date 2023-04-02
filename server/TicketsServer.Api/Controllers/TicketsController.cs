@@ -84,6 +84,8 @@ public class TicketsController : ControllerBase
         {
             return BadRequest();
         }
+        System.Console.WriteLine("ALKSJDLKASJDLKASJDLKASJKLDJASKLDJAKLSDJKLASDJKLASJDLKAJSDKL");
+        System.Console.Write(team.Name);
 
         var newTicket = new Ticket()
         {
