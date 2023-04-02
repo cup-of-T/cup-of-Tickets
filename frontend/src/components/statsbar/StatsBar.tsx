@@ -31,15 +31,15 @@ export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowA
     setShowAlert(true);
     const accessToken = await getAccessTokenSilently();
     const newArr = [...tickets];
-
     const indexArray: number[] = [];
+
     ticketIds.forEach((ticketId) => {
       updateTicketAssignedTo(ticketId, dbUser.userId, accessToken);
-      // indexArray.push(newArr.indexOf());
+      indexArray.push(newArr.findIndex(t => t.ticketId == ticketId));
     })
 
-
-    setTickets(tickets.filter(ticket => !ticketIds.includes(ticket.ticketId)))
+    indexArray.forEach(i => newArr[i].assignedUser = dbUser);
+    setTickets(newArr);
 
     resetTicketsClaims();
 
