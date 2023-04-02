@@ -40,6 +40,11 @@ export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowA
           <OpenTicketCard />
           <StatsCard />
         </div>
+        {/* <div
+          className='statsbar__help'
+          title='After selecting a ticket you can claim it and blahblahblah '>
+          ?
+        </div> */}
         <div className="statsbar__buttons">
           {addBtnToggle && (
             <button

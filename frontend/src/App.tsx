@@ -43,7 +43,6 @@ function App() {
     setTeams(await getTeams(accessToken));
     fetchTickets();
   }
-  
   useEffect(() => {
     getData();
   }, [isAuthenticated]);
