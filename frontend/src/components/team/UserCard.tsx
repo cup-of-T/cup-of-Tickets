@@ -14,7 +14,6 @@ type RoleType = {
 
 export const UserCard = ({ user: { name, imageUrl, email, role } }: UserCardProps) => {
     const Roles: RoleType = {
-        'Admin': 'Admin/Manager',
         'Manager': 'Manager',
         'User': 'Developer'
     }

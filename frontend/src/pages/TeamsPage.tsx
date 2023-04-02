@@ -11,13 +11,13 @@ interface ITeamsProps {
 
 const TeamsPage = ({ team }: ITeamsProps) => {
     const { dbUser } = useContext(UserContext) as UserContextType;
-    if (dbUser == null) return (<></>);
+    
     if (team == undefined) {
         return (<div className="team-card__header">
             <h2>Please join a team</h2>
         </div>);
     }
-    console.log(team);
+
     return (
         <div className="team-page">
             <Team team={team} />
