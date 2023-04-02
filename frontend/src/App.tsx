@@ -22,13 +22,15 @@ import Settings from './pages/Settings'
 import { InProgress } from './pages/InProgress'
 import { Testing } from './pages/Testing'
 import { AddTicketForm } from './components/addticketform/AddTicketForm'
+import LogoutButton from './components/buttons/LogOutButton'
+import Loader from './components/loader/Loader'
 
 
 
 function App() {
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
   const { dbUser, setDbUser } = useContext(UserContext) as UserContextType;
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, getAccessTokenSilently, logout } = useAuth0();
   const [selectedTeam, setSelectedTeam] = useState(0);
   const [postedUser, setPostedUser] = useState(false);
   const [team, setTeam] = useState<ITeam>({} as ITeam);
