@@ -94,7 +94,7 @@ public class UsersController : ControllerBase
         if (userToUpdate == null)
         {
             return NotFound(); 
-        }
+        } 
 
         var picturePath = "";
         if (userRequest.Picture != null)
