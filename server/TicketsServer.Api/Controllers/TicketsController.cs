@@ -29,6 +29,7 @@ public class TicketsController : ControllerBase
         .Include(ticket => ticket.AssignedUser)
         .Include(ticket => ticket.Creator)
         .Include(ticket => ticket.Categories)
+        .Include(ticket => ticket.Team)
         .ToListAsync();
 
         return tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
@@ -47,6 +48,7 @@ public class TicketsController : ControllerBase
         .Include(ticket => ticket.AssignedUser)
         .Include(ticket => ticket.Creator)
         .Include(ticket => ticket.Categories)
+        .Include(ticket => ticket.Team)
         .FirstOrDefaultAsync(ticket => ticket.TicketId == id);
 
         if (ticket == null)
@@ -77,6 +79,11 @@ public class TicketsController : ControllerBase
             }
             newTicketCategoryList.Add(categoryToAdd);
         }
+        var team = await _context.Teams.FirstOrDefaultAsync(t => t.TeamId == request.TeamId);
+        if (team == null)
+        {
+            return BadRequest();
+        }
 
         var newTicket = new Ticket()
         {
@@ -86,7 +93,8 @@ public class TicketsController : ControllerBase
             Urgency = request.Urgency,
             TimeEstimate = request.TimeEstimate,
             Categories = newTicketCategoryList,
-            Creator = creator
+            Creator = creator,
+            Team = team
         };
 
         var result = _context.Tickets.Add(newTicket).Entity;
