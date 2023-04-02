@@ -12,6 +12,7 @@ public class TicketResponse
     public int Status { get; set; }
     public required string TimeEstimate { get; set; }
     public required User Creator { get; set; }
+    public required Team Team { get; set; }
     public User? AssignedUser { get; set; }
     public List<Category>? Categories { get; set; }
 }

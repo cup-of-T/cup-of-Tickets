@@ -49,10 +49,10 @@ public class UsersController : ControllerBase
         {
             return Forbid();
         }
-        var existingUser = _context.Users.FirstOrDefault(u => u.Email == email);
+        var existingUser = _context.Users.Include(u => u.Teams).FirstOrDefault(u => u.Email == email);
         if (existingUser != null)
         {
-            return Ok(existingUser);
+            return Ok(UserHelper.UserToUserResponse(existingUser));
         }
         var picture = decodedToken.Claims.FirstOrDefault(c => c.Type == "/picture")!.Value;
         var roles = decodedToken.Claims.Where(c => c.Type == "/roles")
