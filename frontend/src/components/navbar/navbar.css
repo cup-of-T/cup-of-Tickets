@@ -14,12 +14,25 @@
 
 .navbar__container {
     display: flex;
-    justify-content: end;
-    gap: 16px;
+    justify-content: space-between;
 }
 
 .navbar__avatar {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+
+.navbar__links{
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+}
+
+.navbar__teams{
+    border-radius: 25px;
+    text-align: center;
+    padding:0px 10px;
+    min-width: 100px;
+    font-weight: 500;
 }

@@ -4,14 +4,15 @@ import Sidebar from "../sidebar/Sidebar";
 import './Header.css'
 
 interface IHeaderProps {
+    setSelectedTeam: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Header = ({ }: IHeaderProps) => {
+const Header = ({ setSelectedTeam }: IHeaderProps) => {
     const { isAuthenticated, user } = useAuth0();
     return (
         <header className="header">
             <Sidebar />
-            <Navbar />
+            <Navbar setSelectedTeam={setSelectedTeam} />
         </header>
     );
 }

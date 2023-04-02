@@ -59,7 +59,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
         <li className='ticket-board__requester'>{ticket.creator.name ? ticket.creator.name : ticket.creator.email}</li>
         <li className='ticket-board__requester-update'>{ticket.createdAt}</li>
         <li className='ticket-board__group'>{ticket.timeEstimate}</li>
-        <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : "-"}</li>
+        <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : ""}</li>
       </ul>
 
       {(showPopUp || isPopUpHovered) && (
