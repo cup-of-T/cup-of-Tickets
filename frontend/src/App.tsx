@@ -47,8 +47,6 @@ function App() {
     getData();
   }, [isAuthenticated]);
 
-  console.log(dbUser);
-  
   return (
     <div className="app">
       {isAuthenticated && <>
