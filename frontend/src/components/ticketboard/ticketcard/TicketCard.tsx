@@ -10,18 +10,14 @@ type TicketCardProps = {
 
 export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setReviewStatus }) => {
   const [showPopUp, setShowPopUp] = useState(false);
+  const [isPopUpHovered, setIsPopupHovered] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
   const handleUrgencySign = () => {
 
-    // fix this after table drop
-    if (ticket.archived == true && ticket.status == 4)
+    if (ticket.archived == true)
     {
       return <li className='center tag-icon bg--black ticket-board__urgency'>ARCHIVED</li>
-    }
-    if (ticket.archived == true )
-    {
-      return <li className='center tag-icon bg--grey ticket-board__urgency'>COMPLETED</li>
     }
       switch (ticket.urgency) {
         case 1: {
@@ -48,7 +44,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
   return (
     <>
       <ul onMouseEnter={() => setShowPopUp(true)}
-        onMouseLeave={() => setShowPopUp(false)}
+        onMouseLeave={() =>  setShowPopUp(false)}
         onClick={() => {
           toggleAddBtn(ticket.ticketId)
           setIsChecked(!isChecked)
@@ -58,17 +54,6 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
             className='ticket-board__checkbox' type="checkbox" checked={isChecked} />)}
-        {(ticket.status == 2)&& (
-          <div className='ticket-review__btns'>
-          <button
-            className='ticket-review__btn'
-            onClick={() => setReviewStatus!(ticket.ticketId, 3)}
-            ><i className="fa-solid fa-circle-xmark color-red ticket-review__btn--icon"></i></button>
-          <button
-            className='ticket-review__btn '
-            onClick={() => setReviewStatus!(ticket.ticketId, 4)}
-            ><i className="fa-solid fa-circle-check color-green ticket-review__btn--icon"></i></button>
-            </div>)}
         {handleUrgencySign()}
         <li className='ticket-board__text'>{ticket.title}</li>
         <li className='ticket-board__requester'>{ticket.creator.name ? ticket.creator.name : ticket.creator.email}</li>
@@ -77,8 +62,10 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
         <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : "-"}</li>
       </ul>
 
-      {showPopUp && (
-        <div className='popup-card'>
+      {(showPopUp || isPopUpHovered) && (
+        <div className='popup-card' 
+          onMouseEnter={() => setIsPopupHovered(true)}
+          onMouseLeave={() => setIsPopupHovered(false)}>
           <div className="popup-card__header">
             <div className="popup-card__tags">
                 {handleStatus()}
@@ -92,7 +79,17 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
             <p className='popup-card__title '>{ticket.title}</p>
           </div>
           <p className='popup-card__description'>{ticket.description}</p>
-
+          {(ticket.status == 2)&& (
+          <div className='ticket-review__btns'>
+            <button
+              className='btn btn--green ticket-review__btn--large'
+              onClick={() => setReviewStatus!(ticket.ticketId, 4)}
+              >Approve <i className="fa-solid fa-circle-check ticket-review__btn--icon"></i></button>
+            <button
+              className='btn btn--red ticket-review__btn--large'
+              onClick={() => setReviewStatus!(ticket.ticketId, 3)}
+              > Request changes <i className="fa-solid fa-circle-xmark ticket-review__btn--icon"></i></button>
+            </div>)}
         </div>)}
     </>
   )
