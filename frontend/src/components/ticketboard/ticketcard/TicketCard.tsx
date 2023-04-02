@@ -71,7 +71,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
                 {handleStatus()}
               <ul className='popup-card__categories'>
                 {
-                ticket.categories.map( category => <li className="tag-icon bg--caribbean">{category.name.toUpperCase()}</li>)
+                ticket.categories.map( category => <li key={category.categoryId} className="tag-icon bg--caribbean">{category.name.toUpperCase()}</li>)
                 }
               </ul>
             </div>
