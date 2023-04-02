@@ -36,9 +36,9 @@ public class TicketsController : ControllerBase
         return tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{teamId}/{id}")]
     [Authorize("User")]
-    public async Task<ActionResult<TicketResponse>> GetTicket(int id)
+    public async Task<ActionResult<TicketResponse>> GetTicket(int teamId, int id)
     {
         if (_context.Tickets == null)
         {
