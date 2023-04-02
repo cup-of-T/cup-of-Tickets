@@ -47,7 +47,6 @@ function App() {
     getData();
   }, [isAuthenticated]);
 
-
   return (
     <div className="app">
       {isAuthenticated && <>

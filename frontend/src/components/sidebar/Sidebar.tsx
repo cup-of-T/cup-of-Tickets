@@ -16,7 +16,6 @@ const Sidebar = () => {
   setCurrentPathname(pathname[1])
 }, [location.pathname]);
   
-  console.log(location.pathname);
   return (
     <aside className="sidebar">
       <menu className="sidebar__links">
