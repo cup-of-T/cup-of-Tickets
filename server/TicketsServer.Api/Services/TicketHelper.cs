@@ -26,7 +26,8 @@ internal static class TicketHelper
             TimeEstimate = ticket.TimeEstimate,
             Creator = ticket.Creator,
             AssignedUser = ticket.AssignedUser,
-            Categories = responseList
+            Categories = responseList,
+            Team = ticket.Team
         };
     }
 }
