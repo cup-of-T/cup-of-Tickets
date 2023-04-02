@@ -17,7 +17,6 @@ const Navbar = ({ setSelectedTeam }: NavbarProps) => {
   if (dbUser == null || dbUser.teams == null) return (<Loader />)
 
   const handleTeamChange = (e: SyntheticEvent) => {
-    e.preventDefault();
     const value = e.target as HTMLInputElement;
     setSelectedTeam(parseInt(value.value, 10));
   }
