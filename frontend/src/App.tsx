@@ -18,7 +18,7 @@ import Dashboard from './pages/TicketDashboard'
 import { Archive } from './pages/Archive'
 import './pages/pages.css'
 import TicketDashboard from './pages/TicketDashboard'
-import { getTeams } from './services/teamApi'
+import { getTeam } from './services/teamApi'
 import { ITeam } from './interfaces/interface'
 import { Team } from './components/team/Team'
 import Settings from './pages/Settings'
@@ -33,7 +33,7 @@ function App() {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [selectedTeam, setSelectedTeam] = useState(0);
   const [postedUser, setPostedUser] = useState(false);
-  const [teams, setTeams] = useState<ITeam[]>([]);
+  const [team, setTeam] = useState<ITeam>({} as ITeam);
 
   useEffect(() => {
     const getData = async () => {
@@ -42,22 +42,28 @@ function App() {
         setDbUser(await postUser(accessToken));
         setPostedUser(true);
       }
-      setTeams(await getTeams(accessToken));
     }
     getData();
   }, [isAuthenticated]);
 
+  const fetchingTeam = async (teamId: number) => {
+      const accessToken = await getAccessTokenSilently();
+      const team = await getTeam(teamId, accessToken);
+      setTeam(team);
+      setSelectedTeam(teamId);
+  }
   useEffect(() => {
     if (dbUser.teams != null) {
-      setSelectedTeam(dbUser.teams[0]?.teamId);
+      fetchingTeam(dbUser?.teams[0].teamId);
     }
   }, [dbUser.teams]);
 
   useEffect(() => {
     fetchTickets(selectedTeam);
+    fetchingTeam(selectedTeam);
   }, [selectedTeam])
 
-  console.log(selectedTeam);
+  console.log(team);
 
   return (
     <div className="app">
@@ -70,7 +76,7 @@ function App() {
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
             <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
-            <Route path="/teams" element={<TeamsPage teams={teams} user={dbUser} />} />
+            <Route path="/teams" element={<TeamsPage team={team} />} />
             <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
             <Route path="/settings" element={<ProtectedRoute component={Settings} />} />
             <Route path="/inprogress" element={<ProtectedRoute component={InProgress} />} />
