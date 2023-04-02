@@ -54,6 +54,13 @@ h3 {
   font-weight: 400;
 }
 
+a{
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
