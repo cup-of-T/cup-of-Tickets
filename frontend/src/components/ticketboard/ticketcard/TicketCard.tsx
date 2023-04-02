@@ -20,10 +20,6 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
     {
       return <li className='center tag-icon bg--black ticket-board__urgency'>ARCHIVED</li>
     }
-    if (ticket.archived == true )
-    {
-      return <li className='center tag-icon bg--grey ticket-board__urgency'>COMPLETED</li>
-    }
       switch (ticket.urgency) {
         case 1: {
           return <li className='center tag-icon bg--orange ticket-board__urgency'>MEDIUM</li>
