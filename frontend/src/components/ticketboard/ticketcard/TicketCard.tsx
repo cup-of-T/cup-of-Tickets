@@ -55,17 +55,6 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
             className='ticket-board__checkbox' type="checkbox" checked={isChecked} />)}
-        {(ticket.status == 2)&& (
-          <div className='ticket-review__btns'>
-          <button
-            className='ticket-review__btn '
-            onClick={() => setReviewStatus!(ticket.ticketId, 4)}
-            ><i className="fa-solid fa-circle-check color-green ticket-review__btn--icon"></i></button>
-          <button
-            className='ticket-review__btn'
-            onClick={() => setReviewStatus!(ticket.ticketId, 3)}
-            ><i className="fa-solid fa-circle-xmark color-red ticket-review__btn--icon"></i></button>
-            </div>)}
         {handleUrgencySign()}
         <li className='ticket-board__text'>{ticket.title}</li>
         <li className='ticket-board__requester'>{ticket.creator.name ? ticket.creator.name : ticket.creator.email}</li>
