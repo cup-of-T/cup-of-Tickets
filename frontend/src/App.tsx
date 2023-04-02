@@ -35,6 +35,13 @@ function App() {
   const [postedUser, setPostedUser] = useState(false);
   const [team, setTeam] = useState<ITeam>({} as ITeam);
 
+  const fetchingTeam = async (teamId: number) => {
+    const accessToken = await getAccessTokenSilently();
+    const team = await getTeam(teamId, accessToken);
+    setTeam(team);
+    setSelectedTeam(teamId);
+  }
+
   useEffect(() => {
     const getData = async () => {
       const accessToken = await getAccessTokenSilently();
@@ -46,12 +53,6 @@ function App() {
     getData();
   }, [isAuthenticated]);
 
-  const fetchingTeam = async (teamId: number) => {
-      const accessToken = await getAccessTokenSilently();
-      const team = await getTeam(teamId, accessToken);
-      setTeam(team);
-      setSelectedTeam(teamId);
-  }
   useEffect(() => {
     if (dbUser.teams != null) {
       fetchingTeam(dbUser?.teams[0].teamId);
@@ -62,8 +63,6 @@ function App() {
     fetchTickets(selectedTeam);
     fetchingTeam(selectedTeam);
   }, [selectedTeam])
-
-  console.log(team);
 
   return (
     <div className="app">

@@ -49,7 +49,7 @@ export const UserSettingsForm = () => {
             <button type="button" className="btn">Add Picture</button>
           </UploadFile>
           <button className="btn btn--blue w-100 user-form__submit-btn" type="submit">
-            save changes
+            Save changes
           </button>
         </Form>
       </div>
