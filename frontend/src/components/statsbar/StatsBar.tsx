@@ -19,7 +19,7 @@ type StatsBarProps = {
 
 export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowAlert }: StatsBarProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
-  const {getAccessTokenSilently} = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const { tickets, setTickets, updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
   const navigate = useNavigate();
 
@@ -28,13 +28,14 @@ export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowA
   }
 
   const handleUpdateTicketAssignee = async () => {
+    setShowAlert(true);
     const accessToken = await getAccessTokenSilently();
     ticketIds.forEach((ticketId) => {
       updateTicketAssignedTo(ticketId, dbUser.userId, accessToken);
     })
-    setShowAlert(true);
+    
+    setTickets(tickets.filter(ticket => !ticketIds.includes(ticket.ticketId)))
 
-    setTickets(prevState => prevState.filter(ticket => !ticketIds.includes(ticket.ticketId)))
     resetTicketsClaims();
 
   }

@@ -1,9 +1,13 @@
 import React from 'react'
 import { AddTicketForm } from '../components/addticketform/AddTicketForm'
 
-export const AddTicket = () => {
+type AddTicketProps = {
+  selectedTeam: number
+}
+
+export const AddTicket = ({ selectedTeam }: AddTicketProps) => {
 
   return (
-    <AddTicketForm />
+    <AddTicketForm selectedTeam={selectedTeam} />
   )
 }

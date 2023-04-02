@@ -24,6 +24,7 @@ import { Team } from './components/team/Team'
 import Settings from './pages/Settings'
 import { InProgress } from './pages/InProgress'
 import { Testing } from './pages/Testing'
+import { AddTicketForm } from './components/addticketform/AddTicketForm'
 
 
 
@@ -74,7 +75,7 @@ function App() {
             <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />} />
             <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
             <Route path="/kanban" element={<ProtectedRoute component={Kanban} />} />
-            <Route path="/addticket" element={<ProtectedRoute component={AddTicket} />} />
+            <Route path="/addticket" element={<AddTicketForm selectedTeam={selectedTeam} />} />
             <Route path="/teams" element={<TeamsPage team={team} />} />
             <Route path="/archive" element={<ProtectedRoute component={Archive} />} />
             <Route path="/settings" element={<ProtectedRoute component={Settings} />} />
