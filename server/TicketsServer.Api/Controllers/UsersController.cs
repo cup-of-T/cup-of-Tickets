@@ -93,7 +93,7 @@ public class UsersController : ControllerBase
         var userToUpdate = await _context.Users.FindAsync(id);
         if (userToUpdate == null)
         {
-            return NotFound();
+            return NotFound(); 
         }
 
         var picturePath = "";
