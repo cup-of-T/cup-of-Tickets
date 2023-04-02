@@ -62,10 +62,6 @@ public class UsersController : ControllerBase
 
         var teamExtractedFromEmail = email.Split('@')[1].Split('.')[0];
         var team = await _context.Teams.FirstOrDefaultAsync(t => t.Name.Contains(teamExtractedFromEmail));
-        if (team == null)
-        {
-            return BadRequest();
-        }
 
         roles.Sort();
         var role = roles[0];
