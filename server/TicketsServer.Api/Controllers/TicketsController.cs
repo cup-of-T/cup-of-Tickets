@@ -68,6 +68,7 @@ public class TicketsController : ControllerBase
         {
             return BadRequest();
         }
+        
         var newTicketCategoryList = new List<Category>();
         foreach (var categoryName in request.CategoryNames)
         {
@@ -84,8 +85,6 @@ public class TicketsController : ControllerBase
         {
             return BadRequest();
         }
-        System.Console.WriteLine("ALKSJDLKASJDLKASJDLKASJKLDJASKLDJAKLSDJKLASDJKLASJDLKAJSDKL");
-        System.Console.Write(team.Name);
 
         var newTicket = new Ticket()
         {
