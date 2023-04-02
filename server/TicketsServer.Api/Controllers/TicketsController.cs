@@ -17,9 +17,9 @@ public class TicketsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
+    [HttpGet("{teamId}")]
     [Authorize("User")]
-    public async Task<ActionResult<IList<TicketResponse>>> GetTicket()
+    public async Task<ActionResult<IList<TicketResponse>>> GetTickets(int teamId)
     {
         if (_context.Tickets == null)
         {
@@ -30,6 +30,7 @@ public class TicketsController : ControllerBase
         .Include(ticket => ticket.Creator)
         .Include(ticket => ticket.Categories)
         .Include(ticket => ticket.Team)
+        .Where(ticket => ticket.Team.TeamId == teamId)
         .ToListAsync();
 
         return tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
