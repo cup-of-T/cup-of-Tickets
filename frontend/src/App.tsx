@@ -42,16 +42,20 @@ function App() {
       setPostedUser(true);
     }
     setTeams(await getTeams(accessToken));
-    fetchTickets();
+    fetchTickets(selectedTeam);
   }
   useEffect(() => {
     getData();
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    fetchTickets(selectedTeam);
+  }, [selectedTeam]);
+
   return (
     <div className="app">
       {isAuthenticated && <>
-        <Header setSelectedTeam={setSelectedTeam}/>
+        <Header setSelectedTeam={setSelectedTeam} />
         <main className="main center">
           <Routes>
             <Route path="/" element={<TicketDashboard />} />

@@ -13,21 +13,21 @@ const TicketProvider = ({ children }: TicketsProviderProps) => {
     const { getAccessTokenSilently } = useAuth0();
     const [tickets, setTickets] = useState<ITicket[]>([]);
 
-    const fetchTickets = async () => {
+    const fetchTickets = async (teamId: number) => {
         const accessToken = await getAccessTokenSilently();
+        setTickets(await getTickets(teamId, accessToken));
+    }
+
+    const updateTicketAssignee = async (ticketId: number, userId: number) => {
+        const accessToken = await getAccessTokenSilently();
+        await updateTicketAssignedTo(ticketId, userId, accessToken)
         setTickets(await getTickets(accessToken));
     }
 
-    const updateTicketAssignee = async (ticketId : number, userId: number) => {
-        const accessToken = await getAccessTokenSilently();
-        await updateTicketAssignedTo(ticketId, userId, accessToken)
-        setTickets(await getTickets(accessToken)); 
-    }
-
-    const patchTicketsStatus = async (ticketId : number, status: number) => {
+    const patchTicketsStatus = async (ticketId: number, status: number) => {
         const accessToken = await getAccessTokenSilently();
         await updateTicketStatus(ticketId, status, accessToken)
-        setTickets(await getTickets(accessToken)); 
+        setTickets(await getTickets(accessToken));
     }
 
 
@@ -44,7 +44,7 @@ const TicketProvider = ({ children }: TicketsProviderProps) => {
     }
 
     return (
-        <TicketsContext.Provider value={{ tickets, setTickets, fetchTickets, deletingTicket, updateTicketAssignee,patchTicketsStatus, postingTicket }}>
+        <TicketsContext.Provider value={{ tickets, setTickets, fetchTickets, deletingTicket, updateTicketAssignee, patchTicketsStatus, postingTicket }}>
             {children}
         </TicketsContext.Provider>
     );

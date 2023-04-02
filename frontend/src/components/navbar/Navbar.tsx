@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Loader from "../loader/Loader";
 import LogoutButton from "../buttons/LogOutButton";
 import './navbar.css';
-import { useContext } from "react";
+import { SyntheticEvent, useContext } from "react";
 import { UserContext } from "../../context/UserProvider";
 import { UserContextType } from "../../types";
 import { Link } from "react-router-dom";
@@ -17,10 +17,16 @@ const Navbar = ({ setSelectedTeam }: NavbarProps) => {
 
   if (dbUser == null) return (<Loader />)
 
+  const handleTeamChange = (e: SyntheticEvent) => {
+    e.preventDefault();
+    const value = e.target as HTMLInputElement;
+    setSelectedTeam(parseInt(value.value, 10));
+  }
+
   return (
     <nav className="navbar">
       <div className="container navbar__container center">
-        <select className='navbar__teams'>
+        <select className='navbar__teams' onChange={handleTeamChange}>
           {dbUser.teams?.map(team =>
             <option key={team.teamId} value={team.teamId}>{team.name}</option>)}
         </select>
