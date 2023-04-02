@@ -31,6 +31,7 @@ function App() {
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
   const { dbUser, setDbUser } = useContext(UserContext) as UserContextType;
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [selectedTeam, setSelectedTeam] = useState(0);
   const [postedUser, setPostedUser] = useState(false);
   const [teams, setTeams] = useState<ITeam[]>([]);
 
@@ -50,7 +51,7 @@ function App() {
   return (
     <div className="app">
       {isAuthenticated && <>
-        <Header />
+        <Header setSelectedTeam={setSelectedTeam}/>
         <main className="main center">
           <Routes>
             <Route path="/" element={<TicketDashboard />} />
