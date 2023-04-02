@@ -13,7 +13,6 @@ export const InProgress = () => {
 
     const toggleAddBtn = (ticketId: number) => {
         if ( currentTicketIds.some(id => id == ticketId)) {
-            console.log(currentTicketIds)
             setCurrentTicketIds([...currentTicketIds.filter(id => id !== ticketId)])
             return;
         }

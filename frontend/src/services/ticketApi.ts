@@ -1,3 +1,4 @@
+import { values } from "lodash";
 import { IArchivedRequest, IAssigneeRequest, IStatusRequest, ITicket } from "../interfaces/interface";
 
 export const getTickets = async (accessToken: string) => {
@@ -8,6 +9,7 @@ export const getTickets = async (accessToken: string) => {
 }
 
 export const postTicket = async (ticket: Partial<ITicket>, accessToken: string) => {
+  console.log(ticket);
   const ticketToJson = JSON.stringify(ticket);
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets`, {
     method: 'POST',
