@@ -32,19 +32,23 @@
   background-color: #91ccdb;
 }
 
+.sidebar__active{
+  color: rgb(119, 119, 119);
+  background-color: #91ccdb;
+}
+
 .sidebar__tooltiptext {
   visibility: hidden;
   width: 110px;
-  background-color: #57a5b8;
-  color: white;
   text-align: center;
   padding: 3px 0;
-  border-radius: 25px;
-  /* border: 1px solid rgb(119, 119, 119); */
-  /* Position the sidebar__tooltip text */
+  border-radius: 4px;
+  background-color: rgb(119, 119, 119);
+  color: white;
+  top: 30%;
   position: absolute;
   z-index: 1;
-  left: 102%;
+  left: 90%;
 }
 
 .sidebar__links-item:hover .sidebar__tooltiptext {
