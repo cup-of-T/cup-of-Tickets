@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketsServer.Api.Models;
 using TicketsServer.Api.Services;
+using System.Globalization;
 
 namespace TicketsServer.Api.Controllers;
 [Route("api/[controller]")]
@@ -65,10 +66,14 @@ public class UsersController : ControllerBase
         }
         roles.Sort();
         var role = roles[0];
+
+        var name = email.Split('@')[0].Replace('.', ' ');
+        var textInfo = new CultureInfo("en-US", false).TextInfo;
+
         var user = new User()
         {
             Email = email,
-            Name = email.Split('@')[0],
+            Name = textInfo.ToTitleCase(name),
             ImageUrl = picture,
             Role = role,
             Teams = new List<Team> { team }
