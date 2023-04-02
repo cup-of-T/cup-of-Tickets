@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Microsoft.Net.Http.Headers;
 using Microsoft.Extensions.FileProviders;
+using TicketsServer.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -96,6 +97,15 @@ foreach (var key in requiredVars)
     if (value == "" || value == null)
     {
         throw new Exception($"Config variable missing: {key}.");
+    }
+}
+
+if (app.Environment.IsDevelopment())
+{
+    using (var scope = app.Services.CreateScope())
+    {
+    var services = scope.ServiceProvider;
+    SeedData.Initialize(services);
     }
 }
 

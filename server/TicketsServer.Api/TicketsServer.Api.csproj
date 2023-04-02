@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bogus" Version="34.0.2" />
     <PackageReference Include="dotenv.net" Version="3.1.2" />
     <PackageReference Include="dotnetenv" Version="2.5.0" />
     <PackageReference Include="jwt" Version="10.0.2" />
