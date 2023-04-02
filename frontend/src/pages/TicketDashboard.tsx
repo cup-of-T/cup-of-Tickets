@@ -8,9 +8,11 @@ import { TicketsContextType } from "../types";
 const TicketDashboard = () => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-    const { tickets} = useContext(TicketsContext) as TicketsContextType;
+    const { tickets } = useContext(TicketsContext) as TicketsContextType;
     const [currentTicketIds, setCurrentTicketIds] = useState<number[]>([])
-    
+
+    console.log(showAlert);
+
     const toggleAddBtn = (ticketId: number) => {
         if (currentTicketIds.some(id => id == ticketId)) {
             setCurrentTicketIds([...currentTicketIds.filter(id => id !== ticketId)]);
@@ -30,7 +32,7 @@ const TicketDashboard = () => {
                 setShowAlert(false);
             }, 2500);
         }
-    }, [currentTicketIds, showAlert])
+    }, [currentTicketIds])
 
     const resetTicketsClaims = () => {
         setCurrentTicketIds([]);

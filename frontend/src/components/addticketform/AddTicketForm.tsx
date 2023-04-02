@@ -14,7 +14,11 @@ import { useNavigate } from "react-router-dom";
 import { Urgency } from "./Urgency";
 import Loader from "../loader/Loader";
 
-export const AddTicketForm = () => {
+type AddTicketFormProps = {
+  selectedTeam: number
+}
+
+export const AddTicketForm = ({ selectedTeam }: AddTicketFormProps) => {
   const navigate = useNavigate();
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { postingTicket } = useContext(TicketsContext) as TicketsContextType
@@ -23,7 +27,7 @@ export const AddTicketForm = () => {
 
   const initialValues = {
     title: "",
-    teamId: dbUser?.teams[0].teamId,
+    teamId: selectedTeam,
     description: "",
     timeEstimate: "XS",
     urgency: 0,
@@ -35,6 +39,7 @@ export const AddTicketForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, { setSubmitting }) => {
+        values.teamId = selectedTeam;
         setSubmitting(false);
         postingTicket(values as Partial<ITicket>)
         navigate('/');
@@ -50,11 +55,6 @@ export const AddTicketForm = () => {
             type="text"
             placeholder="Title.."
           />
-          <SelectOptions label="Team" name="team">
-            {dbUser?.teams?.map(t =>
-              <option key={t?.teamId} value={t?.teamId}>{t?.name}</option>
-            )}
-          </SelectOptions>
           <SelectOptions label="Time Estimate" name="timeEstimate">
             <option value="XS">XS</option>
             <option value="S">S</option>

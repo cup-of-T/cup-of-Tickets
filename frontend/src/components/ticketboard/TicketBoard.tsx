@@ -36,10 +36,6 @@ export const TicketBoard = ({ toggleAddBtn, tickets, showAlert, setReviewStatus 
         />
 
       }
-      {/* <TicketsTable title={'Closed tickets'}
-        tickets={completedTickets}
-        toggleAddBtn={toggleAddBtn}
-      /> */}
     </section>
   )
 }

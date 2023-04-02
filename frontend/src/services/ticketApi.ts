@@ -8,6 +8,7 @@ export const getTickets = async (teamId: number, accessToken: string) => {
 }
 
 export const postTicket = async (ticket: Partial<ITicket>, accessToken: string) => {
+  console.log(ticket);
   const ticketToJson = JSON.stringify(ticket);
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets`, {
     method: 'POST',
