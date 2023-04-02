@@ -30,10 +30,15 @@ export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowA
   const handleUpdateTicketAssignee = async () => {
     setShowAlert(true);
     const accessToken = await getAccessTokenSilently();
+    const newArr = [...tickets];
+
+    const indexArray: number[] = [];
     ticketIds.forEach((ticketId) => {
       updateTicketAssignedTo(ticketId, dbUser.userId, accessToken);
+      // indexArray.push(newArr.indexOf());
     })
-    
+
+
     setTickets(tickets.filter(ticket => !ticketIds.includes(ticket.ticketId)))
 
     resetTicketsClaims();
