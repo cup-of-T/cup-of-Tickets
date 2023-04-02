@@ -50,7 +50,6 @@ function App() {
   useEffect(() => {
     if (dbUser.teams != null) {
       setSelectedTeam(dbUser.teams[0]?.teamId);
-      // fetchTickets(selectedTeam);
     }
   }, [dbUser.teams]);
 
