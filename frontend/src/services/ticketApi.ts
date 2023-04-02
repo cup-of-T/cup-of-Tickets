@@ -1,4 +1,3 @@
-import { values } from "lodash";
 import { IArchivedRequest, IAssigneeRequest, IStatusRequest, ITicket } from "../interfaces/interface";
 
 export const getTickets = async (accessToken: string) => {
