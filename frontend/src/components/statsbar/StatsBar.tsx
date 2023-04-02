@@ -6,6 +6,8 @@ import { UserContext } from '../../context/UserProvider'
 import { TicketsContextType, UserContextType } from '../../types'
 import { TicketsContext } from '../../context/TicketsProvider'
 import { useNavigate } from 'react-router-dom'
+import { updateTicketAssignedTo } from '../../services/ticketApi'
+import { useAuth0 } from '@auth0/auth0-react'
 
 
 type StatsBarProps = {
@@ -17,19 +19,24 @@ type StatsBarProps = {
 
 export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowAlert }: StatsBarProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
-  const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
+  const {getAccessTokenSilently} = useAuth0();
+  const { tickets, setTickets, updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
   const navigate = useNavigate();
 
   const onCreateButtonClick = () => {
     navigate('/addticket');
   }
 
-  const handleUpdateTicketAssignee = () => {
+  const handleUpdateTicketAssignee = async () => {
+    const accessToken = await getAccessTokenSilently();
     ticketIds.forEach((ticketId) => {
-      updateTicketAssignee(ticketId, dbUser.userId)
+      updateTicketAssignedTo(ticketId, dbUser.userId, accessToken);
     })
     setShowAlert(true);
+
+    setTickets(prevState => prevState.filter(ticket => !ticketIds.includes(ticket.ticketId)))
     resetTicketsClaims();
+
   }
 
 

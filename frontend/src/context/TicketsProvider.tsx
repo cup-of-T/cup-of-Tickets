@@ -18,6 +18,12 @@ const TicketProvider = ({ children }: TicketsProviderProps) => {
         setTickets(await getTickets(teamId, accessToken));
     }
 
+    // const updateTicketAssignee = async (ticketId: number, userId: number) => {
+    //     const accessToken = await getAccessTokenSilently();
+    //     await updateTicketAssignedTo(ticketId, userId, accessToken)
+    //     setTickets(await getTickets(accessToken));
+
+
     const postingTicket = async (ticket: Partial<ITicket>) => {
         const accessToken = await getAccessTokenSilently();
         const response = await postTicket(ticket, accessToken);
