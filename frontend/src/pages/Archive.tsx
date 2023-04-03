@@ -1,10 +1,7 @@
-import React, { useContext, useState } from 'react'
-import { StatsBar } from '../components/statsbar/StatsBar';
-import { TicketBoard } from '../components/ticketboard/TicketBoard';
+import { useContext, useState } from 'react'
 import { TicketsTable } from '../components/ticketboard/ticketstable/TicketsTable';
 import { TicketsContext } from '../context/TicketsProvider';
 import { TicketsContextType } from '../types';
-// import './pages.css';
 
 export const Archive = () => {
     const [addBtnToggle, setAddToggleBtn] = useState(false);

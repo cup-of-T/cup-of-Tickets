@@ -1,4 +1,3 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import Loader from "../loader/Loader";
 import LogoutButton from "../buttons/LogOutButton";
 import './navbar.css';

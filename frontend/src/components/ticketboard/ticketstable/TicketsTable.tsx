@@ -1,4 +1,3 @@
-import React from 'react'
 import { ITicket } from '../../../interfaces/interface'
 import { TicketAlert } from '../ticketalert/TicketAlert'
 import { TicketCard } from '../ticketcard/TicketCard'

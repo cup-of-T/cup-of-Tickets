@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import { SyntheticEvent, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context/UserProvider";
 import { TicketsContextType, UserContextType } from "../../types";
 import { Categories } from "./Categories";

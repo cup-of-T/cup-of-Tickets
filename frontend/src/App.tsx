@@ -22,10 +22,6 @@ import Settings from './pages/Settings'
 import { InProgress } from './pages/InProgress'
 import { Testing } from './pages/Testing'
 import { AddTicketForm } from './components/addticketform/AddTicketForm'
-import LogoutButton from './components/buttons/LogOutButton'
-import Loader from './components/loader/Loader'
-
-
 
 function App() {
   const { tickets, fetchTickets } = useContext(TicketsContext) as TicketsContextType;
