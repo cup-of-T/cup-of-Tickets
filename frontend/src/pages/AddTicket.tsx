@@ -1,4 +1,3 @@
-import React from 'react'
 import { AddTicketForm } from '../components/addticketform/AddTicketForm'
 
 type AddTicketProps = {

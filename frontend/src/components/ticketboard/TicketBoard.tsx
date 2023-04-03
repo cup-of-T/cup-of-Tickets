@@ -32,8 +32,7 @@ export const TicketBoard = ({ toggleAddBtn, tickets, showAlert, setReviewStatus,
       {(dbUser.role == 'Manager' || dbUser.role == 'Admin') &&
         <TicketsTable title={`Claimed tickets by ${teamName}`}
           tickets={assignedTickets}
-          setReviewStatus={setReviewStatus}
-          toggleAddBtn={toggleAddBtn}
+          // setReviewStatus={setReviewStatus}
         />
 
       }

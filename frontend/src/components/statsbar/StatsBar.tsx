@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 import { StatsCard } from './statscard/StatsCard'
 import './statsbar.css'
 import { OpenTicketCard } from './statscard/OpenTicketCard'
@@ -20,7 +20,7 @@ type StatsBarProps = {
 export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowAlert }: StatsBarProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { getAccessTokenSilently } = useAuth0();
-  const { tickets, setTickets, updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
+  const { tickets, setTickets } = useContext(TicketsContext) as TicketsContextType;
   const navigate = useNavigate();
 
   const onCreateButtonClick = () => {
@@ -45,7 +45,6 @@ export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowA
 
   }
 
-
   return (
     <section className="statsbar">
       <div className="statsbar__container container center">
@@ -53,11 +52,6 @@ export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowA
           <OpenTicketCard />
           <StatsCard />
         </div>
-        {/* <div
-          className='statsbar__help'
-          title='After selecting a ticket you can claim it and blahblahblah '>
-          ?
-        </div> */}
         <div className="statsbar__buttons">
           {addBtnToggle && (
             <button

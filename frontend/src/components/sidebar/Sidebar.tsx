@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { UserContext } from '../../context/UserProvider'
 import { UserContextType } from '../../types'
-import Loader from '../loader/Loader'
 import './sidebar.css'
 
 const Sidebar = () => {

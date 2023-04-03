@@ -1,5 +1,4 @@
 import { useField, useFormikContext } from "formik";
-import React from "react";
 import "./urgency.css";
 
 type UrgencyProps = {
