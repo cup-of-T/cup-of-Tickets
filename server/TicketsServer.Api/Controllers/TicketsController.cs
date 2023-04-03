@@ -33,7 +33,7 @@ public class TicketsController : ControllerBase
         .Where(ticket => ticket.Team.TeamId == teamId)
         .ToListAsync();
 
-        return tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
+        return Ok(tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList());
     }
 
     [HttpGet("{teamId}/{id}")]
@@ -57,7 +57,7 @@ public class TicketsController : ControllerBase
             return NotFound();
         }
 
-        return TicketHelper.TicketToResponse(ticket);
+        return Ok(TicketHelper.TicketToResponse(ticket));
     }
 
     [HttpPost]
