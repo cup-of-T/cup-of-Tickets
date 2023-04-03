@@ -7,7 +7,7 @@ import { TicketHeader } from '../ticketheader/TicketHeader'
 type TicketsTableProps = {
     title: string,
     tickets: ITicket[],
-    toggleAddBtn: (ticketId: number) => void,
+    toggleAddBtn?: (ticketId: number) => void,
     setReviewStatus?: (ticketId: number, status : number) => void,
     showAlert?: boolean
 }

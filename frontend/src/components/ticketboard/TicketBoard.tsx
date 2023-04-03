@@ -33,7 +33,6 @@ export const TicketBoard = ({ toggleAddBtn, tickets, showAlert, setReviewStatus,
         <TicketsTable title={`Claimed tickets by ${teamName}`}
           tickets={assignedTickets}
           setReviewStatus={setReviewStatus}
-          toggleAddBtn={toggleAddBtn}
         />
 
       }

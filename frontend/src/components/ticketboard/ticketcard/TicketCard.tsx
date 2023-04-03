@@ -3,7 +3,7 @@ import { ITicket } from '../../../interfaces/interface'
 import './ticketcard.css'
 
 type TicketCardProps = {
-  toggleAddBtn: (ticketId: number) => void,
+  toggleAddBtn?: (ticketId: number) => void,
   setReviewStatus?: (ticketId: number, status: number) => void,
   ticket: ITicket
 }
@@ -43,13 +43,13 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
       <ul onMouseEnter={() => setShowPopUp(true)}
         onMouseLeave={() => setShowPopUp(false)}
         onClick={() => {
-          toggleAddBtn(ticket.ticketId)
+          toggleAddBtn!(ticket.ticketId)
           setIsChecked(!isChecked)
         }}
         className='ticket-board__grid fw-300 ticket-board__card-styling container'>
         {(ticket.assignedUser == null) && (
           <input
-            onChange={() => toggleAddBtn(ticket.ticketId)}
+            onChange={() => toggleAddBtn!(ticket.ticketId)}
             className='ticket-board__checkbox' type="checkbox" checked={isChecked} />)}
         {handleUrgencySign()}
         <li className='ticket-board__text'>{ticket.title}</li>
