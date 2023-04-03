@@ -15,8 +15,8 @@ public class SeedData
     {
         using (var context = new DbContext(serviceProvider.GetRequiredService<DbContextOptions<DbContext>>()))
         {
-            if (context.Tickets!.Any()) { return;}
-            
+            if (context.Tickets!.Any()) { return; }
+
             var descriptions = new string[]{
                 "check the github project for additional info",
                 "do not get expected response from request",
@@ -44,9 +44,16 @@ public class SeedData
                 "cookie window fix"
             };
 
-            var TimeEstimates = new string[]{"XS","S","M","L","XL"};
+            var TimeEstimates = new string[] { "XS", "S", "M", "L", "XL" };
 
             var mathias = await context.Users.FindAsync(21);
+            var lucas = await context.Users.FindAsync(24);
+            var bjorn = await context.Users.FindAsync(25);
+            if (mathias == null || lucas == null || bjorn == null)
+            {
+                throw new Exception("Can't find instructor");
+            }
+            var instructors = new User[] { mathias, lucas, bjorn };
 
             var categories = context.Categories.ToList();
 
@@ -57,11 +64,11 @@ public class SeedData
                 .RuleFor(ticket => ticket.Description, bogus => bogus.Random.ArrayElement<string>(descriptions))
                 .RuleFor(ticket => ticket.Archived, bogus => bogus.Random.Bool())
                 .RuleFor(ticket => ticket.Urgency, bogus => 0)
-                .RuleFor(ticket => ticket.Status, bogus => bogus.Random.Number(0,0))
+                .RuleFor(ticket => ticket.Status, bogus => bogus.Random.Number(0, 0))
                 .RuleFor(ticket => ticket.TimeEstimate, bogus => bogus.Random.ArrayElement<string>(TimeEstimates))
-                .RuleFor(ticket => ticket.Creator, bogus => mathias)
-                .RuleFor(ticket => ticket.Team , bogus => bogus.Random.ListItem(teams))          
-                .RuleFor(ticket => ticket.Categories, bogus => bogus.Random.ListItems(categories, (bogus.Random.Number(1,3))))
+                .RuleFor(ticket => ticket.Creator, bogus => bogus.Random.ArrayElement(instructors))
+                .RuleFor(ticket => ticket.Team, bogus => bogus.Random.ListItem(teams))
+                .RuleFor(ticket => ticket.Categories, bogus => bogus.Random.ListItems(categories, (bogus.Random.Number(1, 3))))
                 .Generate(130);
 
             await context.Tickets.AddRangeAsync(tickets);
