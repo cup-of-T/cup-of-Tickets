@@ -1,7 +1,12 @@
 import { IArchivedRequest, IAssigneeRequest, IStatusRequest, ITicket } from "../interfaces/interface";
 
+<<<<<<< HEAD
 export const getTickets = async (accessToken: string) => {
   const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets`, {
+=======
+export const getTickets = async (teamId: number, accessToken: string) => {
+  const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/Tickets/${teamId}`, {
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
     headers: { Authorization: `Bearer ${accessToken}` }
   })
   return await response.json() as ITicket[];

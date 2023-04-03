@@ -46,10 +46,17 @@ export const UserSettingsForm = () => {
             placeholder="name.."
           />
           <UploadFile accept="image/*">
+<<<<<<< HEAD
             <button type="button" className="btn">Add Picture</button>
           </UploadFile>
           <button className="btn btn--blue w-100 user-form__submit-btn" type="submit">
             save changes
+=======
+            <button type="button" className="btn">Add picture</button>
+          </UploadFile>
+          <button className="btn btn--blue w-100 user-form__submit-btn" type="submit">
+            Save changes
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
           </button>
         </Form>
       </div>

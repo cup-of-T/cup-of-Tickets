@@ -60,12 +60,6 @@ public class UsersController : ControllerBase
                                         .ToList();
 
 
-        // var team = await _context.Teams.FirstOrDefaultAsync(t => t.Name == teamName);
-        // if (team == null)
-        // {
-        //     return BadRequest();
-        // }
-
         roles.Sort();
         var role = roles[0];
 
@@ -80,6 +74,7 @@ public class UsersController : ControllerBase
             Role = role,
             Teams = new List<Team>()
         };
+        
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 

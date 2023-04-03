@@ -4,7 +4,11 @@ import './ticketcard.css'
 
 type TicketCardProps = {
   toggleAddBtn: (ticketId: number) => void,
+<<<<<<< HEAD
   setReviewStatus?: (ticketId: number, status : number) => void,
+=======
+  setReviewStatus?: (ticketId: number, status: number) => void,
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
   ticket: ITicket
 }
 
@@ -15,6 +19,7 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
 
   const handleUrgencySign = () => {
 
+<<<<<<< HEAD
     if (ticket.archived == true)
     {
       return <li className='center tag-icon bg--black ticket-board__urgency'>ARCHIVED</li>
@@ -39,18 +44,49 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
       default:
         return <span className='tag-icon bg--grey'>OPEN</span>;
     }
+=======
+    if (ticket.archived == true) {
+      return <li className='center tag-icon bg--black ticket-board__urgency'>ARCHIVED</li>
+    }
+    switch (ticket.urgency) {
+      case 1: {
+        return <li className='center tag-icon bg--orange ticket-board__urgency'>MEDIUM</li>
+      }
+      case 2: {
+        return <li className='center tag-icon bg--red ticket-board__urgency'>URGENT</li>
+      }
+      default: {
+        return <li className='center tag-icon bg--green ticket-board__urgency'>NORMAL</li>
+      }
+    }
+  }
+
+  const handleStatus = () => {
+    if (ticket.status > 3) {
+      return <span className='tag-icon bg--black'>CLOSED</span>;
+    }
+    return <span className='tag-icon bg--grey'>OPEN</span>;
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
   }
 
   return (
     <>
       <ul onMouseEnter={() => setShowPopUp(true)}
+<<<<<<< HEAD
         onMouseLeave={() =>  setShowPopUp(false)}
+=======
+        onMouseLeave={() => setShowPopUp(false)}
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
         onClick={() => {
           toggleAddBtn(ticket.ticketId)
           setIsChecked(!isChecked)
         }}
         className='ticket-board__grid fw-300 ticket-board__card-styling container'>
+<<<<<<< HEAD
         {(ticket.assignedUser == null)&& (
+=======
+        {(ticket.assignedUser == null) && (
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
           <input
             onChange={() => toggleAddBtn(ticket.ticketId)}
             className='ticket-board__checkbox' type="checkbox" checked={isChecked} />)}
@@ -59,15 +95,24 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
         <li className='ticket-board__requester'>{ticket.creator.name ? ticket.creator.name : ticket.creator.email}</li>
         <li className='ticket-board__requester-update'>{ticket.createdAt}</li>
         <li className='ticket-board__group'>{ticket.timeEstimate}</li>
+<<<<<<< HEAD
         <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : "-"}</li>
       </ul>
 
       {(showPopUp || isPopUpHovered) && (
         <div className='popup-card' 
+=======
+        <li className='ticket-board__assignee'>{ticket.assignedUser ? ticket.assignedUser.name : ""}</li>
+      </ul>
+
+      {(showPopUp || isPopUpHovered) && (
+        <div className='popup-card'
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
           onMouseEnter={() => setIsPopupHovered(true)}
           onMouseLeave={() => setIsPopupHovered(false)}>
           <div className="popup-card__header">
             <div className="popup-card__tags">
+<<<<<<< HEAD
                 {handleStatus()}
               <ul className='popup-card__categories'>
                 {
@@ -88,6 +133,28 @@ export const TicketCard: FC<TicketCardProps> = ({ toggleAddBtn, ticket, setRevie
             <button
               className='btn btn--red ticket-review__btn--large'
               onClick={() => setReviewStatus!(ticket.ticketId, 3)}
+=======
+              {handleStatus()}
+              <ul className='popup-card__categories'>
+                {
+                  ticket.categories.map(category => <li key={category.categoryId} className="tag-icon bg--caribbean">{category.name.toUpperCase()}</li>)
+                }
+              </ul>
+            </div>
+            <p> Issue # {ticket.ticketId} </p>
+            <p className='popup-card__title '>{ticket.title}</p>
+          </div>
+          <p className='popup-card__description'>{ticket.description}</p>
+          {(ticket.status == 2) && (
+            <div className='ticket-review__btns'>
+              <button
+                className='btn btn--green ticket-review__btn--large'
+                onClick={() => setReviewStatus!(ticket.ticketId, 4)}
+              >Approve <i className="fa-solid fa-circle-check ticket-review__btn--icon"></i></button>
+              <button
+                className='btn btn--red ticket-review__btn--large'
+                onClick={() => setReviewStatus!(ticket.ticketId, 3)}
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
               > Request changes <i className="fa-solid fa-circle-xmark ticket-review__btn--icon"></i></button>
             </div>)}
         </div>)}

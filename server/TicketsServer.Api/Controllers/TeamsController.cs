@@ -45,7 +45,7 @@ namespace TicketsServer.Api.Controllers
             {
                 return NotFound();
             }
-            var team = await _context.Teams.FindAsync(id);
+            var team = await _context.Teams.Include(team => team.Users).FirstOrDefaultAsync(t => t.TeamId == id);
 
             if (team == null)
             {

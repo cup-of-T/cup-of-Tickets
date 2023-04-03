@@ -6,6 +6,11 @@ import { UserContext } from '../../context/UserProvider'
 import { TicketsContextType, UserContextType } from '../../types'
 import { TicketsContext } from '../../context/TicketsProvider'
 import { useNavigate } from 'react-router-dom'
+<<<<<<< HEAD
+=======
+import { updateTicketAssignedTo } from '../../services/ticketApi'
+import { useAuth0 } from '@auth0/auth0-react'
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
 
 
 type StatsBarProps = {
@@ -17,19 +22,43 @@ type StatsBarProps = {
 
 export const StatsBar = ({ addBtnToggle, ticketIds, resetTicketsClaims, setShowAlert }: StatsBarProps) => {
   const { dbUser } = useContext(UserContext) as UserContextType;
+<<<<<<< HEAD
   const { updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
+=======
+  const { getAccessTokenSilently } = useAuth0();
+  const { tickets, setTickets, updateTicketAssignee } = useContext(TicketsContext) as TicketsContextType;
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
   const navigate = useNavigate();
 
   const onCreateButtonClick = () => {
     navigate('/addticket');
   }
 
+<<<<<<< HEAD
   const handleUpdateTicketAssignee = () => {
     ticketIds.forEach((ticketId) => {
       updateTicketAssignee(ticketId, dbUser.userId)
     })
     setShowAlert(true);
     resetTicketsClaims();
+=======
+  const handleUpdateTicketAssignee = async () => {
+    setShowAlert(true);
+    const accessToken = await getAccessTokenSilently();
+    const newArr = [...tickets];
+    const indexArray: number[] = [];
+
+    ticketIds.forEach((ticketId) => {
+      updateTicketAssignedTo(ticketId, dbUser.userId, accessToken);
+      indexArray.push(newArr.findIndex(t => t.ticketId == ticketId));
+    })
+
+    indexArray.forEach(i => newArr[i].assignedUser = dbUser);
+    setTickets(newArr);
+
+    resetTicketsClaims();
+
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
   }
 
 

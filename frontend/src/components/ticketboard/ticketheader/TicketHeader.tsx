@@ -9,7 +9,11 @@ export const TicketHeader = () => {
       <li className='ticket-board__requester '>Requester</li>
       <li className='ticket-board__requester-update'>Created at</li>
       <li className='ticket-board__group'>Complexity</li>
+<<<<<<< HEAD
       <li className='ticket-board__assignee'>Assignee</li>
+=======
+      <li className='ticket-board__assignee'>Assigned To</li>
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
     </ul> 
   )
 }

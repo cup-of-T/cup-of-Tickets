@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+<<<<<<< HEAD
     <TargetFramework>net7</TargetFramework>
+=======
+    <TargetFramework>net7.0</TargetFramework>
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -10,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="FluentAssertions" Version="6.10.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.4" />
@@ -17,19 +22,31 @@
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" version="4.3.1" />
     <PackageReference Include="NUnit.Analyzers" Version="3.5.0" />
+=======
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+<<<<<<< HEAD
     <PackageReference Include="coverlet.collector" Version="3.2.0">
+=======
+    <PackageReference Include="coverlet.collector" Version="3.1.2">
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 
+<<<<<<< HEAD
   <ItemGroup>
     <ProjectReference Include="..\TicketsServer.Api\TicketsServer.Api.csproj" />
+=======
+  <ItemGroup>
+    <ProjectReference Include="..\TicketsServer.Api\TicketsServer.Api.csproj" />
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
   </ItemGroup>
 
 </Project>

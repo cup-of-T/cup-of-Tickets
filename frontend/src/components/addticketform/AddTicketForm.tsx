@@ -14,7 +14,15 @@ import { useNavigate } from "react-router-dom";
 import { Urgency } from "./Urgency";
 import Loader from "../loader/Loader";
 
+<<<<<<< HEAD
 export const AddTicketForm = () => {
+=======
+type AddTicketFormProps = {
+  selectedTeam: number
+}
+
+export const AddTicketForm = ({ selectedTeam }: AddTicketFormProps) => {
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
   const navigate = useNavigate();
   const { dbUser } = useContext(UserContext) as UserContextType;
   const { postingTicket } = useContext(TicketsContext) as TicketsContextType
@@ -23,7 +31,11 @@ export const AddTicketForm = () => {
 
   const initialValues = {
     title: "",
+<<<<<<< HEAD
     teamId: dbUser?.teams[0].teamId,
+=======
+    teamId: selectedTeam,
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
     description: "",
     timeEstimate: "XS",
     urgency: 0,
@@ -35,6 +47,10 @@ export const AddTicketForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, { setSubmitting }) => {
+<<<<<<< HEAD
+=======
+        values.teamId = selectedTeam;
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
         setSubmitting(false);
         postingTicket(values as Partial<ITicket>)
         navigate('/');
@@ -50,11 +66,14 @@ export const AddTicketForm = () => {
             type="text"
             placeholder="Title.."
           />
+<<<<<<< HEAD
           <SelectOptions label="Team" name="team">
             {dbUser?.teams?.map(t =>
               <option key={t?.teamId} value={t?.teamId}>{t?.name}</option>
             )}
           </SelectOptions>
+=======
+>>>>>>> 027473ac3d1d23a4dd2f9678620edd51d00d76b7
           <SelectOptions label="Time Estimate" name="timeEstimate">
             <option value="XS">XS</option>
             <option value="S">S</option>

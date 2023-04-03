@@ -17,9 +17,9 @@ public class TicketsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
+    [HttpGet("{teamId}")]
     [Authorize("User")]
-    public async Task<ActionResult<IList<TicketResponse>>> GetTickets()
+    public async Task<ActionResult<IList<TicketResponse>>> GetTickets(int teamId)
     {
         if (_context.Tickets == null)
         {
@@ -30,16 +30,15 @@ public class TicketsController : ControllerBase
         .Include(ticket => ticket.Creator)
         .Include(ticket => ticket.Categories)
         .Include(ticket => ticket.Team)
+        .Where(ticket => ticket.Team.TeamId == teamId)
         .ToListAsync();
 
-        var ticketResponse = tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
-
-        return Ok(ticketResponse);
+        return tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{teamId}/{id}")]
     [Authorize("User")]
-    public async Task<ActionResult<TicketResponse>> GetTicket(int id)
+    public async Task<ActionResult<TicketResponse>> GetTicket(int teamId, int id)
     {
         if (_context.Tickets == null)
         {
@@ -105,7 +104,7 @@ public class TicketsController : ControllerBase
 
         return CreatedAtAction(
             nameof(GetTicket),
-             new { id = result.TicketId },
+             new { id = result.TicketId, teamId = result.Team.TeamId},
              TicketHelper.TicketToResponse(result)
          );
     }
