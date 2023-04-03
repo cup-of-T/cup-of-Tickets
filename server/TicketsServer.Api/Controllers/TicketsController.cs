@@ -19,7 +19,7 @@ public class TicketsController : ControllerBase
 
     [HttpGet]
     [Authorize("User")]
-    public async Task<ActionResult<IList<TicketResponse>>> GetTicket()
+    public async Task<ActionResult<IList<TicketResponse>>> GetTickets()
     {
         if (_context.Tickets == null)
         {
@@ -32,7 +32,9 @@ public class TicketsController : ControllerBase
         .Include(ticket => ticket.Team)
         .ToListAsync();
 
-        return tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
+        var ticketResponse = tickets.Select(ticket => TicketHelper.TicketToResponse(ticket)).ToList();
+
+        return Ok(ticketResponse);
     }
 
     [HttpGet("{id}")]

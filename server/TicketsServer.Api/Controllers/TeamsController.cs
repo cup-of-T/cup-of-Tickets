@@ -24,7 +24,7 @@ namespace TicketsServer.Api.Controllers
 
         [Authorize("User")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TeamResponse>>> GetTeam()
+        public async Task<ActionResult<IEnumerable<TeamResponse>>> GetTeams()
         {
             if (_context.Teams == null)
             {
