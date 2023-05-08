@@ -11,3 +11,6 @@ In order to navigate the website please use those credentials which will grant y
 
 username : mathias.viklund@appliedtechnology.se
 password : Password123
+
+
+readme to be continued
