@@ -8,8 +8,7 @@ Project made by [Lidia Orfanu](https://github.com/LidiaOrfanu), [Luc Siat](https
 Techstack:
   - .NET with C#
   - Entity Framework
-  - TypeScript
-  - React with Vite
+  - React with Vite & Typescript
   - Github Actions & Project
   - Azure Sql DB, Azure web app services & Azure static webpages
 
